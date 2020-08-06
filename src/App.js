@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import NavLinks from "./components/NavLinks";
+
+const GlobalStyle = createGlobalStyle`
+body {
+  margin: 0;
+  background-color: rgb(42, 42, 42);
 }
+`;
+
+const App = () => {
+  return (
+    <Router>
+      <GlobalStyle />
+      <NavLinks />
+      <Route path="/"></Route>
+    </Router>
+  );
+};
 
 export default App;
