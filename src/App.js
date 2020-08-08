@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 import NavLinks from "./components/NavLinks";
+import Home from "./pages/Home";
+import MoviesPage from "./pages/MoviesPage";
+import SeriesPage from "./pages/SeriesPage";
+import SearchPage from "./pages/SearchPage";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -16,7 +20,18 @@ const App = () => {
     <Router>
       <GlobalStyle />
       <NavLinks />
-      <Route path="/"></Route>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/movies">
+        <MoviesPage />
+      </Route>
+      <Route path="/series">
+        <SeriesPage />
+      </Route>
+      <Route path="/discover">
+        <SearchPage />
+      </Route>
     </Router>
   );
 };
