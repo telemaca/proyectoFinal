@@ -7,7 +7,8 @@ import Hero from "../components/Hero";
 import API_KEY from "../data/apiKey";
 
 const StyledContainer = styled.div`
-  width: 100%;
+  width: 95vw;
+  transform: translateX(-0.7px);
 `;
 
 const Home = () => {

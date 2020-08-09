@@ -1,36 +1,60 @@
-// Hero
-// Debe mostrar una imagen de fondo
-// Debe mostrar título, rating y sinopsis
-// Debe poder tener una opción para llevar a la página de la película o serie
-// Los datos de los puntos anteriores se pasan como props
-
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import Rating from "./Rating";
 
+const StyledContainer = styled.div`
+  height: 600px;
+  display: flex;
+`;
+
+const StyledContainerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  background-color: black;
+  padding-left: 2vw;
+`;
+
 const BackgrdImgContainer = styled.div`
-  width: 100%;
-  height: 30vh;
+  width: 70%;
   background-image: url(${(props) => props.img});
   background-size: cover;
+  box-shadow: inset 50px -20px 60px 60px #000;
 `;
-const StyledTitle = styled.h1``;
-const StyledDescription = styled.p``;
+
+const StyledTitleLink = styled(Link)`
+  font-family: "Baloo Tamma 2";
+  font-weight: 600;
+  font-size: 3vw;
+  text-decoration: none;
+  color: #fafafa;
+  &:hover {
+    color: #2196f3;
+  }
+`;
+
+const StyledDescription = styled.p`
+  font-family: "Roboto";
+  color: #fafafa;
+  z-index: 200;
+`;
 
 const Hero = ({ data }) => {
   const { title, overview, backdrop_path, vote_average } = data;
   return (
-    <BackgrdImgContainer
-      img={`https://image.tmdb.org/t/p/original${backdrop_path}`}
-    >
-      <Link>
-        <StyledTitle>{title}</StyledTitle>
-      </Link>
-      <Rating rating={vote_average} />
-      <StyledDescription>{overview}</StyledDescription>
-    </BackgrdImgContainer>
+    <StyledContainer>
+      <StyledContainerInfo>
+        <StyledTitleLink>{title}</StyledTitleLink>
+        <Rating rating={vote_average} />
+        <StyledDescription>{overview}</StyledDescription>
+      </StyledContainerInfo>
+      <BackgrdImgContainer
+        img={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+      ></BackgrdImgContainer>
+    </StyledContainer>
   );
 };
 

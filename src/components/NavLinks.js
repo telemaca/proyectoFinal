@@ -17,6 +17,7 @@ const StyledAside = styled.aside`
   align-items: center;
   background-color: black;
   padding-top: 2vw;
+  border-right: 1px solid #fafafa;
 `;
 
 const StyledNavLink = styled(NavLink)`
