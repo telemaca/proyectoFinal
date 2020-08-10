@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 import NavLinks from "./components/NavLinks";
@@ -20,18 +20,20 @@ const App = () => {
     <Router>
       <GlobalStyle />
       <NavLinks />
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/movies">
-        <MoviesPage />
-      </Route>
-      <Route path="/series">
-        <SeriesPage />
-      </Route>
-      <Route path="/discover">
-        <SearchPage />
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/movies">
+          <MoviesPage />
+        </Route>
+        <Route path="/series">
+          <SeriesPage />
+        </Route>
+        <Route path="/discover">
+          <SearchPage />
+        </Route>
+      </Switch>
     </Router>
   );
 };
