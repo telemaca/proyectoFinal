@@ -27,7 +27,7 @@ const MoviesPage = () => {
   return (
     <MainFlex>
       <StyledContainer>
-        <Hero data={popularMovie} />
+        <Hero data={popularMovie} link="movie" />
       </StyledContainer>
 
       <CardListPreview title="Popular Movies" elements={popularMovies} />

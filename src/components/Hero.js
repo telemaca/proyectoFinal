@@ -43,7 +43,7 @@ const StyledDescription = styled.p`
   z-index: 200;
 `;
 
-const Hero = ({ data }) => {
+const Hero = ({ data, link }) => {
   const { setSelectedId } = useMoviesSeriesContext();
   const { title, overview, backdrop_path, vote_average, name, media_type, id } = data;
   const handleClick = () => setSelectedId(id)
@@ -51,7 +51,7 @@ const Hero = ({ data }) => {
   return (
     <StyledContainer>
       <StyledContainerInfo>
-        <StyledTitleLink to={`/${media_type ? "movie" : "tv"}/${id}`} onClick={handleClick}>{title || name}</StyledTitleLink>
+        <StyledTitleLink to={`/${link}/${id}`} onClick={handleClick}>{title || name}</StyledTitleLink>
         <Rating rating={vote_average} />
         <StyledDescription>{overview}</StyledDescription>
       </StyledContainerInfo>

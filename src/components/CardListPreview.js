@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BasicCard from "./CardMovie";
-import Container from "./native components/Container";
+import Section from "./native components/Section";
 
 const ContainerFlex = styled.div`
   display: flex;
@@ -19,12 +19,12 @@ const Title = styled.h3`
 `;
 const CardListPreview = ({ title, elements }) => {
   return (
-    <Container backgroundColor="black">
+    <Section backgroundColor="black">
       <Title>{title}</Title>
       <ContainerFlex>
         {elements && elements.map((element) => <BasicCard data={element} />)}
       </ContainerFlex>
-    </Container>
+    </Section>
   );
 };
 export default CardListPreview;
