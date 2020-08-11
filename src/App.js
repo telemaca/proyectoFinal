@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
+import { MoviesSeriesProvider } from "./contexts/MoviesSeriesContext"
+
 import NavLinks from "./components/NavLinks";
 import Home from "./pages/Home";
 import MoviesPage from "./pages/MoviesPage";
@@ -17,24 +19,26 @@ body {
 
 const App = () => {
   return (
-    <Router>
-      <GlobalStyle />
-      <NavLinks />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/movies">
-          <MoviesPage />
-        </Route>
-        <Route path="/series">
-          <SeriesPage />
-        </Route>
-        <Route path="/discover">
-          <SearchPage />
-        </Route>
-      </Switch>
-    </Router>
+    <MoviesSeriesProvider>
+      <Router>
+        <GlobalStyle />
+        <NavLinks />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/movie">
+            <MoviesPage />
+          </Route>
+          <Route path="/tv">
+            <SeriesPage />
+          </Route>
+          <Route path="/discover">
+            <SearchPage />
+          </Route>
+        </Switch>
+      </Router>
+    </MoviesSeriesProvider>
   );
 };
 
