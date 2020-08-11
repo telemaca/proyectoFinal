@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import useMoviesSeriesContext from "../contexts/MoviesSeriesContext"
 import Rating from "./Rating";
 
 const StyledContainer = styled.div`
@@ -43,11 +44,14 @@ const StyledDescription = styled.p`
 `;
 
 const Hero = ({ data }) => {
-  const { title, overview, backdrop_path, vote_average } = data;
+  const { setSelectedId } = useMoviesSeriesContext();
+  const { title, overview, backdrop_path, vote_average, name, media_type, id } = data;
+  const handleClick = () => setSelectedId(id)
+
   return (
     <StyledContainer>
       <StyledContainerInfo>
-        <StyledTitleLink>{title}</StyledTitleLink>
+        <StyledTitleLink to={`/${media_type ? "movie" : "tv"}/${id}`} onClick={handleClick}>{title || name}</StyledTitleLink>
         <Rating rating={vote_average} />
         <StyledDescription>{overview}</StyledDescription>
       </StyledContainerInfo>

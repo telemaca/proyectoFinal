@@ -11,7 +11,6 @@ import {
 
 const StyledAside = styled.aside`
   width: 5vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,10 +42,10 @@ const NavLinks = () => {
         <StyledNavLink exact to="/" activeClassName="selected">
           <HomeIcon />
         </StyledNavLink>
-        <StyledNavLink to="/movies" activeClassName="selected">
+        <StyledNavLink to="/movie" activeClassName="selected">
           <MovieIcon />
         </StyledNavLink>
-        <StyledNavLink to="/series" activeClassName="selected">
+        <StyledNavLink to="/tv" activeClassName="selected">
           <TvIcon />
         </StyledNavLink>
         <StyledNavLink to="/discover" activeClassName="selected">
