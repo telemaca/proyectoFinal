@@ -13,6 +13,7 @@ const StyledContainer = styled.div`
 const MainFlex = styled.main`
   display: flex;
   flex-direction: column;
+  width: 95vw;
   transform: translateX(-0.7px);
 `;
 
@@ -26,9 +27,9 @@ const SeriesPage = () => {
 
   return (
     <MainFlex>
-      <StyledContainer>
-        <Hero data={popularSerie} link="tv" />
-      </StyledContainer>
+
+      <Hero data={popularSerie} link="tv" />
+
 
       <CardListPreview title="Popular TV Shows" elements={popularSeries} />
       <CardListPreview title="Top Rated TV Shows" elements={topRatedSeries} />

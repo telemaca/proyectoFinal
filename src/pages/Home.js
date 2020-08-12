@@ -10,6 +10,7 @@ import CardListPreview from "../components/CardListPreview";
 
 const MainFlex = styled.main`
   display: flex;
+  width: 95vw;
   flex-direction: column;
   transform: translateX(-0.7px);
 `;
@@ -23,9 +24,9 @@ const Home = () => {
 
   return (
     <MainFlex>
-      <Section>
-        <Hero data={trendingMovie} link="movie" />
-      </Section>
+
+      <Hero data={trendingMovie} link="movie" />
+
 
       <CardListPreview title="Trending Movies" elements={trendingMovies} />
       <CardListPreview title="Trending Tv Show" elements={trendingSeries} />

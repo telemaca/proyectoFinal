@@ -7,6 +7,7 @@ import { MoviesSeriesProvider } from "./contexts/MoviesSeriesContext"
 import NavLinks from "./components/NavLinks";
 import Home from "./pages/Home";
 import MoviesPage from "./pages/MoviesPage";
+import MoviePage from "./pages/MoviePage";
 import SeriesPage from "./pages/SeriesPage";
 import SearchPage from "./pages/SearchPage";
 
@@ -30,10 +31,13 @@ const App = () => {
           <Route exact path="/movie">
             <MoviesPage />
           </Route>
-          <Route path="/tv">
+          <Route path="/movie/:movieId">
+            <MoviePage />
+          </Route>
+          <Route exact path="/tv">
             <SeriesPage />
           </Route>
-          <Route path="/discover">
+          <Route exact path="/discover">
             <SearchPage />
           </Route>
         </Switch>

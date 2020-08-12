@@ -19,7 +19,7 @@ const Title = styled.h3`
 `;
 const CardListPreview = ({ title, elements }) => {
   return (
-    <Section backgroundColor="black">
+    <Section>
       <Title>{title}</Title>
       <ContainerFlex>
         {elements && elements.map((element) => <BasicCard data={element} />)}

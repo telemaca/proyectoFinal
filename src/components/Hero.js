@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import useMoviesSeriesContext from "../contexts/MoviesSeriesContext"
 import Rating from "./Rating";
 
-const StyledContainer = styled.div`
-  height: 600px;
+const StyledSection = styled.section`
+  height: 70vh;
   display: flex;
+
+  @media(max-width: 950px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledContainerInfo = styled.div`
@@ -40,16 +44,17 @@ const StyledTitleLink = styled(Link)`
 const StyledDescription = styled.p`
   font-family: "Roboto";
   color: #fafafa;
+  font-size: 1vw;
   z-index: 200;
 `;
 
 const Hero = ({ data, link }) => {
   const { setSelectedId } = useMoviesSeriesContext();
-  const { title, overview, backdrop_path, vote_average, name, media_type, id } = data;
+  const { title, overview, backdrop_path, vote_average, name, id } = data;
   const handleClick = () => setSelectedId(id)
 
   return (
-    <StyledContainer>
+    <StyledSection>
       <StyledContainerInfo>
         <StyledTitleLink to={`/${link}/${id}`} onClick={handleClick}>{title || name}</StyledTitleLink>
         <Rating rating={vote_average} />
@@ -58,7 +63,7 @@ const Hero = ({ data, link }) => {
       <BackgrdImgContainer
         img={`https://image.tmdb.org/t/p/original${backdrop_path}`}
       ></BackgrdImgContainer>
-    </StyledContainer>
+    </StyledSection>
   );
 };
 
