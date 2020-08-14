@@ -22,7 +22,7 @@ const CardListPreview = ({ title, elements }) => {
     <Container backgroundColor="black">
       <Title>{title}</Title>
       <ContainerFlex>
-        {elements && elements.map((element) => <BasicCard data={element} />)}
+        {elements && elements.slice(0, 5).map((element) => <BasicCard data={element} />)}
       </ContainerFlex>
     </Container>
   );
