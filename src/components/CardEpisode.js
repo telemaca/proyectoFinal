@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Card = styled.article`
-  width: 40%;
+  width: 350px;
   margin-left: 40px;
   overflow: hidden;
   line-height: 20px;
@@ -24,7 +24,7 @@ const Title = styled.h3`
 
 const Text = styled.p `
   font-size: 12px;
-  font-weight: 300;
+  letter-spacing: 0.2px;
   font-family: roboto;  
   color: #fff;
 `
