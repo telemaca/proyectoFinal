@@ -57,7 +57,7 @@ const CardEpisode = ({ data }) => {
   const getDate = (date.getDate() + 1)
 
   const getEpisodeMonth = () => {     
-    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    const meses = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const mes = meses[getMonth]    
     return mes
   } 
