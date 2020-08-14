@@ -52,31 +52,25 @@ const CardEpisode = ({ data }) => {
   const { still_path, episode_number, name, overview, air_date } = data;
 
   const date = new Date(air_date)
-  const getFullYear = date.getFullYear()
-  const getMonth = date.getMonth()
-  const getDate = (date.getDate() + 1)
+  const episodeYear = date.getFullYear()
+  const episodeMonth = date.getMonth()
+  const episodeDay = (date.getDate() + 1)
 
   const getEpisodeMonth = () => {     
     const meses = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const mes = meses[getMonth]    
+    const mes = meses[episodeMonth]    
     return mes
   } 
 
   return (
     <Card>
       <Img src={`http://image.tmdb.org/t/p/w342/${still_path}`} />
-      <ContainerFlex>
-        {
-        episode_number <= 9 
-        ? 
-        <Strong> E0{episode_number}</Strong> 
-        : 
-        <Strong> E{episode_number}</Strong>
-        }        
+      <ContainerFlex>       
+        <Strong> E{episode_number <= 9 ? "0" + episode_number : episode_number}</Strong>               
         <Title>{ name}</Title>
       </ContainerFlex>
       <Text>{overview}</Text>
-      <Span>{`${getDate} ${getEpisodeMonth()} ${getFullYear}`}</Span>      
+      <Span>{`${episodeDay} ${getEpisodeMonth()} ${episodeYear}`}</Span>      
     </Card>
   );
 };
