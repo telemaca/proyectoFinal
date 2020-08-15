@@ -27,13 +27,23 @@ const SeriesPage = () => {
 
   return (
     <MainFlex>
-
       <Hero data={popularSerie} link="tv" />
 
-
-      <CardListPreview title="Popular TV Shows" elements={popularSeries} />
-      <CardListPreview title="Top Rated TV Shows" elements={topRatedSeries} />
-      <CardListPreview title="TV Shows Airing Today" elements={onAirSeries} />
+      <CardListPreview
+        title="Popular TV Shows"
+        elements={popularSeries}
+        link="tv"
+      />
+      <CardListPreview
+        title="Top Rated TV Shows"
+        elements={topRatedSeries}
+        link="tv"
+      />
+      <CardListPreview
+        title="TV Shows Airing Today"
+        elements={onAirSeries}
+        link="tv"
+      />
     </MainFlex>
   );
 };

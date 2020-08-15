@@ -24,12 +24,18 @@ const Home = () => {
 
   return (
     <MainFlex>
-
       <Hero data={trendingMovie} link="movie" />
 
-
-      <CardListPreview title="Trending Movies" elements={trendingMovies} />
-      <CardListPreview title="Trending Tv Show" elements={trendingSeries} />
+      <CardListPreview
+        title="Trending Movies"
+        elements={trendingMovies}
+        link="movie"
+      />
+      <CardListPreview
+        title="Trending Tv Show"
+        elements={trendingSeries}
+        link="tv"
+      />
     </MainFlex>
   );
 };

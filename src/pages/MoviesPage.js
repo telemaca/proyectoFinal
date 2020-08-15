@@ -6,7 +6,6 @@ import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
 
-
 const MainFlex = styled.main`
   display: flex;
   flex-direction: column;
@@ -24,13 +23,23 @@ const MoviesPage = () => {
 
   return (
     <MainFlex>
-
       <Hero data={popularMovie} link="movie" />
 
-
-      <CardListPreview title="Popular Movies" elements={popularMovies} />
-      <CardListPreview title="Top Rated Movies" elements={topRatedMovies} />
-      <CardListPreview title="Now Playing Movies" elements={nowPlayingMovies} />
+      <CardListPreview
+        title="Popular Movies"
+        elements={popularMovies}
+        link="movie"
+      />
+      <CardListPreview
+        title="Top Rated Movies"
+        elements={topRatedMovies}
+        link="movie"
+      />
+      <CardListPreview
+        title="Now Playing Movies"
+        elements={nowPlayingMovies}
+        link="movie"
+      />
     </MainFlex>
   );
 };

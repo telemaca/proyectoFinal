@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
+
 import Rating from "./Rating";
 
 const Card = styled.article`
@@ -26,13 +28,18 @@ const Title = styled.h3`
   color: #fff;
 `;
 
-const BasicCard = ({ data }) => {
-  const { title, poster_path, vote_average, name, id, media_type } = data;
+const BasicCard = ({ data, link }) => {
+  const { setSelectedId } = useMoviesSeriesContext();
+  const { title, poster_path, vote_average, name, id } = data;
+  const handleClick = () => setSelectedId(id);
 
   return (
     <Card>
-      <Link to={`/${media_type ? "movie" : "tv"}/${id}`}>
-        <Img src={`http://image.tmdb.org/t/p/w342/${poster_path}`} />
+      <Link to={`/${link}/${id} `}>
+        <Img
+          src={`http://image.tmdb.org/t/p/w342/${poster_path}`}
+          onClick={handleClick}
+        />
       </Link>
       <Title>{title || name}</Title>
       <Rating rating={vote_average} />
