@@ -17,15 +17,14 @@ const Title = styled.h3`
   letter-spacing: 0.4px;
   color: #fff;
 `;
+
 const CardListPreview = ({ title, elements, link }) => {
   return (
     <Section>
       <Title>{title}</Title>
       <ContainerFlex>
         {elements &&
-          elements
-            .slice(0, 5)
-            .map((element) => <BasicCard data={element} link={link} />)}
+          elements.map((element) => <BasicCard data={element} link={link} />)}
       </ContainerFlex>
     </Section>
   );
