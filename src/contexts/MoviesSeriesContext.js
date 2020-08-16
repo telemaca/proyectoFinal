@@ -24,7 +24,7 @@ const MoviesSeriesProvider = ({ children }) => {
       .get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`)
       .then((response) => {
         setTrendingMovie(response.data.results[0]);
-        setTrendingMovies(response.data.results);
+        setTrendingMovies(response.data.results.slice(0, 5));
       });
   }, []);
 
@@ -32,7 +32,7 @@ const MoviesSeriesProvider = ({ children }) => {
     axios
       .get(`https://api.themoviedb.org/3/trending/tv/day?api_key=${API_KEY}`)
       .then((response) => {
-        setTrendingSeries(response.data.results);
+        setTrendingSeries(response.data.results.slice(0, 5));
       });
   }, []);
 
@@ -41,7 +41,7 @@ const MoviesSeriesProvider = ({ children }) => {
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
       .then((response) => {
         setPopularMovie(response.data.results[0]);
-        setPopularMovies(response.data.results);
+        setPopularMovies(response.data.results.slice(0, 5));
       });
   }, []);
 
@@ -49,7 +49,7 @@ const MoviesSeriesProvider = ({ children }) => {
     axios
       .get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`)
       .then((response) => {
-        setTopRatedMovies(response.data.results);
+        setTopRatedMovies(response.data.results.slice(0, 5));
       });
   }, []);
 
@@ -57,7 +57,7 @@ const MoviesSeriesProvider = ({ children }) => {
     axios
       .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`)
       .then((response) => {
-        setNowPlayingMovies(response.data.results);
+        setNowPlayingMovies(response.data.results.slice(0, 5));
       });
   }, []);
 
@@ -66,7 +66,7 @@ const MoviesSeriesProvider = ({ children }) => {
       .get(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`)
       .then((response) => {
         setPopularSerie(response.data.results[0]);
-        setPopularSeries(response.data.results);
+        setPopularSeries(response.data.results.slice(0, 5));
       });
   }, []);
 
@@ -74,7 +74,7 @@ const MoviesSeriesProvider = ({ children }) => {
     axios
       .get(`https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}`)
       .then((response) => {
-        setTopRatedSeries(response.data.results);
+        setTopRatedSeries(response.data.results.slice(0, 5));
       });
   }, []);
 
@@ -82,7 +82,7 @@ const MoviesSeriesProvider = ({ children }) => {
     axios
       .get(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}`)
       .then((response) => {
-        setOnAirSeries(response.data.results);
+        setOnAirSeries(response.data.results.slice(0, 5));
       });
   }, []);
 

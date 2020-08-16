@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
-import { MoviesSeriesProvider } from "./contexts/MoviesSeriesContext"
+import { MoviesSeriesProvider } from "./contexts/MoviesSeriesContext";
 
 import NavLinks from "./components/NavLinks";
 import Home from "./pages/Home";
@@ -14,7 +14,7 @@ import SearchPage from "./pages/SearchPage";
 const GlobalStyle = createGlobalStyle`
 body {
   margin: 0;
-  background-color: rgb(42, 42, 42);
+  background-color: black;
 }
 `;
 

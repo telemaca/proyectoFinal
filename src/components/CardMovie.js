@@ -9,6 +9,7 @@ import Rating from "./Rating";
 const Card = styled.article`
   width: 17%;
 `;
+
 const Img = styled.img`
   width: 100%;
   transition: 0.3s;
@@ -28,13 +29,13 @@ const Title = styled.h3`
   color: #fff;
 `;
 
-const BasicCard = ({ data, link }) => {
+const BasicCard = ({ data, link, customStyle }) => {
   const { setSelectedId } = useMoviesSeriesContext();
   const { title, poster_path, vote_average, name, id } = data;
   const handleClick = () => setSelectedId(id);
 
   return (
-    <Card>
+    <Card style={customStyle}>
       <Link to={`/${link}/${id} `}>
         <Img
           src={`http://image.tmdb.org/t/p/w342/${poster_path}`}
