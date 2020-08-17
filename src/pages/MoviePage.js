@@ -13,6 +13,8 @@ import MovieInfo from "../components/MovieInfo";
 import MovieCast from "../components/MovieCast";
 import SimilarMovies from "../components/SimilarMovies";
 
+
+
 const MainFlex = styled.main`
   display: flex;
   flex-direction: column;
@@ -21,10 +23,11 @@ const MainFlex = styled.main`
 `;
 
 const MoviePage = () => {
-  const { selectedId } = useMoviesSeriesContext();
+  const { selectedId, popularMovies } = useMoviesSeriesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
+  
 
   useEffect(() => {
     axios
@@ -57,6 +60,7 @@ const MoviePage = () => {
   }, [selectedId]);
 
   return (
+    
     <MainFlex>
       <Hero data={selectedMovie} link="movie" />
       <MovieNavLinks />
@@ -71,10 +75,14 @@ const MoviePage = () => {
           <MovieCast actors={selectedMovieCast} />
         </Route>
         <Route path="/movie/:movieId/similar">
-          <SimilarMovies movies={similarMovies} />
+          <SimilarMovies movies={similarMovies} popularMovies={popularMovies}/>
         </Route>
       </Switch>
+     
     </MainFlex>
+   
+  
+   
   );
 };
 

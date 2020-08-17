@@ -13,9 +13,11 @@ const StyledSection = styled.section`
   box-shadow: inset -100px -50px 110px 41px #000;
 `;
 
-const SimilarMovies = ({ movies }) => {
+const SimilarMovies = ({ movies, popularMovies }) => {
+
   return (
-    <StyledSection>
+  movies.length >= 1 ?
+   <StyledSection>
       {movies.map((movie) => (
         <BasicCard
           data={movie}
@@ -23,7 +25,20 @@ const SimilarMovies = ({ movies }) => {
           customStyle={{ marginBottom: "3vw" }}
         />
       ))}
+    </StyledSection> 
+    :
+    <StyledSection>
+      {popularMovies.map((movie) => (
+        <BasicCard
+          data={movie}
+          link="movie"
+          customStyle={{ marginBottom: "3vw" }}
+        />
+      ))}
     </StyledSection>
+   
+    
+    
   );
 };
 
