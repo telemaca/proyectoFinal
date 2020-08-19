@@ -6,39 +6,44 @@ import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
 
+
 const MainFlex = styled.main`
   display: flex;
   flex-direction: column;
-  width: 95vw;
+  width: 93vw;
   transform: translateX(-0.7px);
 `;
 
 const MoviesPage = () => {
-  const {
-    popularMovie,
-    popularMovies,
-    topRatedMovies,
-    nowPlayingMovies,
-  } = useMoviesSeriesContext();
+  const { popularMovie, popularMovies, topRatedMovies, nowPlayingMovies } = useMoviesSeriesContext();     
 
   return (
     <MainFlex>
-      <Hero data={popularMovie} link="movie" />
-
+      <Hero data={popularMovie} media_type="movie" />
+      
+      <MainFlex>         
+      
       <CardListPreview
         title="Popular Movies"
         elements={popularMovies}
-        link="movie"
+        media_type="movie"
+        categoryId="popular"
       />
+      
+      </MainFlex>
+
       <CardListPreview
         title="Top Rated Movies"
         elements={topRatedMovies}
-        link="movie"
+        media_type="movie"
+        categoryId="top_rated"
       />
+      
       <CardListPreview
         title="Now Playing Movies"
         elements={nowPlayingMovies}
-        link="movie"
+        media_type="movie"
+        categoryId="now_playing"
       />
     </MainFlex>
   );

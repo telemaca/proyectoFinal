@@ -1,13 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
 
 import Rating from "./Rating";
 
 const Card = styled.article`
   width: 17%;
+  margin-top: 1vw;
 `;
 
 const Img = styled.img`
@@ -29,19 +28,21 @@ const Title = styled.h3`
   color: #fff;
 `;
 
-const BasicCard = ({ data, link, customStyle }) => {
-  const { setSelectedId } = useMoviesSeriesContext();
-  const { title, poster_path, vote_average, name, id } = data;
-  const handleClick = () => setSelectedId(id);
+const BasicCard = ({ data, customStyle, media_type }) => {
+ 
+  const { title, poster_path, vote_average, name, id } = data;  
+  const history = useHistory()
+
+  const handleMediaClick = (id, media_type) => {
+    history.push(`/${media_type}/${id}`);
+  };  
 
   return (
-    <Card style={customStyle}>
-      <Link to={`/${link}/${id} `}>
+    <Card key={id} id={id} style={customStyle} media_type={media_type}>     
         <Img
           src={`http://image.tmdb.org/t/p/w342/${poster_path}`}
-          onClick={handleClick}
-        />
-      </Link>
+          onClick={() => handleMediaClick(id, media_type)}
+        />    
       <Title>{title || name}</Title>
       <Rating rating={vote_average} />
     </Card>
