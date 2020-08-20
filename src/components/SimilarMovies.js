@@ -21,7 +21,7 @@ const SimilarMovies = ({ movies, popularMovies }) => {
       {movies.map((movie) => (
         <BasicCard
           data={movie}
-          link="movie"
+          media_type="movie"
           customStyle={{ marginBottom: "3vw" }}
         />
       ))}
@@ -31,7 +31,7 @@ const SimilarMovies = ({ movies, popularMovies }) => {
       {popularMovies.map((movie) => (
         <BasicCard
           data={movie}
-          link="movie"
+          media_type="movie"
           customStyle={{ marginBottom: "3vw" }}
         />
       ))}

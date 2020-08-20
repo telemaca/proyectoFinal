@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -18,51 +18,54 @@ import SimilarMovies from "../components/SimilarMovies";
 const MainFlex = styled.main`
   display: flex;
   flex-direction: column;
-  width: 95vw;
+  width: 93vw;
   transform: translateX(-0.7px);
 `;
 
 const MoviePage = () => {
-  const { selectedId, popularMovies } = useMoviesSeriesContext();
+  const { movieId } = useParams()
+  
+  const {popularMovies} = useMoviesSeriesContext()
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
-  
+ 
+
 
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${selectedId}?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
       )
       .then((response) => {
         setSelectedMovie(response.data);
       });
-  }, [selectedId]);
+  }, [movieId]);
 
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${selectedId}/credits?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`
       )
       .then((response) => {
         setSelectedMovieCast(response.data.cast.slice(0, 18));
       });
-  }, [selectedId]);
+  }, [movieId]);
 
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${selectedId}/similar?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}`
       )
       .then((response) => {
         setSimilarMovies(response.data.results);
       });
-  }, [selectedId]);
+  }, [movieId]);
 
   return (
     
     <MainFlex>
-      <Hero data={selectedMovie} link="movie" />
+      <Hero data={selectedMovie} media_type="movie" />
       <MovieNavLinks />
       <Switch>
         {/* <Route path="/movie/:movieId">
@@ -78,7 +81,7 @@ const MoviePage = () => {
           <SimilarMovies movies={similarMovies} popularMovies={popularMovies}/>
         </Route>
       </Switch>
-     
+   
     </MainFlex>
    
   
