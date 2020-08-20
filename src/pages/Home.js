@@ -1,17 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 
 import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
 
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
-
-const MainFlex = styled.main`
-  display: flex;
-  width: 93vw;
-  flex-direction: column;
-  transform: translateX(-0.7px);
-`;
+import MainFlex from "../components/MainFlex"
 
 const Home = () => {
   const {
@@ -19,7 +12,7 @@ const Home = () => {
     trendingMovies,
     trendingSeries,
   } = useMoviesSeriesContext();
-  
+
   return (
     <MainFlex>
       <Hero data={trendingMovie} media_type="movie" />

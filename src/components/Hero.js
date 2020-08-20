@@ -32,6 +32,8 @@ const StyledTitleLink = styled(Link)`
   font-family: "Baloo Tamma 2";
   font-weight: 600;
   font-size: 3vw;
+  line-height: 3vw;
+  padding-bottom: 2vw;
   text-decoration: none;
   color: #fafafa;
   &:hover {
@@ -47,9 +49,9 @@ const StyledDescription = styled.p`
 `;
 
 const Hero = ({ data, media_type }) => {
- 
+
   const { title, overview, backdrop_path, vote_average, name, id } = data;
-  
+
   return (
     <StyledSection>
       <StyledContainerInfo>
