@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useParams } from "react-router-dom";
-import styled from "styled-components";
 import axios from "axios";
 
 import API_KEY from "../data/apiKey";
@@ -12,24 +11,16 @@ import MovieNavLinks from "../components/MovieNavLinks";
 import MovieInfo from "../components/MovieInfo";
 import MovieCast from "../components/MovieCast";
 import SimilarMovies from "../components/SimilarMovies";
+import MainFlex from "../components/MainFlex"
 
-
-
-const MainFlex = styled.main`
-  display: flex;
-  flex-direction: column;
-  width: 93vw;
-  transform: translateX(-0.7px);
-`;
 
 const MoviePage = () => {
   const { movieId } = useParams()
-  
-  const {popularMovies} = useMoviesSeriesContext()
+
+  const { popularMovies } = useMoviesSeriesContext()
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
- 
 
 
   useEffect(() => {
@@ -63,7 +54,6 @@ const MoviePage = () => {
   }, [movieId]);
 
   return (
-    
     <MainFlex>
       <Hero data={selectedMovie} media_type="movie" />
       <MovieNavLinks />
@@ -78,14 +68,10 @@ const MoviePage = () => {
           <MovieCast actors={selectedMovieCast} />
         </Route>
         <Route path="/movie/:movieId/similar">
-          <SimilarMovies movies={similarMovies} popularMovies={popularMovies}/>
+          <SimilarMovies movies={similarMovies} popularMovies={popularMovies} />
         </Route>
       </Switch>
-   
     </MainFlex>
-   
-  
-   
   );
 };
 

@@ -19,6 +19,9 @@ const StyledAside = styled.aside`
   background-color: black;
   padding-top: 2vw;
   border-right: 1px solid #fafafa;
+  position: fixed;
+  height: -webkit-fill-available;
+  z-index: 200;
 `;
 
 const StyledNavLink = styled(NavLink)`
