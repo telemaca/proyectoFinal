@@ -49,7 +49,7 @@ const MoviesSeriesProvider = ({ children }) => {
     axios
       .get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`)
       .then((response) => {
-        setTopRatedMovies(response.data.results.slice(0, 5));
+        setTopRatedMovies(response.data.results);
       });
   }, []);
 
