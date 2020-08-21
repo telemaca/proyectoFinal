@@ -11,23 +11,19 @@ import MovieNavLinks from "../components/MovieNavLinks";
 import MovieInfo from "../components/MovieInfo";
 import MovieCast from "../components/MovieCast";
 import SimilarMovies from "../components/SimilarMovies";
-import MainFlex from "../components/MainFlex"
-
+import MainFlex from "../components/MainFlex";
 
 const MoviePage = () => {
-  const { movieId } = useParams()
+  const { movieId } = useParams();
 
-  const { popularMovies } = useMoviesSeriesContext()
+  const { popularMovies } = useMoviesSeriesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
 
-
   useEffect(() => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
-      )
+      .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
       .then((response) => {
         setSelectedMovie(response.data);
       });
@@ -68,7 +64,10 @@ const MoviePage = () => {
           <MovieCast actors={selectedMovieCast} />
         </Route>
         <Route path="/movie/:movieId/similar">
-          <SimilarMovies movies={similarMovies} popularMovies={popularMovies} />
+          <SimilarMovies
+            movies={similarMovies.length !== 0 ? similarMovies : popularMovies}
+            notFound={similarMovies.length !== 0}
+          />
         </Route>
       </Switch>
     </MainFlex>

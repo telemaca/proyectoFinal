@@ -6,39 +6,44 @@ import BasicCard from "../components/CardMovie";
 
 const StyledSection = styled.section`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-wrap: wrap;
   justify-content: space-between;
-  padding: 3vw;
+  padding: 3vw; */
   background-color: #1d1d1d;
   box-shadow: inset -100px -50px 110px 41px #000;
 `;
 
-const SimilarMovies = ({ movies, popularMovies }) => {
+const StyledContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 3vw;
+`;
 
+const Text = styled.p`
+  color: #fafafa;
+  font-family: "Roboto";
+  font-size: 1.5vw;
+  text-align: center;
+`;
+
+const SimilarMovies = ({ movies, notFound = false }) => {
   return (
-  movies.length >= 1 ?
-   <StyledSection>
-      {movies.map((movie) => (
-        <BasicCard
-          data={movie}
-          media_type="movie"
-          customStyle={{ marginBottom: "3vw" }}
-        />
-      ))}
-    </StyledSection> 
-    :
     <StyledSection>
-      {popularMovies.map((movie) => (
-        <BasicCard
-          data={movie}
-          media_type="movie"
-          customStyle={{ marginBottom: "3vw" }}
-        />
-      ))}
+      {notFound && (
+        <Text>Similar Movies not found. Showing Trending Movies instead.</Text>
+      )}
+      <StyledContainer>
+        {movies.map((movie) => (
+          <BasicCard
+            data={movie}
+            media_type="movie"
+            customStyle={{ marginBottom: "3vw" }}
+          />
+        ))}
+      </StyledContainer>
     </StyledSection>
-   
-    
-    
   );
 };
 
