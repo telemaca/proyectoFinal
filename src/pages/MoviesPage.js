@@ -7,7 +7,17 @@ import CardListPreview from "../components/CardListPreview";
 import MainFlex from "../components/MainFlex";
 
 const MoviesPage = () => {
-  const { popularMovie, popularMovies, topRatedMovies, nowPlayingMovies } = useMoviesSeriesContext();
+  const {
+    popularMovie,
+    popularMovies,
+    topRatedMovies,
+    nowPlayingMovies,
+  } = useMoviesSeriesContext();
+
+  //Ordeno por la mayor cantidad de votos para que no muestre en la pagina principal pelis medio random
+  const filteredTopRatedMovies = topRatedMovies
+    .sort((a, b) => b.vote_count - a.vote_count)
+    .slice(0, 5);
 
   return (
     <MainFlex>
@@ -22,7 +32,7 @@ const MoviesPage = () => {
 
       <CardListPreview
         title="Top Rated Movies"
-        elements={topRatedMovies}
+        elements={filteredTopRatedMovies}
         media_type="movie"
         categoryId="top_rated"
       />
