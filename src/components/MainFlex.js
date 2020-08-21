@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const StyledMain = styled.main`
@@ -9,8 +9,8 @@ const StyledMain = styled.main`
   transform: translateX(-0.7px);
 `;
 
-const MainFlex = ({ children }) => {
-    return <StyledMain>{children}</StyledMain>
-}
+const MainFlex = ({ children, ...props }) => {
+  return <StyledMain {...props}>{children}</StyledMain>;
+};
 
 export default MainFlex;
