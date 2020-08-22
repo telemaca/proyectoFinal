@@ -7,9 +7,6 @@ import BasicCard from "../components/CardMovie";
 const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
-  /* flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 3vw; */
   background-color: #1d1d1d;
   box-shadow: inset -100px -50px 110px 41px #000;
 `;

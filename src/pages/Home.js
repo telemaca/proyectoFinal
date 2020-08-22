@@ -1,19 +1,24 @@
 import React from "react";
 
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
+import useMoviesContext from "../contexts/MoviesContext";
+import useSeriesContext from "../contexts/SeriesContext";
 
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
-import MainFlex from "../components/MainFlex"
+import MainFlex from "../components/MainFlex";
+import LoadingPage from "./LoadingPage";
 
 const Home = () => {
   const {
     trendingMovie,
     trendingMovies,
-    trendingSeries,
-  } = useMoviesSeriesContext();
+    isMoviesDataLoading,
+  } = useMoviesContext();
+  const { trendingSeries, isSeriesDataLoading } = useSeriesContext();
 
-  return (
+  return isMoviesDataLoading && isSeriesDataLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
       <Hero data={trendingMovie} media_type="movie" />
 
