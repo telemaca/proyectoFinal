@@ -1,40 +1,38 @@
 import React from "react";
-import styled from "styled-components";
 
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
-
-import Section from "../components/native components/Section";
+import useMoviesContext from "../contexts/MoviesContext";
+import useSeriesContext from "../contexts/SeriesContext";
 
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
-
-const MainFlex = styled.main`
-  display: flex;
-  width: 95vw;
-  flex-direction: column;
-  transform: translateX(-0.7px);
-`;
+import MainFlex from "../components/MainFlex";
+import LoadingPage from "./LoadingPage";
 
 const Home = () => {
   const {
     trendingMovie,
     trendingMovies,
-    trendingSeries,
-  } = useMoviesSeriesContext();
+    isMoviesDataLoading,
+  } = useMoviesContext();
+  const { trendingSeries, isSeriesDataLoading } = useSeriesContext();
 
-  return (
+  return isMoviesDataLoading && isSeriesDataLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
-      <Hero data={trendingMovie} link="movie" />
+      <Hero data={trendingMovie} media_type="movie" />
 
       <CardListPreview
         title="Trending Movies"
         elements={trendingMovies}
-        link="movie"
+        media_type="movie"
+        categoryId="trending"
       />
       <CardListPreview
         title="Trending Tv Show"
         elements={trendingSeries}
-        link="tv"
+        media_type="tv"
+        categoryId="trending"
       />
     </MainFlex>
   );

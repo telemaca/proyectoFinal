@@ -1,8 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import styled from "styled-components";
-
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
 
 const StyledNav = styled.nav`
   width: 100%;
@@ -26,26 +24,25 @@ const StyledListItem = styled.li`
 const StyledNavLink = styled(NavLink)`
   color: #fafafa;
   text-decoration: none;
-
   &:hover {
     color: lightblue;
   }
-
   &.selected {
     color: grey;
   }
 `;
 
 const MovieNavLinks = () => {
-  const { selectedId } = useMoviesSeriesContext();
-
+ 
+  const { movieId } = useParams();
+    
   return (
     <StyledNav>
       <StyledList>
         <StyledListItem>
           <StyledNavLink
-            exact
-            to={`/movie/${selectedId}/info`}
+            
+            to={`/movie/${movieId}/info`}
             activeClassName="selected"
           >
             INFO
@@ -53,8 +50,8 @@ const MovieNavLinks = () => {
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink
-            exact
-            to={`/movie/${selectedId}/cast`}
+            
+            to={`/movie/${movieId}/cast`}
             activeClassName="selected"
           >
             CAST
@@ -62,8 +59,8 @@ const MovieNavLinks = () => {
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink
-            exact
-            to={`/movie/${selectedId}/similar`}
+            
+            to={`/movie/${movieId}/similar`}
             activeClassName="selected"
           >
             SIMILAR MOVIES

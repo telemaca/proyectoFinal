@@ -5,6 +5,7 @@ const StyledArticle = styled.article`
   width: 13vw;
   overflow: hidden;
   font-family: "Roboto";
+  margin-right: 4vw;
 `;
 
 const StyledImg = styled.img`

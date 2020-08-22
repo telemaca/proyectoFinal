@@ -1,64 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import styled from "styled-components";
+import { Route, Switch, useParams } from "react-router-dom";
 import axios from "axios";
 
 import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
+import useMoviesContext from "../contexts/MoviesContext";
 
 import Hero from "../components/Hero";
 import MovieNavLinks from "../components/MovieNavLinks";
 import MovieInfo from "../components/MovieInfo";
 import MovieCast from "../components/MovieCast";
 import SimilarMovies from "../components/SimilarMovies";
-
-const MainFlex = styled.main`
-  display: flex;
-  flex-direction: column;
-  width: 95vw;
-  transform: translateX(-0.7px);
-`;
+import MainFlex from "../components/MainFlex";
+import LoadingPage from "../pages/LoadingPage";
 
 const MoviePage = () => {
-  const { selectedId } = useMoviesSeriesContext();
+  const { movieId } = useParams();
+
+  const { popularMovies } = useMoviesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
+  const [isMovieDataLoading, setIsMovieDataLoading] = useState(true);
 
   useEffect(() => {
+    setIsMovieDataLoading(true);
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${selectedId}?api_key=${API_KEY}`
-      )
+      .get(`${API_URL}movie/${movieId}?api_key=${API_KEY}`)
       .then((response) => {
         setSelectedMovie(response.data);
+        setIsMovieDataLoading(false);
       });
-  }, [selectedId]);
 
-  useEffect(() => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${selectedId}/credits?api_key=${API_KEY}`
-      )
+      .get(`${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`)
       .then((response) => {
-        setSelectedMovieCast(response.data.cast.slice(0, 18));
+        setSelectedMovieCast(response.data.cast.slice(0, 20));
       });
-  }, [selectedId]);
 
-  useEffect(() => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${selectedId}/similar?api_key=${API_KEY}`
-      )
+      .get(`${API_URL}movie/${movieId}/similar?api_key=${API_KEY}`)
       .then((response) => {
         setSimilarMovies(response.data.results);
       });
-  }, [selectedId]);
+  }, [movieId]);
 
-  return (
+  return isMovieDataLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
-      <Hero data={selectedMovie} link="movie" />
+      <Hero data={selectedMovie} media_type="movie" />
       <MovieNavLinks />
       <Switch>
         <Route path="/movie/:movieId/info">
@@ -68,7 +60,10 @@ const MoviePage = () => {
           <MovieCast actors={selectedMovieCast} />
         </Route>
         <Route path="/movie/:movieId/similar">
-          <SimilarMovies movies={similarMovies} />
+          <SimilarMovies
+            movies={similarMovies.length !== 0 ? similarMovies : popularMovies}
+            notFound={similarMovies.length !== 0}
+          />
         </Route>
       </Switch>
     </MainFlex>

@@ -1,17 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
+import useMoviesContext from "../contexts/MoviesContext";
 
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
-
-const MainFlex = styled.main`
-  display: flex;
-  flex-direction: column;
-  width: 95vw;
-  transform: translateX(-0.7px);
-`;
+import MainFlex from "../components/MainFlex";
+import LoadingPage from "./LoadingPage";
 
 const MoviesPage = () => {
   const {
@@ -19,26 +13,39 @@ const MoviesPage = () => {
     popularMovies,
     topRatedMovies,
     nowPlayingMovies,
-  } = useMoviesSeriesContext();
+    isMoviesDataLoading,
+  } = useMoviesContext();
 
-  return (
+  //Ordeno por la mayor cantidad de votos para que no muestre en la pagina principal pelis medio random
+  const filteredTopRatedMovies = topRatedMovies
+    .sort((a, b) => b.vote_count - a.vote_count)
+    .slice(0, 5);
+
+  return isMoviesDataLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
-      <Hero data={popularMovie} link="movie" />
+      <Hero data={popularMovie} media_type="movie" />
 
       <CardListPreview
         title="Popular Movies"
         elements={popularMovies}
-        link="movie"
+        media_type="movie"
+        categoryId="popular"
       />
+
       <CardListPreview
         title="Top Rated Movies"
-        elements={topRatedMovies}
-        link="movie"
+        elements={filteredTopRatedMovies}
+        media_type="movie"
+        categoryId="top_rated"
       />
+
       <CardListPreview
         title="Now Playing Movies"
         elements={nowPlayingMovies}
-        link="movie"
+        media_type="movie"
+        categoryId="now_playing"
       />
     </MainFlex>
   );
