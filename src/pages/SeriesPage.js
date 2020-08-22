@@ -1,10 +1,11 @@
 import React from "react";
 
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
+import useSeriesContext from "../contexts/SeriesContext";
 
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
-import MainFlex from "../components/MainFlex"
+import MainFlex from "../components/MainFlex";
+import LoadingPage from "./LoadingPage";
 
 const SeriesPage = () => {
   const {
@@ -12,9 +13,12 @@ const SeriesPage = () => {
     popularSeries,
     topRatedSeries,
     onAirSeries,
-  } = useMoviesSeriesContext();
+    isSeriesDataLoading,
+  } = useSeriesContext();
 
-  return (
+  return isSeriesDataLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
       <Hero data={popularSerie} media_type="tv" />
 

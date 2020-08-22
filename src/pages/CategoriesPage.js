@@ -7,8 +7,10 @@ import { useParams } from "react-router-dom";
 import BasicCard from "../components/CardMovie";
 import Section from "../components/native components/Section";
 import MainFlex from "../components/MainFlex";
+import LoadingPage from "../pages/LoadingPage";
 
 import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
 const ContainerFlex = styled.div`
   display: flex;
@@ -31,24 +33,29 @@ const Title = styled.h3`
 const CategoriesPage = () => {
   const { categoryId, media } = useParams();
   const [categoriesMovies, setCategoriesMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const categoryTitle = categoryId.split("_").join(" ");
   const upperCaseTitle =
     categoryTitle[0].toUpperCase() + categoryTitle.slice(1);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(
         categoryId === "trending"
-          ? `https://api.themoviedb.org/3/${categoryId}/${media}/day?api_key=${API_KEY}`
-          : `https://api.themoviedb.org/3/${media}/${categoryId}?api_key=${API_KEY}`
+          ? `${API_URL}${categoryId}/${media}/day?api_key=${API_KEY}`
+          : `${API_URL}${media}/${categoryId}?api_key=${API_KEY}`
       )
       .then((response) => {
         setCategoriesMovies(response.data.results);
+        setIsLoading(false);
       });
   }, [categoryId, media]);
 
-  return (
+  return isLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
       <Section>
         <Title>

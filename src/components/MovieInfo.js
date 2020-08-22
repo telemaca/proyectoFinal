@@ -13,6 +13,7 @@ const StyledSection = styled.section`
 
 const StyledImg = styled.img`
   height: 25vw;
+  width: 17vw;
 `;
 
 const StyledContainer = styled.div`

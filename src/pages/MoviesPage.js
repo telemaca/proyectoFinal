@@ -1,10 +1,11 @@
 import React from "react";
 
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
+import useMoviesContext from "../contexts/MoviesContext";
 
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
 import MainFlex from "../components/MainFlex";
+import LoadingPage from "./LoadingPage";
 
 const MoviesPage = () => {
   const {
@@ -12,14 +13,17 @@ const MoviesPage = () => {
     popularMovies,
     topRatedMovies,
     nowPlayingMovies,
-  } = useMoviesSeriesContext();
+    isMoviesDataLoading,
+  } = useMoviesContext();
 
   //Ordeno por la mayor cantidad de votos para que no muestre en la pagina principal pelis medio random
   const filteredTopRatedMovies = topRatedMovies
     .sort((a, b) => b.vote_count - a.vote_count)
     .slice(0, 5);
 
-  return (
+  return isMoviesDataLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
       <Hero data={popularMovie} media_type="movie" />
 

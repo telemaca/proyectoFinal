@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import BasicCard from "./CardMovie";
 import Section from "./native components/Section";
@@ -10,11 +10,11 @@ const ContainerFlex = styled.div`
   justify-content: space-evenly;
   padding-bottom: 4vw;
 `;
-const StyledContainerFlex = styled(ContainerFlex) `
+const StyledContainerFlex = styled(ContainerFlex)`
   justify-content: flex-start;
   padding: 0;
   align-items: center;
-`
+`;
 const Title = styled.h3`
   margin-left: 2.4vw;
   font-size: 1.6rem;
@@ -24,25 +24,31 @@ const Title = styled.h3`
   color: #fff;
 `;
 
-const StyledExploreLink = styled(Link) `
-    margin-left: 2vw;
-    text-decoration: none;
-    font-size: 14px;
-    font-family: roboto;
-    color: #2196f3;
-`
+const StyledExploreLink = styled(Link)`
+  margin-left: 2vw;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: roboto;
+  color: #2196f3;
+`;
 
-const CardListPreview = ({ title, elements, categoryId, media_type}) => {
- 
+const CardListPreview = ({ title, elements, categoryId, media_type }) => {
   return (
     <Section>
       <StyledContainerFlex>
         <Title>{title}</Title>
-        <StyledExploreLink to={`${media_type}/category/${categoryId}`} > Explore All</StyledExploreLink>
+        <StyledExploreLink to={`${media_type}/category/${categoryId}`}>
+          {" "}
+          Explore All
+        </StyledExploreLink>
       </StyledContainerFlex>
       <ContainerFlex>
         {elements &&
-          elements.slice(0, 5).map((element) => <BasicCard data={element} media_type={media_type}/>)}
+          elements
+            .slice(0, 5)
+            .map((element, i) => (
+              <BasicCard key={i} data={element} media_type={media_type} />
+            ))}
       </ContainerFlex>
     </Section>
   );
