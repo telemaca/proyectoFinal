@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import MoviesPage from "./pages/MoviesPage";
 import MoviePage from "./pages/MoviePage";
 import SeriesPage from "./pages/SeriesPage";
+import SeriePage from "./pages/SeriePage";
 import SearchPage from "./pages/SearchPage";
 
 const GlobalStyle = createGlobalStyle`
@@ -36,6 +37,9 @@ const App = () => {
           </Route>
           <Route exact path="/tv">
             <SeriesPage />
+          </Route>
+          <Route exact path="/tv/:tvId">
+            <SeriePage />
           </Route>
           <Route exact path="/discover">
             <SearchPage />
