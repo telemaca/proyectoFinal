@@ -1,72 +1,65 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import styled from "styled-components";
+import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 
 import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
-import useMoviesSeriesContext from "../contexts/MoviesSeriesContext";
+import useSeriesContext from "../contexts/SeriesContext";
 
 import Hero from "../components/Hero";
 import SerieNavLinks from "../components/SerieNavLinks";
 import SerieInfo from "../components/SerieInfo";
 import SerieSeasons from "../components/SerieSeasons";
 import SimilarSeries from "../components/SimilarSeries";
-
-const MainFlex = styled.main`
-  display: flex;
-  flex-direction: column;
-  width: 95vw;
-  transform: translateX(-0.7px);
-`;
+import MainFlex from "../components/MainFlex";
+import LoadingPage from "../pages/LoadingPage";
 
 const SeriePage = () => {
-  const { selectedId } = useMoviesSeriesContext();
+  const { tvId } = useParams();
+  const { path } = useRouteMatch();
+
+  const { popularSeries } = useSeriesContext();
   const [selectedSerie, setSelectedSerie] = useState({});
-  const [selectedSerieSeasons, setSelectedSerieSeasons] = useState([]);
   const [similarSeries, setSimilarSeries] = useState([]);
+  const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);
 
   useEffect(() => {
+    setIsSerieDataLoading(true);
     axios
-      .get(`https://api.themoviedb.org/3/tv/${selectedId}?api_key=${API_KEY}`)
+      .get(`${API_URL}tv/${tvId}?api_key=${API_KEY}`)
       .then((response) => {
         setSelectedSerie(response.data);
-      });
-  }, [selectedId]);
+        setIsSerieDataLoading(false);
+      })
+      .catch((err) => console.log(err));
 
-  useEffect(() => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${selectedId}/credits?api_key=${API_KEY}`
-      )
-      .then((response) => {
-        setSelectedSerieSeasons(response.data.cast.slice(0, 18));
-      });
-  }, [selectedId]);
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${selectedId}/similar?api_key=${API_KEY}`
-      )
+      .get(`${API_URL}tv/${tvId}/similar?api_key=${API_KEY}`)
       .then((response) => {
         setSimilarSeries(response.data.results);
-      });
-  }, [selectedId]);
+      })
+      .catch((err) => console.log(err));
+  }, [tvId]);
 
-  return (
+  return isSerieDataLoading ? (
+    <LoadingPage />
+  ) : (
     <MainFlex>
-      <Hero data={selectedSerie} link="tv" />
+      <Hero data={selectedSerie} media_type="tv" />
       <SerieNavLinks />
       <Switch>
-        <Route path="/tv/:tvId/info">
+        <Route path={`${path}/info`}>
           <SerieInfo data={selectedSerie} />
         </Route>
-        {/* <Route path="/tv/:tvId/cast">
-          <SerieSeasons actors={selectedSerieSeasons} />
-        </Route> */}
-        <Route path="/tv/:tvId/similar">
-          <SimilarSeries series={similarSeries} />
+        <Route path={`${path}/season`}>
+          <SerieSeasons data={selectedSerie} />
+        </Route>
+        <Route path={`${path}/similar`}>
+          <SimilarSeries
+            series={similarSeries.length !== 0 ? similarSeries : popularSeries}
+            notFound={similarSeries.length !== 0}
+          />
         </Route>
       </Switch>
     </MainFlex>

@@ -48,7 +48,14 @@ const StyledText = styled.div`
 `;
 
 const SerieInfo = ({ data }) => {
-  const { overview, poster_path, genres, release_date, networks } = data;
+  const {
+    overview,
+    poster_path,
+    genres,
+    first_air_date,
+    number_of_seasons,
+    number_of_episodes,
+  } = data;
 
   const getReleaseDate = () => {
     const months = [
@@ -65,10 +72,10 @@ const SerieInfo = ({ data }) => {
       "November",
       "December",
     ];
-    const movieDate = new Date(release_date);
-    return `${movieDate.getDate() + 1} ${
-      months[movieDate.getMonth()]
-    }, ${movieDate.getFullYear()}`;
+    const serieDate = new Date(first_air_date);
+    return `${serieDate.getDate() + 1} ${
+      months[serieDate.getMonth()]
+    }, ${serieDate.getFullYear()}`;
   };
 
   return (
@@ -95,6 +102,14 @@ const SerieInfo = ({ data }) => {
             <StyledListItem>
               <StyledCategory>Released</StyledCategory>
               <StyledText>{getReleaseDate()}</StyledText>
+            </StyledListItem>
+            <StyledListItem>
+              <StyledCategory>Seasons</StyledCategory>
+              <StyledText>{number_of_seasons}</StyledText>
+            </StyledListItem>
+            <StyledListItem>
+              <StyledCategory>Episodes</StyledCategory>
+              <StyledText>{number_of_episodes}</StyledText>
             </StyledListItem>
           </StyledList>
         </div>
