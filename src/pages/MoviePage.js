@@ -62,7 +62,7 @@ const MoviePage = () => {
         <Route path="/movie/:movieId/similar">
           <SimilarMovies
             movies={similarMovies.length !== 0 ? similarMovies : popularMovies}
-            notFound={similarMovies.length !== 0}
+            notFound={similarMovies.length === 0}
           />
         </Route>
       </Switch>

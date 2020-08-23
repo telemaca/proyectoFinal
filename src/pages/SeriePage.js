@@ -58,7 +58,7 @@ const SeriePage = () => {
         <Route path={`${path}/similar`}>
           <SimilarSeries
             series={similarSeries.length !== 0 ? similarSeries : popularSeries}
-            notFound={similarSeries.length !== 0}
+            notFound={similarSeries.length === 0}
           />
         </Route>
       </Switch>
