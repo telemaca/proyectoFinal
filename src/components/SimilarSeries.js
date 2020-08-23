@@ -29,7 +29,7 @@ const SimilarSeries = ({ series, notFound = false }) => {
   return (
     <StyledSection>
       {notFound && (
-        <Text>Similar Series not found. Showing Trending Series instead.</Text>
+        <Text>Similar Series not found. Showing Popular Series instead.</Text>
       )}
       <StyledContainer>
         {series.map((serie) => (

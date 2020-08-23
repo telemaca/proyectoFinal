@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useRouteMatch, Link } from "react-router-dom";
+import { useParams, useRouteMatch, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
@@ -21,14 +21,18 @@ const StyledListItem = styled.li`
   font-family: "Roboto";
 `;
 
-const StyledNavLink = styled(Link)`
+const StyledNavLink = styled(NavLink)`
   color: #fafafa;
   text-decoration: none;
   &:hover {
-    color: lightblue;
+    color: #2196f3;
+    font-weight: 700;
   }
   &.selected {
-    color: grey;
+    font-weight: 700;
+    padding-bottom: 5px;
+    border-bottom: 3px solid;
+    letter-spacing: 1px;
   }
 `;
 

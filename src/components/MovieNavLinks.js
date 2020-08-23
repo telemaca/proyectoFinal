@@ -25,23 +25,25 @@ const StyledNavLink = styled(NavLink)`
   color: #fafafa;
   text-decoration: none;
   &:hover {
-    color: lightblue;
+    color: #2196f3;
+    font-weight: 700;
   }
   &.selected {
-    color: grey;
+    font-weight: 700;
+    padding-bottom: 5px;
+    border-bottom: 3px solid;
+    letter-spacing: 1px;
   }
 `;
 
 const MovieNavLinks = () => {
- 
   const { movieId } = useParams();
-    
+
   return (
     <StyledNav>
       <StyledList>
         <StyledListItem>
           <StyledNavLink
-            
             to={`/movie/${movieId}/info`}
             activeClassName="selected"
           >
@@ -50,7 +52,6 @@ const MovieNavLinks = () => {
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink
-            
             to={`/movie/${movieId}/cast`}
             activeClassName="selected"
           >
@@ -59,7 +60,6 @@ const MovieNavLinks = () => {
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink
-            
             to={`/movie/${movieId}/similar`}
             activeClassName="selected"
           >

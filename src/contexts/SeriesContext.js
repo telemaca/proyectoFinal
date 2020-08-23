@@ -19,21 +19,21 @@ const SeriesProvider = ({ children }) => {
     axios
       .get(`${API_URL}trending/tv/day?api_key=${API_KEY}`)
       .then((response) => {
-        setTrendingSeries(response.data.results.slice(0, 5));
+        setTrendingSeries(response.data.results);
         setIsSeriesDataLoading(false);
       });
 
     axios.get(`${API_URL}tv/popular?api_key=${API_KEY}`).then((response) => {
       setPopularSerie(response.data.results[0]);
-      setPopularSeries(response.data.results.slice(0, 5));
+      setPopularSeries(response.data.results);
     });
 
     axios.get(`${API_URL}tv/top_rated?api_key=${API_KEY}`).then((response) => {
-      setTopRatedSeries(response.data.results.slice(0, 5));
+      setTopRatedSeries(response.data.results);
     });
 
     axios.get(`${API_URL}tv/on_the_air?api_key=${API_KEY}`).then((response) => {
-      setOnAirSeries(response.data.results.slice(0, 5));
+      setOnAirSeries(response.data.results);
     });
   }, []);
 

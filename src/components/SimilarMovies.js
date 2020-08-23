@@ -29,7 +29,7 @@ const SimilarMovies = ({ movies, notFound = false }) => {
   return (
     <StyledSection>
       {notFound && (
-        <Text>Similar Movies not found. Showing Trending Movies instead.</Text>
+        <Text>Similar Movies not found. Showing Popular Movies instead.</Text>
       )}
       <StyledContainer>
         {movies.map((movie) => (

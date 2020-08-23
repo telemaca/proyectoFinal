@@ -21,13 +21,13 @@ const MoviesProvider = ({ children }) => {
       .get(`${API_URL}trending/movie/day?api_key=${API_KEY}`)
       .then((response) => {
         setTrendingMovie(response.data.results[0]);
-        setTrendingMovies(response.data.results.slice(0, 5));
+        setTrendingMovies(response.data.results);
         setIsMoviesDataLoading(false);
       });
 
     axios.get(`${API_URL}movie/popular?api_key=${API_KEY}`).then((response) => {
       setPopularMovie(response.data.results[0]);
-      setPopularMovies(response.data.results.slice(0, 5));
+      setPopularMovies(response.data.results);
     });
 
     axios
@@ -39,7 +39,7 @@ const MoviesProvider = ({ children }) => {
     axios
       .get(`${API_URL}movie/now_playing?api_key=${API_KEY}`)
       .then((response) => {
-        setNowPlayingMovies(response.data.results.slice(0, 5));
+        setNowPlayingMovies(response.data.results);
       });
   }, []);
 
