@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 3vw;
+  padding: 0 3vw;
 `;
 
 const Text = styled.p`
@@ -23,6 +23,7 @@ const Text = styled.p`
   font-family: "Roboto";
   font-size: 1.5vw;
   text-align: center;
+  margin-top: 4vw;
 `;
 
 const SimilarMovies = ({ movies, notFound = false }) => {

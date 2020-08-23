@@ -36,7 +36,7 @@ const MoviePage = () => {
     axios
       .get(`${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`)
       .then((response) => {
-        setSelectedMovieCast(response.data.cast.slice(0, 20));
+        setSelectedMovieCast(response.data.cast);
       });
 
     axios

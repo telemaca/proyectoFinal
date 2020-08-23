@@ -112,8 +112,9 @@ const SerieSeasons = ({ data }) => {
               )}
             </Container>
             {episodes &&
-              episodes.episodes.map((episode) => (
+              episodes.episodes.map((episode, i) => (
                 <BasicCard
+                  key={i}
                   data={episode}
                   media_type="tv"
                   customStyle={{ marginBottom: "3vw" }}
