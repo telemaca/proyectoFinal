@@ -9,8 +9,6 @@ import {
   BsSearch as SearchIcon,
 } from "react-icons/bs";
 
-
-
 const StyledAside = styled.aside`
   width: 5vw;
   display: flex;
@@ -47,10 +45,10 @@ const NavLinks = () => {
         <StyledNavLink exact to="/" activeClassName="selected">
           <HomeIcon />
         </StyledNavLink>
-        <StyledNavLink to="/movies" activeClassName="selected">
+        <StyledNavLink exact to="/movie" activeClassName="selected">
           <MovieIcon />
         </StyledNavLink>
-        <StyledNavLink to="/tv" activeClassName="selected">
+        <StyledNavLink exact to="/tv" activeClassName="selected">
           <TvIcon />
         </StyledNavLink>
         <StyledNavLink to="/discover" activeClassName="selected">

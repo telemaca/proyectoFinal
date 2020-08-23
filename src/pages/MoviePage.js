@@ -53,9 +53,6 @@ const MoviePage = () => {
       <Hero data={selectedMovie} media_type="movie" />
       <MovieNavLinks />
       <Switch>
-        {/* <Route path="/movie/:movieId">
-          <MovieInfo data={selectedMovie} />
-        </Route> */}
         <Route path="/movie/:movieId/info">
           <MovieInfo data={selectedMovie} />
         </Route>
