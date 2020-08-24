@@ -20,8 +20,7 @@ body {
 `;
 
 const App = () => {
-  return (
-     <MoviesSeriesProvider>
+  return (     
       <Router>          
         <GlobalStyle />
         <NavLinks />
@@ -51,8 +50,7 @@ const App = () => {
             <SearchPage />
           </Route>
         </Switch>       
-      </Router>
-     </MoviesSeriesProvider>
+      </Router>    
   );
 };
 

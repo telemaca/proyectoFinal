@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdPlayArrow as PlayIcon } from "react-icons/md";
 import Rating from "./Rating";
 
@@ -84,8 +84,7 @@ const Text = styled.p `
 
 const Hero = ({ data, media_type }) => {
 
-  const { title, overview, backdrop_path, vote_average, name, id } = data;
-  const {url} = useRouteMatch()
+  const { title, overview, backdrop_path, vote_average, name, id } = data; 
   
   return (
     <StyledSection>

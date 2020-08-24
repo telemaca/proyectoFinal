@@ -19,7 +19,7 @@ const MoviePage = () => {
   const { movieId } = useParams();
   const {path} = useRouteMatch()
  
-  const { popularMovies } = useMoviesSeriesContext();
+  const { popularMovies } = useMoviesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);

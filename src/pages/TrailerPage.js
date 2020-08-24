@@ -6,6 +6,9 @@ import styled from "styled-components";
 
 import { CgCloseR as CloseIcon } from "react-icons/cg";
 import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
+
+import LoadingPage from "../pages/LoadingPage"
 
 const Container = styled.div `
   width: calc(100% - 4vw);
@@ -29,6 +32,7 @@ const StyledCloseIcon = styled(CloseIcon) `
 const TrailerPage = () => {
   const { media, id } = useParams()
   const [trailerData, setTrailerData] = useState([])
+  const [isTrailerDataLoading, setIsTrailerDataLoading] = useState(true);
   const history = useHistory()
 
   const handleGoBackClick = () => {
@@ -36,14 +40,18 @@ const TrailerPage = () => {
   }
 
   useEffect (() => {
+    setIsTrailerDataLoading(true);
     axios
-      .get(`https://api.themoviedb.org/3/${media}/${id}/videos?api_key=${API_KEY}`)
+      .get(`${API_URL}${media}/${id}/videos?api_key=${API_KEY}`)
       .then((response) => {
-        setTrailerData(response.data.results.filter((index) => index.type === "Trailer"))        
+        setTrailerData(response.data.results.filter((index) => index.type === "Trailer"))  
+        setIsTrailerDataLoading(false);      
       })
   }, [media, id]) 
 
-  return (    
+  return isTrailerDataLoading ? (
+    <LoadingPage />
+  ) : (    
     <Container >  
       <StyledCloseIcon onClick={handleGoBackClick} />
       <ReactPlayer 
