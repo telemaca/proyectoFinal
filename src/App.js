@@ -10,6 +10,7 @@ import SeriesPage from "./pages/SeriesPage";
 import SeriePage from "./pages/SeriePage";
 import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage";
+import TrailerPage from "./pages/TrailerPage"
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -19,34 +20,37 @@ body {
 `;
 
 const App = () => {
-  return (
-    <Router>
-      <GlobalStyle />
-      <NavLinks />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/movie">
-          <MoviesPage />
-        </Route>
-        <Route path="/:media/category/:categoryId">
-          <CategoriesPage />
-        </Route>
-        <Route path="/movie/:movieId">
-          <MoviePage />
-        </Route>
-        <Route exact path="/tv">
-          <SeriesPage />
-        </Route>
-        <Route path="/tv/:tvId">
+  return (     
+      <Router>          
+        <GlobalStyle />
+        <NavLinks />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/movie">
+            <MoviesPage />
+          </Route>         
+          <Route path="/movie/:movieId">
+            <MoviePage />           
+          </Route>         
+          <Route exact path="/tv">
+            <SeriesPage />
+          </Route>
+          <Route path="/tv/:tvId">
           <SeriePage />
         </Route>
-        <Route exact path="/discover">
-          <SearchPage />
+          <Route path="/:media/category/:categoryId">
+          <CategoriesPage />
         </Route>
-      </Switch>
-    </Router>
+          <Route path="/video/:media/:id">
+            <TrailerPage />
+          </Route>       
+          <Route exact path="/discover">
+            <SearchPage />
+          </Route>
+        </Switch>       
+      </Router>    
   );
 };
 

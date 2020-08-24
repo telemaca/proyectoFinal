@@ -38,6 +38,7 @@ const BasicCard = ({ data, customStyle, media_type }) => {
   };  
 
   return (
+    
     <Card key={id} id={id} style={customStyle} media_type={media_type}>     
         <Img
           src={`http://image.tmdb.org/t/p/w342/${poster_path}`}

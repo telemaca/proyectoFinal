@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
@@ -37,14 +37,15 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const MovieNavLinks = () => {
-  const { movieId } = useParams();
-
+  const {url} = useRouteMatch() 
+  
   return (
     <StyledNav>
       <StyledList>
         <StyledListItem>
           <StyledNavLink
-            to={`/movie/${movieId}/info`}
+            
+            to={`${url}/info`}
             activeClassName="selected"
           >
             INFO
@@ -52,7 +53,8 @@ const MovieNavLinks = () => {
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink
-            to={`/movie/${movieId}/cast`}
+            
+            to={`${url}/cast`}
             activeClassName="selected"
           >
             CAST
@@ -60,7 +62,8 @@ const MovieNavLinks = () => {
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink
-            to={`/movie/${movieId}/similar`}
+            
+            to={`${url}/similar`}
             activeClassName="selected"
           >
             SIMILAR MOVIES

@@ -1,4 +1,5 @@
 import React from "react";
+
 import styled from "styled-components";
 
 import CastCard from "../components/CastCard";
@@ -13,7 +14,10 @@ const StyledSection = styled.section`
 `;
 
 const MovieCast = ({ actors }) => {
+  
+
   return (
+    
     <StyledSection>
       {actors.map((actor, i) => (
         <CastCard key={i} data={actor} />

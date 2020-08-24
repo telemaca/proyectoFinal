@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useParams } from "react-router-dom";
+import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 
 import API_KEY from "../data/apiKey";
@@ -17,7 +17,8 @@ import LoadingPage from "../pages/LoadingPage";
 
 const MoviePage = () => {
   const { movieId } = useParams();
-
+  const {path} = useRouteMatch()
+ 
   const { popularMovies } = useMoviesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
@@ -46,20 +47,20 @@ const MoviePage = () => {
       });
   }, [movieId]);
 
-  return isMovieDataLoading ? (
+return isMovieDataLoading ? (
     <LoadingPage />
-  ) : (
+  ) : (  
     <MainFlex>
       <Hero data={selectedMovie} media_type="movie" />
       <MovieNavLinks />
-      <Switch>
-        <Route path="/movie/:movieId/info">
+      <Switch>        
+        <Route path={`${path}/info`}>
           <MovieInfo data={selectedMovie} />
         </Route>
-        <Route path="/movie/:movieId/cast">
+        <Route path={`${path}/cast`}>
           <MovieCast actors={selectedMovieCast} />
         </Route>
-        <Route path="/movie/:movieId/similar">
+        <Route path={`${path}/similar`}>
           <SimilarMovies
             movies={similarMovies.length !== 0 ? similarMovies : popularMovies}
             notFound={similarMovies.length === 0}
