@@ -5,27 +5,40 @@ import { MdPlayArrow as PlayIcon } from "react-icons/md";
 import Rating from "./Rating";
 
 const StyledSection = styled.section`
-  height: 70vh;
+  height: ${(props) => (props.page === "home" ? "70vh" : "90vh")};
   display: flex;
-  @media(max-width: 950px) {
+  background-color: black;
+  flex-direction: ${(props) =>
+    props.page === "home" ? "row" : "column-reverse"};
+  justify-content: ${(props) =>
+    props.page === "home" ? "initial" : "flex-end"};
+  /* @media(max-width: 950px) {
     flex-direction: column;
-  }
+  } */
 `;
 
 const StyledContainerInfo = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => (props.page === "home" ? "column" : "row")};
   justify-content: center;
-  width: 30%;
+  width: ${(props) => (props.page === "home" ? "30%" : "auto")};
   background-color: black;
-  padding-left: 2vw;
+  padding: ${(props) => props.page === "secondary" && "4vw 0 0 2vw"};
+  padding-left: ${(props) => props.page === "home" && "3vw"};
+`;
+
+const Container = styled.div`
+  padding-right: ${(props) => (props.page === "home" ? "0" : "5vw")};
+  max-width: ${(props) => props.page === "secondary" && "30%"};
 `;
 
 const BackgrdImgContainer = styled.div`
-  width: 70%;
+  width: ${(props) => (props.page === "home" ? "70%" : "95vw")};
+  height: ${(props) => (props.page === "home" ? "auto" : "30vw")};
   background-image: url(${(props) => props.img});
   background-size: cover;
-  box-shadow: inset 50px -20px 60px 60px #000;
+  box-shadow: ${(props) =>
+    props.page === "home" ? "inset 50px -20px 60px 60px #000" : "none"};
 `;
 
 const StyledTitleLink = styled(Link)`
@@ -37,7 +50,7 @@ const StyledTitleLink = styled(Link)`
   text-decoration: none;
   color: #fafafa;
   &:hover {
-    color: #2196f3;
+    color: ${(props) => (props.page === "home" ? "#2196f3" : "#fafafa")};
   }
 `;
 
@@ -46,9 +59,11 @@ const StyledDescription = styled.p`
   color: #fafafa;
   font-size: 1vw;
   z-index: 200;
+  width: ${(props) => (props.page === "home" ? "auto" : "50%")};
+  margin: ${(props) => props.page === "secondary" && "0"};
 `;
 
-const Button = styled.button `
+const Button = styled.button`
   width: 13vw;
   height: 3.3vw;
   background-color: #202124;
@@ -62,44 +77,48 @@ const Button = styled.button `
     background-color: #2f2f2f;
     border: solid #2f2f2f;
     transition: 0.2s;
-  }    
-`
-const StyledPlayIcon = styled(PlayIcon) `
+  }
+`;
+const StyledPlayIcon = styled(PlayIcon)`
   font-size: 1.7vw;
   color: #fff;
   margin-right: 0.7vw;
-`
-const StyledTrailerLink = styled(Link) `
-  text-decoration:none;
+`;
+const StyledTrailerLink = styled(Link)`
+  text-decoration: none;
   width: 13vw;
   margin-top: 2vw;
-`
-const Text = styled.p `
+`;
+const Text = styled.p`
   color: #fff;
   font-family: roboto;
   font-size: 1.1vw;
   font-weight: 600;
   letter-spacing: 0.1em;
-`
+`;
 
-const Hero = ({ data, media_type }) => {
+const Hero = ({ data, media_type, page = "home" }) => {
+  const { title, overview, backdrop_path, vote_average, name, id } = data;
 
-  const { title, overview, backdrop_path, vote_average, name, id } = data; 
-  
   return (
-    <StyledSection>
-      <StyledContainerInfo>
-        <StyledTitleLink to={`/${media_type}/${id}`}>{title || name}</StyledTitleLink>
-        <Rating rating={vote_average} />
-        <StyledDescription>{overview}</StyledDescription>         
-          <StyledTrailerLink to={`/video/${media_type}/${id}`}>         
-            <Button>
-              <StyledPlayIcon/> 
-              <Text>Watch Trailer</Text>
-            </Button>
-          </StyledTrailerLink>       
+    <StyledSection page={page}>
+      <StyledContainerInfo page={page}>
+        <Container page={page}>
+          <StyledTitleLink page={page} to={`/${media_type}/${id}`}>
+            {title || name}
+          </StyledTitleLink>
+          <Rating rating={vote_average} />
+        </Container>
+        <StyledDescription page={page}>{overview}</StyledDescription>
+        <StyledTrailerLink to={`/video/${media_type}/${id}`}>
+          <Button>
+            <StyledPlayIcon />
+            <Text>Watch Trailer</Text>
+          </Button>
+        </StyledTrailerLink>
       </StyledContainerInfo>
       <BackgrdImgContainer
+        page={page}
         img={`https://image.tmdb.org/t/p/original${backdrop_path}`}
       ></BackgrdImgContainer>
     </StyledSection>

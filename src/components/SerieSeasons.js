@@ -7,7 +7,7 @@ import { FaArrowDown } from "react-icons/fa";
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
 
-import BasicCard from "../components/CardSerie";
+import CardEpisode from "../components/CardEpisode";
 import LoadingPage from "../pages/LoadingPage";
 
 const StyledSection = styled.section`
@@ -22,23 +22,22 @@ const StyledSection = styled.section`
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 3vw;
+  margin-left: 3vw;
 `;
 
 const Container = styled.div`
   display: flex;
   width: 100%;
-  align-items: center;
 `;
 
 const Select = styled.select`
   color: #fafafa;
-  height: 3vw;
-  width: 16vw;
+  height: 2vw;
+  width: 7vw;
   margin-bottom: 2vw;
+  padding-left: 0.7vw;
   font-family: "Roboto";
-  font-size: 1.5vw;
+  font-size: 0.8vw;
   background-color: #1d1d1d;
   text-align: center;
 `;
@@ -52,16 +51,14 @@ const Option = styled.option`
   box-shadow: inset -100px -50px 110px 41px #000;
 `;
 
-const StyledOverview = styled.div`
-  width: 90%;
-  margin-bottom: 2vw;
-`;
+const StyledOverview = styled.div``;
 
 const Text = styled.p`
-  color: #fafafa;
+  color: grey;
   font-family: "Roboto";
-  font-size: 1.5vw;
+  font-size: 0.9vw;
   text-align: center;
+  margin: 0.5vw 1.5vw;
 `;
 
 const SerieSeasons = ({ data }) => {
@@ -90,13 +87,15 @@ const SerieSeasons = ({ data }) => {
       });
   }, [seasonSelected]);
 
-  return (
+  return isSerieDataLoading ? (
+    <LoadingPage />
+  ) : (
     <StyledSection>
       {tvId && seasons && (
         <>
           <StyledContainer>
             <Container>
-              <Select onChange={handleChange}>
+              <Select onChange={handleChange} value={seasonSelected}>
                 {seasons
                   .filter((season) => season.name !== "Specials")
                   .map((season, index) => (
@@ -107,13 +106,13 @@ const SerieSeasons = ({ data }) => {
               </Select>
               {episodes && (
                 <StyledOverview>
-                  <Text>Episodes: {episodes.episodes.length}</Text>
+                  <Text>{episodes.episodes.length} episodes</Text>
                 </StyledOverview>
               )}
             </Container>
             {episodes &&
               episodes.episodes.map((episode, i) => (
-                <BasicCard
+                <CardEpisode
                   key={i}
                   data={episode}
                   media_type="tv"

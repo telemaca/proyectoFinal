@@ -20,7 +20,7 @@ const Home = () => {
     <LoadingPage />
   ) : (
     <MainFlex>
-      <Hero data={trendingMovie} media_type="movie" />
+      <Hero data={trendingMovie} media_type="movie" page="home" />
 
       <CardListPreview
         title="Trending Movies"
