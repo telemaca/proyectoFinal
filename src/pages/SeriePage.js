@@ -46,7 +46,7 @@ const SeriePage = () => {
     <LoadingPage />
   ) : (
     <MainFlex>
-      <Hero data={selectedSerie} media_type="tv" />
+      <Hero data={selectedSerie} media_type="tv" page="secondary" />
       <SerieNavLinks />
       <Switch>
         <Route path={`${path}/info`}>

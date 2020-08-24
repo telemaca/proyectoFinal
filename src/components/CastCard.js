@@ -37,7 +37,7 @@ const CastCard = ({ data }) => {
         src={
           profile_path === null
             ? "https://sainfoinc.com/wp-content/uploads/2018/02/image-not-available.jpg"
-            : `https://image.tmdb.org/t/p/original${profile_path}`
+            : `https://image.tmdb.org/t/p/w342/${profile_path}`
         }
       />
       <ActorName>{name}</ActorName>

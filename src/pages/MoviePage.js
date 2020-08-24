@@ -51,7 +51,7 @@ return isMovieDataLoading ? (
     <LoadingPage />
   ) : (  
     <MainFlex>
-      <Hero data={selectedMovie} media_type="movie" />
+      <Hero data={selectedMovie} media_type="movie" page="secondary" />
       <MovieNavLinks />
       <Switch>        
         <Route path={`${path}/info`}>
