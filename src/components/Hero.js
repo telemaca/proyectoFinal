@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
+import { Link, useRouteMatch } from "react-router-dom";
+import { MdPlayArrow as PlayIcon } from "react-icons/md";
 import Rating from "./Rating";
 
 const StyledSection = styled.section`
@@ -48,16 +48,57 @@ const StyledDescription = styled.p`
   z-index: 200;
 `;
 
+const Button = styled.button `
+  width: 13vw;
+  height: 3.3vw;
+  background-color: #202124;
+  border: solid #202124;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+  &:hover {
+    cursor: pointer;
+    background-color: #2f2f2f;
+    border: solid #2f2f2f;
+    transition: 0.2s;
+  }    
+`
+const StyledPlayIcon = styled(PlayIcon) `
+  font-size: 1.7vw;
+  color: #fff;
+  margin-right: 0.7vw;
+`
+const StyledTrailerLink = styled(Link) `
+  text-decoration:none;
+  width: 13vw;
+  margin-top: 2vw;
+`
+const Text = styled.p `
+  color: #fff;
+  font-family: roboto;
+  font-size: 1.1vw;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+`
+
 const Hero = ({ data, media_type }) => {
 
   const { title, overview, backdrop_path, vote_average, name, id } = data;
-
+  const {url} = useRouteMatch()
+  
   return (
     <StyledSection>
       <StyledContainerInfo>
         <StyledTitleLink to={`/${media_type}/${id}`}>{title || name}</StyledTitleLink>
         <Rating rating={vote_average} />
-        <StyledDescription>{overview}</StyledDescription>
+        <StyledDescription>{overview}</StyledDescription>         
+          <StyledTrailerLink to={`/video/${media_type}/${id}`}>         
+            <Button>
+              <StyledPlayIcon/> 
+              <Text>Watch Trailer</Text>
+            </Button>
+          </StyledTrailerLink>       
       </StyledContainerInfo>
       <BackgrdImgContainer
         img={`https://image.tmdb.org/t/p/original${backdrop_path}`}

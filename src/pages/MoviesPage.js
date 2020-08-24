@@ -8,6 +8,7 @@ import MainFlex from "../components/MainFlex";
 import LoadingPage from "./LoadingPage";
 
 const MoviesPage = () => {
+  
   const {
     popularMovie,
     popularMovies,
