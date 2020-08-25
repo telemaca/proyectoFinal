@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useRouteMatch, NavLink } from "react-router-dom";
 import styled from "styled-components";
+import useSeriesContext from "../contexts/SeriesContext";
 
 const StyledNav = styled.nav`
   width: 100%;
@@ -37,7 +38,8 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const SerieNavLinks = () => {
-  const { tvId } = useParams();
+  const { seasonNumber } = useSeriesContext();
+
   const { url } = useRouteMatch();
 
   return (
@@ -49,7 +51,7 @@ const SerieNavLinks = () => {
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
-          <StyledNavLink exact to={`${url}/season`} activeClassName="selected">
+          <StyledNavLink exact to={`${url}/season/${seasonNumber}`} activeClassName="selected">
             SEASONS
           </StyledNavLink>
         </StyledListItem>
