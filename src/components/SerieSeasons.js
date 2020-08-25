@@ -65,66 +65,67 @@ const Text = styled.p`
 
 const SerieSeasons = ({ data }) => {
   const { tvId, seasonNumber } = useParams();
-  const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);  
+  const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);
   const [episodes, setEpisodes] = useState();
-  const {  setSeasonNumber } = useSeriesContext();
+  const { setSeasonNumber } = useSeriesContext();
   const { seasons } = data;
 
-  const history = useHistory();  
+  const history = useHistory();
 
   const handleChange = (e) => {
     const numberValue = Number(e.target.value)
-    setSeasonNumber (numberValue);
+    setSeasonNumber(numberValue);
     history.push(`/tv/${tvId}/season/${numberValue}`);
   };
 
   useEffect(() => {
     setIsSerieDataLoading(true);
+    setSeasonNumber(1)
     axios
       .get(`${API_URL}tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}`)
       .then((response) => {
         setEpisodes(response.data);
-        setIsSerieDataLoading(false);        
+        setIsSerieDataLoading(false);
       });
   }, [seasonNumber]);
 
   return isSerieDataLoading ? (
     <LoadingPage />
   ) : (
-    <StyledSection>
-      {tvId && seasons && (
-        <>
-          <StyledContainer>
-            <Container>
-              <Select onChange={handleChange} value={seasonNumber}>
-                {seasons
-                  .filter((season) => season.name !== "Specials")
-                  .map((season, index) => (
-                    <Option value={index + 1} key={season.id} id={season.id}>
-                      Season {index + 1}
-                    </Option>
-                  ))}
-              </Select>
-              {episodes && (
-                <StyledOverview>
-                  <Text>{episodes.episodes.length} episodes</Text>
-                </StyledOverview>
-              )}
-            </Container>
-            {episodes &&
-              episodes.episodes.map((episode, i) => (
-                <CardEpisode
-                  key={i}
-                  data={episode}
-                  media_type="tv"
-                  customStyle={{ marginBottom: "3vw" }}
-                />
-              ))}
-          </StyledContainer>
-        </>
-      )}
-    </StyledSection>
-  );
+      <StyledSection>
+        {tvId && seasons && (
+          <>
+            <StyledContainer>
+              <Container>
+                <Select onChange={handleChange} value={seasonNumber}>
+                  {seasons
+                    .filter((season) => season.name !== "Specials")
+                    .map((season, index) => (
+                      <Option value={index + 1} key={season.id} id={season.id}>
+                        Season {index + 1}
+                      </Option>
+                    ))}
+                </Select>
+                {episodes && (
+                  <StyledOverview>
+                    <Text>{episodes.episodes.length} episodes</Text>
+                  </StyledOverview>
+                )}
+              </Container>
+              {episodes &&
+                episodes.episodes.map((episode, i) => (
+                  <CardEpisode
+                    key={i}
+                    data={episode}
+                    media_type="tv"
+                    customStyle={{ marginBottom: "3vw" }}
+                  />
+                ))}
+            </StyledContainer>
+          </>
+        )}
+      </StyledSection>
+    );
 };
 
 export default SerieSeasons;

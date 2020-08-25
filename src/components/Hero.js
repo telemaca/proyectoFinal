@@ -64,13 +64,13 @@ const StyledDescription = styled.p`
 `;
 
 const Button = styled.button`
-  width: 13vw;
-  height: 3.3vw;
+  height: 2.3vw;
   background-color: #202124;
   border: solid #202124;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: .7vw;
   transition: 0.2s;
   &:hover {
     cursor: pointer;
@@ -80,7 +80,7 @@ const Button = styled.button`
   }
 `;
 const StyledPlayIcon = styled(PlayIcon)`
-  font-size: 1.7vw;
+  font-size: 1.3vw;
   color: #fff;
   margin-right: 0.7vw;
 `;
@@ -92,8 +92,7 @@ const StyledTrailerLink = styled(Link)`
 const Text = styled.p`
   color: #fff;
   font-family: roboto;
-  font-size: 1.1vw;
-  font-weight: 600;
+  font-size: 0.8vw;
   letter-spacing: 0.1em;
 `;
 
@@ -107,15 +106,23 @@ const Hero = ({ data, media_type, page = "home" }) => {
           <StyledTitleLink page={page} to={`/${media_type}/${id}`}>
             {title || name}
           </StyledTitleLink>
-          <Rating rating={vote_average} />
+          <Rating rating={vote_average} page={page} />
+          {page === "secondary" &&
+            <StyledTrailerLink to={`/video/${media_type}/${id}`}>
+              <Button>
+                <StyledPlayIcon />
+                <Text>Watch Trailer</Text>
+              </Button>
+            </StyledTrailerLink>}
         </Container>
         <StyledDescription page={page}>{overview}</StyledDescription>
-        <StyledTrailerLink to={`/video/${media_type}/${id}`}>
-          <Button>
-            <StyledPlayIcon />
-            <Text>Watch Trailer</Text>
-          </Button>
-        </StyledTrailerLink>
+        {page === "home" &&
+          <StyledTrailerLink to={`/video/${media_type}/${id}`}>
+            <Button>
+              <StyledPlayIcon />
+              <Text>Watch Trailer</Text>
+            </Button>
+          </StyledTrailerLink>}
       </StyledContainerInfo>
       <BackgrdImgContainer
         page={page}

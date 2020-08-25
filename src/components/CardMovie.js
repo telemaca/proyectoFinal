@@ -11,6 +11,7 @@ const Card = styled.article`
 
 const Img = styled.img`
   width: 100%;
+  height: 23vw;
   transition: 0.3s;
   &:hover {
     transform: scale(1.02);

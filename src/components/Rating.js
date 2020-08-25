@@ -4,6 +4,7 @@ import { BsStar, BsStarHalf, BsStarFill } from "react-icons/bs";
 
 const StyledContainer = styled.div`
   display: flex;
+  margin-bottom: ${props => props.page === "home" ? 0 : "2vw"}
 `;
 
 const StyledDescription = styled.p`
@@ -32,7 +33,7 @@ const StarEmpty = styled(BsStar)`
   font-size: 1.1vw;
 `;
 
-const Rating = ({ rating }) => {
+const Rating = ({ rating, page }) => {
   const showRating = (rating) => {
     const fullStars = Math.floor(rating / 2);
     const halfStars = rating / 2 - fullStars;
@@ -50,7 +51,7 @@ const Rating = ({ rating }) => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer page={page}>
       {showRating(rating)}
       <StyledDescription>{rating}</StyledDescription>
     </StyledContainer>
