@@ -13,7 +13,7 @@ const SeriesProvider = ({ children }) => {
   const [popularSeries, setPopularSeries] = useState([]);
   const [topRatedSeries, setTopRatedSeries] = useState([]);
   const [onAirSeries, setOnAirSeries] = useState([]);
-  
+  const [seasonNumber, setSeasonNumber] = useState(1)
 
   useEffect(() => {
     setIsSeriesDataLoading(true);
@@ -47,7 +47,8 @@ const SeriesProvider = ({ children }) => {
         topRatedSeries,
         onAirSeries,
         isSeriesDataLoading,
-       
+        seasonNumber,
+        setSeasonNumber,
       }}
     >
       {children}
@@ -59,3 +60,4 @@ const useSeriesContext = () => useContext(SeriesContext);
 
 export { SeriesProvider };
 export default useSeriesContext;
+

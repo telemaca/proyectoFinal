@@ -30,6 +30,7 @@ const SeriePage = () => {
       .get(`${API_URL}tv/${tvId}?api_key=${API_KEY}`)
       .then((response) => {
         setSelectedSerie(response.data);
+        console.log(response.data)
         setIsSerieDataLoading(false);
       })
       .catch((err) => console.log(err));
@@ -52,7 +53,7 @@ const SeriePage = () => {
         <Route path={`${path}/info`}>
           <SerieInfo data={selectedSerie} />
         </Route>
-        <Route path={`${path}/season`}>
+        <Route path={`${path}/season/:seasonNumber`}>
           <SerieSeasons data={selectedSerie} />
         </Route>
         <Route path={`${path}/similar`}>

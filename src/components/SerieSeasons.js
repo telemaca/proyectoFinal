@@ -1,4 +1,3 @@
- 
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +6,8 @@ import { FaArrowDown } from "react-icons/fa";
 
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
+
+import useSeriesContext from "../contexts/SeriesContext";
 
 import CardEpisode from "../components/CardEpisode";
 import LoadingPage from "../pages/LoadingPage";
@@ -63,30 +64,29 @@ const Text = styled.p`
 `;
 
 const SerieSeasons = ({ data }) => {
-  const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);
-  const [seasonSelected, setSeasonSelected] = useState(1);
+  const { tvId, seasonNumber } = useParams();
+  const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);  
   const [episodes, setEpisodes] = useState();
-
+  const {  setSeasonNumber } = useSeriesContext();
   const { seasons } = data;
 
-  const history = useHistory();
-
-  const { tvId } = useParams();
+  const history = useHistory();  
 
   const handleChange = (e) => {
-    setSeasonSelected(e.target.value);
-    history.push(`/tv/${tvId}/season/${e.target.value}`);
+    const numberValue = Number(e.target.value)
+    setSeasonNumber (numberValue);
+    history.push(`/tv/${tvId}/season/${numberValue}`);
   };
 
   useEffect(() => {
     setIsSerieDataLoading(true);
     axios
-      .get(`${API_URL}tv/${tvId}/season/${seasonSelected}?api_key=${API_KEY}`)
+      .get(`${API_URL}tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}`)
       .then((response) => {
         setIsSerieDataLoading(false);
         setEpisodes(response.data);
       });
-  }, [seasonSelected]);
+  }, [seasonNumber]);
 
   return isSerieDataLoading ? (
     <LoadingPage />
@@ -96,7 +96,7 @@ const SerieSeasons = ({ data }) => {
         <>
           <StyledContainer>
             <Container>
-              <Select onChange={handleChange} value={seasonSelected}>
+              <Select onChange={handleChange} value={seasonNumber}>
                 {seasons
                   .filter((season) => season.name !== "Specials")
                   .map((season, index) => (
