@@ -83,8 +83,8 @@ const SerieSeasons = ({ data }) => {
     axios
       .get(`${API_URL}tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}`)
       .then((response) => {
-        setIsSerieDataLoading(false);
         setEpisodes(response.data);
+        setIsSerieDataLoading(false);        
       });
   }, [seasonNumber]);
 

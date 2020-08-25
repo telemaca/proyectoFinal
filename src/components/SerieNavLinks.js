@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useRouteMatch, NavLink } from "react-router-dom";
+import { useRouteMatch, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import useSeriesContext from "../contexts/SeriesContext";
 
@@ -38,8 +38,7 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const SerieNavLinks = () => {
-  const { seasonNumber } = useSeriesContext();
-
+  const { seasonNumber } = useSeriesContext();  
   const { url } = useRouteMatch();
 
   return (
