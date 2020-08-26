@@ -4,7 +4,11 @@ import { BsStar, BsStarHalf, BsStarFill } from "react-icons/bs";
 
 const StyledContainer = styled.div`
   display: flex;
-  margin-bottom: ${props => props.page === "home" ? 0 : "2vw"}
+  margin-bottom: ${props => props.page === "home" ? 0 : "2vw"};
+  
+  @media(max-width: 950px) {
+    padding-top: 2vh;
+  }
 `;
 
 const StyledDescription = styled.p`
@@ -12,25 +16,25 @@ const StyledDescription = styled.p`
   color: #fafafa;
   margin: 0;
   padding-left: 1vw;
-  font-size: 1.1vw;
+  font-size: 1rem;
 `;
 
 const StarFull = styled(BsStarFill)`
   padding-right: 5px;
   color: #0d8cd6;
-  font-size: 1.1vw;
+  font-size: 1rem;
 `;
 
 const StarHalf = styled(BsStarHalf)`
   padding-right: 5px;
   color: #0d8cd6;
-  font-size: 1.1vw;
+  font-size: 1rem;
 `;
 
 const StarEmpty = styled(BsStar)`
   padding-right: 5px;
   color: #0d8cd6;
-  font-size: 1.1vw;
+  font-size: 1rem;
 `;
 
 const Rating = ({ rating, page }) => {

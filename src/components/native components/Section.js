@@ -1,7 +1,7 @@
 import React from "react";
 
-const Section = ({ children }) => {
-    return <section style={{ backgroundColor: "black" }}>{children}</section>;
+const Section = ({ children, backgroundColor = "black" }) => {
+    return <section style={{ backgroundColor: `${backgroundColor}` }}>{children}</section>;
 };
 
 export default Section;

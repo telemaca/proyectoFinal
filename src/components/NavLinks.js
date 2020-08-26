@@ -20,12 +20,28 @@ const StyledAside = styled.aside`
   position: fixed;
   height: -webkit-fill-available;
   z-index: 200;
+
+  @media (max-width: 850px) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 3rem;
+    position: fixed;
+    border: none;
+    bottom:0;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
-  cursor: pointer;
+  /* cursor: pointer; */
   svg {
     color: #fafafa;
+    font-size: 1.5vw;
+    margin-bottom: 3vw;
+    @media (max-width: 850px) {
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
   }
   &.selected {
     svg {
@@ -38,9 +54,7 @@ const NavLinks = () => {
   return (
     <StyledAside>
       <IconContext.Provider
-        value={{
-          style: { fontSize: "1.5vw", marginBottom: "3vw" },
-        }}
+        value={{ style: { cursor: "pointer" } }}
       >
         <StyledNavLink exact to="/" activeClassName="selected">
           <HomeIcon />
