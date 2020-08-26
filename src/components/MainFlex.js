@@ -7,6 +7,10 @@ const StyledMain = styled.main`
   width: 95vw;
   padding-left: 5vw;
   transform: translateX(-0.7px);
+  @media (max-width: 850px) {
+    padding-left: 0;
+    width: 100vw;
+  }
 `;
 
 const MainFlex = ({ children, ...props }) => {

@@ -12,9 +12,13 @@ const StyledSection = styled.section`
     props.page === "home" ? "row" : "column-reverse"};
   justify-content: ${(props) =>
     props.page === "home" ? "initial" : "flex-end"};
-  /* @media(max-width: 950px) {
-    flex-direction: column;
-  } */
+  
+  @media(max-width: 950px) {
+    flex-direction: column-reverse;
+    height: auto;
+    justify-content: flex-end;
+    /* margin-bottom: ${(props) => props.page === "secondary" && "2rem"}; */
+  }
 `;
 
 const StyledContainerInfo = styled.div`
@@ -25,20 +29,36 @@ const StyledContainerInfo = styled.div`
   background-color: black;
   padding: ${(props) => props.page === "secondary" && "4vw 0 0 2vw"};
   padding-left: ${(props) => props.page === "home" && "3vw"};
+  @media(max-width: 950px) {
+    width: 90%;
+    justify-content: left;
+    margin: 6vw 0;
+  }
 `;
 
 const Container = styled.div`
   padding-right: ${(props) => (props.page === "home" ? "0" : "5vw")};
   max-width: ${(props) => props.page === "secondary" && "30%"};
+  @media(max-width: 950px) {
+    padding-left: ${(props) => props.page === "secondary" && "3vw"};
+    max-width: ${(props) => props.page === "secondary" && "100%"};
+  }
 `;
 
 const BackgrdImgContainer = styled.div`
-  width: ${(props) => (props.page === "home" ? "70%" : "95vw")};
+  width: ${(props) => (props.page === "home" ? "100%" : "95vw")};
   height: ${(props) => (props.page === "home" ? "auto" : "30vw")};
   background-image: url(${(props) => props.img});
   background-size: cover;
   box-shadow: ${(props) =>
     props.page === "home" ? "inset 50px -20px 60px 60px #000" : "none"};
+  
+  @media(max-width: 950px) {
+    width: 100vw;
+    height: 18rem;
+    box-shadow: inset 0px -20px 30px 6px #000;
+    background-position-x: center;
+  }
 `;
 
 const StyledTitleLink = styled(Link)`
@@ -52,6 +72,10 @@ const StyledTitleLink = styled(Link)`
   &:hover {
     color: ${(props) => (props.page === "home" ? "#2196f3" : "#fafafa")};
   }
+  @media(max-width: 950px) {
+    font-size: 2.5rem;
+    line-height: 6vh;
+  }
 `;
 
 const StyledDescription = styled.p`
@@ -61,6 +85,10 @@ const StyledDescription = styled.p`
   z-index: 200;
   width: ${(props) => (props.page === "home" ? "auto" : "50%")};
   margin: ${(props) => props.page === "secondary" && "0"};
+
+  @media(max-width: 950px) {
+    display: none;
+  }
 `;
 
 const Button = styled.button`
@@ -88,6 +116,10 @@ const StyledTrailerLink = styled(Link)`
   text-decoration: none;
   width: 13vw;
   margin-top: 2vw;
+
+  @media(max-width: 950px) {
+    display: none;
+  }
 `;
 const Text = styled.p`
   color: #fff;
