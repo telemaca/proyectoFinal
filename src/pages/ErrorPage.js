@@ -5,11 +5,13 @@ import "../styles/error-page.scss";
 //Coustard
 const ErrorPage = () => {
   return (
-    <section>
-    <div className="error-msg">
-      <p className="code404">-ERROR 404-</p>
-      <h3>This is not the page you are <br/> looking for.</h3>
-    </div>
+    <section className="error-section">
+      <div className="error-msg">
+        <p className="code404">-ERROR 404-</p>
+        <h3>
+          This is not the page you are <br /> looking for.
+        </h3>
+      </div>
       <div className="at-at">
         <div className="at-at-content">
           <div className="at-at-body">
