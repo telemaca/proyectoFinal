@@ -1,35 +1,119 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
-
+import { BsSearch as SearchIcon } from "react-icons/bs";
+import { useHistory } from "react-router-dom"
 import useSearchContext from "../contexts/SearchContext"
 
+import BasicCard from "../components/CardMovie"
+import Section from "../components/native components/Section"
+import SearchResults from "../components/SearchResults"
+
 const Button = styled.button `
-  width: 50px;
-  height: 20px;
+  width: 4.5vw;
+  height: 4.5vw;
+  position: absolute;
+  top: 4.7vw;
+  right: 42.8vw;
+  border-radius: 0 5px 5px 0;
+  background-color: #202124;
+  border: none;
+  &:focus {
+    outline: none;
+  }
 `
-const Input = styled.input `
- width: 200px;
+const InputSearch = styled.input `
+  width: 50vw;
+  height: 4.5vw;
+  margin: 20px 0;
+  padding-left: 1.5vw;
+  border: none;
+  background-color: #2C313B;
+  border-radius: 5px;
+  position: relative;
+  color: #fafafa;
+  justify-content: flex-start;
+  &:focus {
+  outline: none;
+  }
 `
+
 const Container = styled.div `
- margin-left: 50px;
+  margin: 0 3vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `
+const Label = styled.label `
+  color: #fff;
+  margin: 2vw;
+  font-family: roboto;
+`
+const Form = styled.form `
+  margin-left: 4vw;
+`
+const StyledSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  height: 100vh;
+  padding-top: 20px;
+`
+const InputRadio = styled.input `
+
+`
+const StyledSearchIcon = styled(SearchIcon) `
+  color: #fafafa;
+  font-size: 1.5vw;
+  &:hover {
+    cursor: pointer;
+  }    
+`
+
 const SearchPage = () => {
-  const { handleSearchBarVisibleClick , searchBarVisible } = useSearchContext()
-  /* const [searchBarVisible, setSearchBarVisible] = useState(false)
-  const handleSearchBarVisibleClick = () => (
-    setSearchBarVisible(!searchBarVisible)
-   /*  setVisibleResults(false); */
+  const {handleMediaClick, handleInputChange, inputValue, results, media, showResults, handleShowResultsClick, setShowResults} = useSearchContext()
+  
+  const handleOnKeyDown = () => {     
+  }
 
   return (
     <>
-    <Container>
-      {searchBarVisible &&
-      <Input/>
-      }
-    </Container>
-    <Container>
-      <Button onClick={() => handleSearchBarVisibleClick()}>click</Button>
-    </Container>
+    <StyledSection>
+      <Form  onClick={(event) => handleMediaClick(event)}>
+        <Label >
+          Movie
+          <InputRadio
+            type="radio"
+            name="media_type"
+            value="movie"            
+            defaultChecked
+          />
+        </Label>
+        <Label >
+          TV Show
+          <InputRadio
+            type="radio"
+            name="media_type"
+            value="tv"            
+          />
+        </Label>
+      </Form>
+    
+      <Form type= "submit" onChange={(event) => handleInputChange(event)} >
+        <InputSearch onKeyPress={handleOnKeyDown} value={inputValue} type="search" placeholder="Search..." name="search"/>
+        <Button onClick={handleShowResultsClick} type="submit"  >
+         <StyledSearchIcon onClick={handleShowResultsClick}/> 
+        </Button>
+      </Form>   
+   
+     <Container>
+        <SearchResults/>
+        {/* { results?.map((result) => (
+            <BasicCard key={result.id} id={result.id} data={result} media_type={media} />
+          ))} */}
+      </Container> 
+    
+       
+    </StyledSection>
     </>
   )
 }
@@ -37,112 +121,3 @@ const SearchPage = () => {
 export default SearchPage
 
 
-/* import React, {useState, useEffect, useParams}from 'react';
-import styled from "styled-components";
-import axios from "axios";
-
-import API_KEY from "../data/apiKey";
-import API_URL from "../utils/API_URL";
-
-import LoadingPage from "../pages/LoadingPage";
-import Container from "../components/native components/Container"
-import BasicCard from "../components/CardMovie";
-
-const StyledSection = styled.section`
-  margin-left: 6vw;
-  padding: 3vw;
-  background-color: black;
-  background-color: #1d1d1d;
-  box-shadow: inset -100px -50px 110px 41px #000;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Select = styled.select`
-  color: #fafafa;
-  height: 2vw;
-  width: 7vw;
-  margin-bottom: 2vw;
-  padding-left: 0.7vw;
-  font-family: "Roboto";
-  font-size: 0.8vw;
-  background-color: #1d1d1d;
-  text-align: center;
-`;
-
-const Option = styled.option`
-  color: #fafafa;
-  font-family: "Roboto";
-  font-size: 1vw;
-  margin: 5px;
-  text-align: center;
-  box-shadow: inset -100px -50px 110px 41px #000;
-`;
-
-const Input = styled.input `
-  width: 10vw;
-`
-const Form = styled.form `
-`
-const Button = styled.button `
-
-`
-const SearchPage = () => {
-  const [media, setMedia] = useState("movie")
-  const [mediaSearch, setMediaSearch] = useState("movie") 
-  const [isSearchDataLoading, setIsSearchDataLoading] = useState(true)
-  const [inputValue, setInputValue] = useState("")
-  const [results, setResults] = useState([])
-
-  const handleMediaChange = (event) => setMedia(event.target.value)
-
-  const handleClick = () => setResults(...results)
-
-  const handleInputChange = (event) => {    
-    setInputValue(event.target.value);
-  }
-
-  useEffect(() => {
-    setIsSearchDataLoading(true);
-  
-    axios
-      .get(`https://api.themoviedb.org/3/search/${media}?api_key=${API_KEY}&query=${inputValue}`)
-      .then((response) => {
-        setResults(response.data.results)
-        console.log(response.data.results)
-        setIsSearchDataLoading(false)
-      });
-  }, [media, inputValue]);
-
-  return (
-    <StyledSection>
-      <Container>
-        <Select name="media" onChange={handleMediaChange}>
-          <Option value="movie">Movies</Option>
-          <Option value="tv">Tv Shows</Option>
-        </Select>
-        <Form 
-            type="submit"
-            onSubmit={handleInputChange}>
-          <Input type="search" placeholder="Search..." name="input" value="law"/>
-        </Form>
-      </Container>
-      <Button
-            type="submit"
-            onClick={handleClick}            
-          >
-           Search
-          </Button>
-      
-      <Container>
-        {results.map((result) => (
-          <BasicCard key={result.id} id={result.id} data={result} media_type={media} />
-        ))}
-      </Container>
-    </StyledSection>
-  )
-}
-
-export default SearchPage
-
- */
