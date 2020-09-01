@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 3vw;
+  padding: 3vw;
 `;
 
 const Text = styled.p`
