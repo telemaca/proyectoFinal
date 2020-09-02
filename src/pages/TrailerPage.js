@@ -1,69 +1,93 @@
-import React, {useState, useEffect} from 'react';
-import ReactPlayer from 'react-player';
+import React, { useState, useEffect } from "react";
+import ReactPlayer from "react-player";
 import axios from "axios";
-import {useParams, useHistory} from "react-router-dom";
-import styled from "styled-components";
-
+import styled, { keyframes } from "styled-components";
 import { CgCloseR as CloseIcon } from "react-icons/cg";
+
+import SmallLoader from "../components/SmallLoader";
+
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
 
-import LoadingPage from "../pages/LoadingPage"
+const move = keyframes`
+from {
+    transform: scale(0.2);
+}
+to {
+    transform: scale(1);
+}
+`;
 
-const Container = styled.div `
-  width: calc(100% - 4vw);
+const Container = styled.div`
+  position: absolute;
+  width: 95%;
   height: 100vh;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 4vw;
-`
-const StyledCloseIcon = styled(CloseIcon) `
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 300;
+`;
+
+const StyledCloseIcon = styled(CloseIcon)`
   color: #fff;
   position: absolute;
-  top: 0.2vw;
-  right: 13vw;
-  font-size: 1.6vw;
+  top: 1vw;
+  right: 5vw;
+  font-size: 2.5vw;
   &:hover {
-    cursor: pointer;   
+    cursor: pointer;
   }
-`
-const TrailerPage = () => {
-  const { media, id } = useParams()
-  const [trailerData, setTrailerData] = useState([])
+`;
+
+const StyledText = styled.p`
+  color: #fafafa;
+  font-size: 2vw;
+  font-family: "Roboto";
+`;
+
+const StyledPlayer = styled(ReactPlayer)`
+  z-index: 400;
+  animation: ${move} 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+`;
+
+const TrailerPage = ({ media, id, onHandleClick }) => {
+  const [trailerData, setTrailerData] = useState([]);
   const [isTrailerDataLoading, setIsTrailerDataLoading] = useState(true);
-  const history = useHistory()
 
-  const handleGoBackClick = () => {
-    history.go(-1)
-  }
-
-  useEffect (() => {
+  useEffect(() => {
     setIsTrailerDataLoading(true);
     axios
       .get(`${API_URL}${media}/${id}/videos?api_key=${API_KEY}`)
       .then((response) => {
-        setTrailerData(response.data.results.filter((index) => index.type === "Trailer"))  
-        setIsTrailerDataLoading(false);      
-      })
-  }, [media, id]) 
+        setTrailerData(
+          response.data.results.filter((index) => index.type === "Trailer")
+        );
+        setIsTrailerDataLoading(false);
+      });
+  }, [media, id]);
 
   return isTrailerDataLoading ? (
-    <LoadingPage />
-  ) : (    
-    <Container >  
-      <StyledCloseIcon onClick={handleGoBackClick} />
-      <ReactPlayer 
-        url= {`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}   
-        width="70vw"
-        height="90vh"
-        volume="0.5"
-        controls
-        onReady
-        /> 
+    <SmallLoader />
+  ) : (
+    <Container>
+      <StyledCloseIcon onClick={onHandleClick} />
+      {trailerData.length === 0 ? (
+        <StyledText>Sorry, no video found</StyledText>
+      ) : (
+        <StyledPlayer
+          url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
+          width="71vw"
+          height="85vh"
+          volume="0.5"
+          controls
+          onReady
+          light
+        />
+      )}
     </Container>
-  )
-}
+  );
+};
 
-export default TrailerPage
+export default TrailerPage;

@@ -9,7 +9,7 @@ import {
   BsSearch as SearchIcon,
 } from "react-icons/bs";
 
-const StyledAside = styled.aside`
+const StyledNav = styled.nav`
   width: 5vw;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@ const StyledAside = styled.aside`
     height: 3rem;
     position: fixed;
     border: none;
-    bottom:0;
+    bottom: 0;
   }
 `;
 
@@ -52,24 +52,22 @@ const StyledNavLink = styled(NavLink)`
 
 const NavLinks = () => {
   return (
-    <StyledAside>
-      <IconContext.Provider
-        value={{ style: { cursor: "pointer" } }}
-      >
+    <StyledNav>
+      <IconContext.Provider value={{ style: { cursor: "pointer" } }}>
         <StyledNavLink exact to="/" activeClassName="selected">
           <HomeIcon />
         </StyledNavLink>
-        <StyledNavLink exact to="/movie" activeClassName="selected">
+        <StyledNavLink to="/movie" activeClassName="selected">
           <MovieIcon />
         </StyledNavLink>
-        <StyledNavLink exact to="/tv" activeClassName="selected">
+        <StyledNavLink to="/tv" activeClassName="selected">
           <TvIcon />
         </StyledNavLink>
         <StyledNavLink to="/discover" activeClassName="selected">
           <SearchIcon />
         </StyledNavLink>
       </IconContext.Provider>
-    </StyledAside>
+    </StyledNav>
   );
 };
 

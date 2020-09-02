@@ -37,7 +37,7 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
     <Section>
       <StyledContainerFlex>
         <Title>{title}</Title>
-        <StyledExploreLink to={`${media_type}/category/${categoryId}`}>
+        <StyledExploreLink to={`category/${categoryId}/${media_type}`}>
           {" "}
           Explore All
         </StyledExploreLink>

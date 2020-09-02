@@ -17,8 +17,8 @@ import LoadingPage from "../pages/LoadingPage";
 
 const MoviePage = () => {
   const { movieId } = useParams();
-  const {path} = useRouteMatch()
- 
+  const { path } = useRouteMatch();
+
   const { popularMovies } = useMoviesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
@@ -47,20 +47,20 @@ const MoviePage = () => {
       });
   }, [movieId]);
 
-return isMovieDataLoading ? (
+  return isMovieDataLoading ? (
     <LoadingPage />
-  ) : (  
+  ) : (
     <MainFlex>
       <Hero data={selectedMovie} media_type="movie" page="secondary" />
       <MovieNavLinks />
-      <Switch>        
-        <Route path={`${path}/info`}>
+      <Switch>
+        <Route exact path={`${path}/info`}>
           <MovieInfo data={selectedMovie} />
         </Route>
-        <Route path={`${path}/cast`}>
+        <Route exact path={`${path}/cast`}>
           <MovieCast actors={selectedMovieCast} />
         </Route>
-        <Route path={`${path}/similar`}>
+        <Route exact path={`${path}/similar`}>
           <SimilarMovies
             movies={similarMovies.length !== 0 ? similarMovies : popularMovies}
             notFound={similarMovies.length === 0}

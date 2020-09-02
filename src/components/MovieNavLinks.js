@@ -37,35 +37,23 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const MovieNavLinks = () => {
-  const {url} = useRouteMatch() 
-  
+  const { url } = useRouteMatch();
+
   return (
     <StyledNav>
       <StyledList>
         <StyledListItem>
-          <StyledNavLink
-            
-            to={`${url}/info`}
-            activeClassName="selected"
-          >
+          <StyledNavLink exact to={`${url}/info`} activeClassName="selected">
             INFO
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
-          <StyledNavLink
-            
-            to={`${url}/cast`}
-            activeClassName="selected"
-          >
+          <StyledNavLink exact to={`${url}/cast`} activeClassName="selected">
             CAST
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
-          <StyledNavLink
-            
-            to={`${url}/similar`}
-            activeClassName="selected"
-          >
+          <StyledNavLink exact to={`${url}/similar`} activeClassName="selected">
             SIMILAR MOVIES
           </StyledNavLink>
         </StyledListItem>
