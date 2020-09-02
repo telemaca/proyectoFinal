@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledArticle = styled.article`
@@ -31,16 +32,18 @@ const CharacterName = styled.p`
   margin-bottom: 4vw;
 `;
 
-const CastCard = ({ data, index }) => {
+const CastCard = ({ data }) => {
   const { profile_path, name, character, id } = data;
-  const [isPersonSelected, setIsPersonSelected] = useState(false);
+  const history = useHistory();
 
-  const handleClickClose = () => setIsPersonSelected(false);
+  const handleMediaClick = (id) => {
+    history.push(`/person/${id}`);
+  };
 
   return (
     <StyledArticle>
       <StyledImg
-        onClick={() => setIsPersonSelected(true)}
+        onClick={() => handleMediaClick(id)}
         src={
           profile_path === null
             ? "https://sainfoinc.com/wp-content/uploads/2018/02/image-not-available.jpg"
