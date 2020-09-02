@@ -12,6 +12,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage";
 import TrailerPage from "./pages/TrailerPage";
 import ErrorPage from "./pages/ErrorPage";
+import DiscoverPage from "./pages/DiscoverPage";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -48,7 +49,7 @@ const App = () => {
           <TrailerPage />
         </Route>
         <Route exact path="/discover">
-          <SearchPage />
+          <DiscoverPage />
         </Route>
         <Route>
           <ErrorPage />
