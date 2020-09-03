@@ -56,6 +56,8 @@ const SerieInfo = ({ data }) => {
     first_air_date,
     number_of_seasons,
     number_of_episodes,
+    original_language,
+    original_name,
   } = data;
 
   const getReleaseDate = () => {
@@ -89,6 +91,20 @@ const SerieInfo = ({ data }) => {
         </StyledOverview>
         <div>
           <StyledList>
+            {original_language !== "en" && (
+              <StyledListItem>
+                <StyledCategory
+                  style={{
+                    fontWeight: 800,
+                    fontSize: "1.2vw",
+                    letterSpacing: "1px",
+                  }}
+                >
+                  Original Title
+                </StyledCategory>
+                <StyledText>{original_name}</StyledText>
+              </StyledListItem>
+            )}
             <StyledListItem>
               <StyledCategory>Genre</StyledCategory>
               <StyledText>

@@ -82,7 +82,13 @@ const CardEpisode = ({ data }) => {
 
   return (
     <Card>
-      <Img src={`http://image.tmdb.org/t/p/w342/${still_path}`} />
+      <Img
+        src={
+          still_path === null
+            ? "https://sainfoinc.com/wp-content/uploads/2018/02/image-not-available.jpg"
+            : `http://image.tmdb.org/t/p/w342/${still_path}`
+        }
+      />
       <ContainerFlex>
         <Strong>
           {" "}

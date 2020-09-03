@@ -10,7 +10,6 @@ import SeriesPage from "./pages/SeriesPage";
 import SeriePage from "./pages/SeriePage";
 import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage";
-import TrailerPage from "./pages/TrailerPage";
 import ErrorPage from "./pages/ErrorPage";
 import DiscoverPage from "./pages/DiscoverPage";
 
@@ -27,30 +26,13 @@ const App = () => {
       <GlobalStyle />
       <NavLinks />
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/movie">
-          <MoviesPage />
-        </Route>
-        <Route path="/movie/:movieId">
-          <MoviePage />
-        </Route>
-        <Route exact path="/tv">
-          <SeriesPage />
-        </Route>
-        <Route path="/tv/:tvId">
-          <SeriePage />
-        </Route>
-        <Route path="/:media/category/:categoryId">
-          <CategoriesPage />
-        </Route>
-        <Route path="/video/:media/:id">
-          <TrailerPage />
-        </Route>
-        <Route exact path="/discover">
-          <DiscoverPage />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/movie" component={MoviesPage} />
+        <Route path="/movie/:movieId" component={MoviePage} />
+        <Route exact path="/tv" component={SeriesPage} />
+        <Route path="/tv/:tvId" component={SeriePage} />
+        <Route path="/category/:categoryId/:media" component={CategoriesPage} />
+        <Route exact path="/discover" component={SearchPage} />
         <Route>
           <ErrorPage />
         </Route>

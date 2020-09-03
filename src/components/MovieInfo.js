@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const StyledSection = styled.section`
   display: flex;
   padding: 3vw;
@@ -50,9 +49,16 @@ const StyledText = styled.div`
 `;
 
 const MovieInfo = ({ data }) => {
-  
-
-  const { overview, poster_path, genres, runtime, release_date, budget } = data;
+  const {
+    overview,
+    poster_path,
+    genres,
+    runtime,
+    release_date,
+    budget,
+    original_language,
+    original_title,
+  } = data;
   const movieHours = Math.floor(runtime / 60);
   const movieMinutes = runtime - movieHours * 60;
 
@@ -79,7 +85,6 @@ const MovieInfo = ({ data }) => {
   };
 
   return (
-  
     <StyledSection>
       <StyledImg src={`https://image.tmdb.org/t/p/original${poster_path}`} />
       <StyledContainer>
@@ -89,6 +94,12 @@ const MovieInfo = ({ data }) => {
         </StyledOverview>
         <div>
           <StyledList>
+            {original_language !== "en" && (
+              <StyledListItem>
+                <StyledCategory>Original Title</StyledCategory>
+                <StyledText>{original_title}</StyledText>
+              </StyledListItem>
+            )}
             <StyledListItem>
               <StyledCategory>Runtime</StyledCategory>
               <StyledText>

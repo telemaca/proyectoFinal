@@ -14,10 +14,7 @@ const StyledSection = styled.section`
 `;
 
 const MovieCast = ({ actors }) => {
-  
-
   return (
-    
     <StyledSection>
       {actors.map((actor, i) => (
         <CastCard key={i} data={actor} />
