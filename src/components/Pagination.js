@@ -1,30 +1,52 @@
 import React from 'react'
 import styled from "styled-components"
 import { RiArrowDropLeftLine as ArrowLeft, RiArrowDropRightLine as ArrowRight } from "react-icons/ri"
+import usePaginationContext from "../contexts/PaginationContext"
+import PageItem from "./PageItem"
 
 const Container = styled.div `
+  width: 100%;  
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 const PaginationButton = styled.button `
-`
-const PageItem = styled.button `
+  margin-left: 2vw;
+  background-color: black;
+  border: none;
 `
 
-const Pagination = ({page, maxPage, setPage}) => {
+const StyledArrowLeft = styled(ArrowLeft) `
+  color: white;
+  font-size: 2vw;
+  &:hover{
+    cursor: pointer;
+  }
+`
+
+const StyledArrowRight = styled(ArrowRight) `
+  color: white;
+  font-size: 2vw;
+  &:hover{
+    cursor: pointer;
+  }
+`
+
+const Pagination = ({ page, maxPage, setPage }) => {
   
-  const toPreviousPage = () => page !== 1 ? setPage(page - 1) : setPage(page)
-  
-  const toNextPage = () => page !== maxPage ? setPage(page + 1) : setPage(page)
+  const { toPreviousPage, toNextPage } = usePaginationContext()
 
   const pages = maxPage > 6 ? 6 : maxPage
 
-  return (
-    <>
-      {
-        pages && 
+  return (    
+   <>       
+     {
+      pages && 
         <Container>
           {page > 1 && (
-            <PaginationButton onClick={() => toPreviousPage()}>
-              <ArrowLeft/>
+            <PaginationButton onClick={(page) => toPreviousPage(page)}>
+              <StyledArrowLeft onClick={() => toPreviousPage()}/>
             </PaginationButton>
           )}
           {pages >= 6 && page < 5 && (
@@ -185,12 +207,12 @@ const Pagination = ({page, maxPage, setPage}) => {
             <PaginationButton             
               onClick={() => toNextPage()}
             >
-              <ArrowRight  />
+              <StyledArrowRight  />
             </PaginationButton>
           )}
         </Container>
-      }
-    </>
+      } 
+    </> 
   )
 }
 

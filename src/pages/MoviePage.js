@@ -6,6 +6,7 @@ import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
 
 import useMoviesContext from "../contexts/MoviesContext";
+import usePaginationContext from "../contexts/PaginationContext"
 
 import Hero from "../components/Hero";
 import MovieNavLinks from "../components/MovieNavLinks";
@@ -19,6 +20,7 @@ const MoviePage = () => {
   const { movieId } = useParams();
   const { path } = useRouteMatch();
 
+  const { page } = usePaginationContext()
   const { popularMovies } = useMoviesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
@@ -41,11 +43,11 @@ const MoviePage = () => {
       });
 
     axios
-      .get(`${API_URL}movie/${movieId}/similar?api_key=${API_KEY}`)
+      .get(`${API_URL}movie/${movieId}/similar?api_key=${API_KEY}&page=${page}`)
       .then((response) => {
         setSimilarMovies(response.data.results);
       });
-  }, [movieId]);
+  }, [movieId, page]);
 
   return isMovieDataLoading ? (
     <LoadingPage />

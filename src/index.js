@@ -6,14 +6,17 @@ import App from "./App";
 
 import { MoviesProvider } from "../src/contexts/MoviesContext";
 import { SeriesProvider } from "../src/contexts/SeriesContext";
+import { PaginationProvider } from "./contexts/PaginationContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <MoviesProvider>
-      <SeriesProvider>
-        <App />
-      </SeriesProvider>
-    </MoviesProvider>
+    <PaginationProvider>
+      <MoviesProvider>
+        <SeriesProvider>
+          <App />
+        </SeriesProvider>
+      </MoviesProvider>
+    </PaginationProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -59,6 +59,7 @@ const CategoriesPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    
     axios
       .get(
         categoryId === "trending"
@@ -66,11 +67,11 @@ const CategoriesPage = () => {
           : `${API_URL}${media}/${categoryId}?api_key=${API_KEY}&page=${page}`
       )
       .then((response) => {
-        setCategoriesMovies(response.data.results);
-        setMaxPage(response.total_pages)
+        setCategoriesMovies(response.data.results);        
+        setMaxPage(response.data.total_pages);        
         setIsLoading(false);
       });
-  }, [categoryId, media]);
+  }, [categoryId, media, page]);
 
   return isLoading ? (
     <LoadingPage />
