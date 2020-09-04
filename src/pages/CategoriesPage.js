@@ -5,9 +5,12 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 import BasicCard from "../components/CardMovie";
+import Section from "../components/native components/Section";
+import Pagination from "../components/Pagination"
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
 
+import usePaginationContext from "../contexts/PaginationContext"
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
 
@@ -48,6 +51,7 @@ const CategoriesPage = () => {
   const { categoryId, media } = useParams();
   const [categoriesMovies, setCategoriesMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { page, setPage, maxPage, setMaxPage } = usePaginationContext()
 
   const categoryTitle = categoryId.split("_").join(" ");
   const upperCaseTitle =
@@ -58,11 +62,12 @@ const CategoriesPage = () => {
     axios
       .get(
         categoryId === "trending"
-          ? `${API_URL}${categoryId}/${media}/day?api_key=${API_KEY}`
-          : `${API_URL}${media}/${categoryId}?api_key=${API_KEY}`
+          ? `${API_URL}${categoryId}/${media}/day?api_key=${API_KEY}&page=${page}`
+          : `${API_URL}${media}/${categoryId}?api_key=${API_KEY}&page=${page}`
       )
       .then((response) => {
         setCategoriesMovies(response.data.results);
+        setMaxPage(response.total_pages)
         setIsLoading(false);
       });
   }, [categoryId, media]);
@@ -83,6 +88,7 @@ const CategoriesPage = () => {
           ))}
         </ContainerFlex>
       </StyledSection>
+      <Pagination page={page} setPage={setPage} maxPage={maxPage}/>
     </MainFlex>
   );
 };

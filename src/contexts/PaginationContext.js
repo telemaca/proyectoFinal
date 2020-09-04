@@ -1,21 +1,19 @@
-/* import React, {useState, useEffect, useContext, createContext} from 'react'
-import axios from "axios";
+import React, {useState, useEffect, useContext, createContext} from 'react'
 
-import API_KEY from "../data/apiKey";
 
 const PaginationContext = createContext()
 
 const PaginationProvider = ({children}) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pages, setPages] = useState(1)
-
-  const updateTotalPages = (totalPages) => setPages(totalPages)
-  
-  const updateCurrentPage = (numberPage) => setCurrentPage(numberPage)
-
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1000);
   
   return (
-    <PaginationContext.Provider value={{pages, currentPage, updateCurrentPage, updateTotalPages}}>
+    <PaginationContext.Provider value={{ 
+      page,
+      setPage,
+      setMaxPage,
+      maxPage,
+      }}>
       {children}
     </PaginationContext.Provider>
   )
@@ -25,4 +23,3 @@ const usePaginationContext = () => useContext(PaginationContext)
 
 export {PaginationProvider}
 export default usePaginationContext
- */
