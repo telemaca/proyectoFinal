@@ -38,7 +38,6 @@ const Text = styled.p`
 `;
 
 const SimilarMovies = ({ movies, notFound = false }) => {
-  const {page, setPage, maxPage } = usePaginationContext()
 
   return (
     <StyledSection>
@@ -53,8 +52,7 @@ const SimilarMovies = ({ movies, notFound = false }) => {
             customStyle={{ marginBottom: "3vw" }}
           />
         ))}
-      </StyledContainer>
-      <Pagination page={page} setPage={setPage} maxPage={maxPage}/>
+      </StyledContainer>      
     </StyledSection>
   );
 };

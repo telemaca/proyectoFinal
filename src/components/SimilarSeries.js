@@ -37,8 +37,7 @@ const Text = styled.p`
 `;
 
 const SimilarSeries = ({ series, notFound = false }) => {
-  const { page, setPage, maxPage } = usePaginationContext()
-
+  
   return (
     <StyledSection>
       {notFound && (
@@ -52,8 +51,7 @@ const SimilarSeries = ({ series, notFound = false }) => {
             customStyle={{ marginBottom: "3vw" }}
           />
         ))}
-      </StyledContainer>
-      <Pagination page={page} setPage={setPage} maxPage={maxPage}/>
+      </StyledContainer>      
     </StyledSection>
   );
 };

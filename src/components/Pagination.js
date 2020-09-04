@@ -6,48 +6,56 @@ import PageItem from "./PageItem"
 
 const Container = styled.div `
   width: 100%;  
-  margin-bottom: 20px;
+  margin-bottom: 3vw;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media(max-width: 765px) {
+    margin-bottom: 5vh;
+  }
+  @media(max-width: 560px) {
+    padding-bottom: 5vh;    
+  }
 `
 const PaginationButton = styled.button `
   margin-left: 2vw;
-  background-color: black;
+  background-color: #000;
   border: none;
   &:focus {
     outline: none;    
-    }
+  }
 `
 
 const StyledArrowLeft = styled(ArrowLeft) `
-  color: white;
-  font-size: 2vw;
+  color: #fff;
+  font-size: 30px;
+  transition: 0.2s;
   &:hover{
     cursor: pointer;
-  }
-  
+    color: #2296F3; 
+    transition: 0.2s;
+  }  
 `
 
 const StyledArrowRight = styled(ArrowRight) `
-  color: white;
-  font-size: 2vw;
+  color: #fff;
+  font-size: 30px;
+  transition: 0.2s;
   &:hover{
     cursor: pointer;
-  }
-  
+    color: #2296F3; 
+    transition: 0.2s;
+  }  
 `
 
-const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {
-  
+const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {  
   const { toPreviousPage, toNextPage } = usePaginationContext()
-
   const pages = maxPage > 6 ? 6 : maxPage
 
-  return (    
-   <>       
-     {
-      pages && 
+ return (    
+  <>     
+      {pages && 
         <Container>
           {currentPage > 1 && (
             <PaginationButton onClick={() => toPreviousPage()}>
@@ -56,26 +64,23 @@ const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {
           )}
           {pages >= 6 && currentPage < 5 && (
             <>
-              {[...Array(5)]. map((pageButton, i) => (
+              {[...Array(5)].map((pageItem, index) => (
                 <PageItem
-                  setPage={setCurrentPage}
-                  page={currentPage}
-                  key={i + 1}
-                  value={i + 1}
-                  content={i + 1}
+                  setCurrentPage={setCurrentPage}
+                  page={currentPage}                 
+                  value={index + 1}
+                  content={index + 1}
                 />                
               ))}
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage - 3}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}            
                 value={maxPage - 3}
                 content={"..."}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
                 value={maxPage}
                 content={maxPage}
               /> 
@@ -85,51 +90,44 @@ const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {
           {pages >= 6 && currentPage >= 5 && currentPage < maxPage - 4 && (
             <>
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={1}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
                 value={1}
                 content={1}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={3}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
                 value={3}
                 content={"..."}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={currentPage - 1}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
                 value={currentPage- 1}
                 content={currentPage - 1}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={currentPage}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
                 value={currentPage}
                 content={currentPage}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={currentPage + 1}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
                 value={currentPage + 1}
                 content={currentPage + 1}
               /> 
                <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage - 3}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
                 value={maxPage - 3}
                 content={"..."}
               /> 
                <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
                 value={maxPage}
                 content={maxPage}
               /> 
@@ -138,51 +136,44 @@ const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {
           {pages >= 6 && currentPage >= maxPage - 4 && (
             <>
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={1}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
                 value={1}
                 content={1}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={4}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
                 value={4}
                 content={"..."}
               /> 
                <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage - 4}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}             
                 value={maxPage - 4}
                 content={maxPage - 4}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage - 3}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
                 value={maxPage - 3}
                 content={maxPage - 3}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage - 2}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}           
                 value={maxPage - 2}
                 content={maxPage - 2}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage - 1}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}             
                 value={maxPage - 1}
                 content={maxPage - 1}
               /> 
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={maxPage}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
                 value={maxPage}
                 content={maxPage}
               /> 
@@ -190,20 +181,18 @@ const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {
           )}
           {pages < 6 && (
             <>
-            {[...Array(pages - 1)].map((pageItem, i) => (
+            {[...Array(pages - 1)].map((pageItem, index) => (
               <PageItem
-                setPage={setCurrentPage}
-                page={currentPage}
-                key={i + 1}
-                value={i + 1}
-                content={i + 1}
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
+                value={index + 1}
+                content={index + 1}
               />
             ))}
             <PageItem
-              setPage={setCurrentPage}
+              setCurrentPage={setCurrentPage}
               page={currentPage}
-              value={maxPage}
-              key={maxPage}
+              value={maxPage}          
               content={maxPage}
             />
           </>
@@ -216,7 +205,7 @@ const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {
             </PaginationButton>
           )}
         </Container>
-      } 
+      }  
     </> 
   )
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, createContext} from 'react'
+import React, {useState, useContext, createContext} from 'react'
 
 
 const PaginationContext = createContext()
@@ -10,6 +10,7 @@ const PaginationProvider = ({children}) => {
   const toPreviousPage = () => currentPage !== 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(currentPage)
   
   const toNextPage = () => currentPage !== maxPage ? setCurrentPage(currentPage + 1) : setCurrentPage(currentPage)
+
   return (
     <PaginationContext.Provider value={{ 
       currentPage,
