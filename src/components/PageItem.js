@@ -13,25 +13,27 @@ const Button = styled.button `
     transition: 0.2s;
     &:hover {
         cursor: pointer;
-        color: #2296F3;
+        color: #2296F3;        
         transition: 0.2s;
     }   
     &:focus {
-    outline: none;    
-  }
-  &.pageSelected {
-    color: #2296F3;
-  }
+        outline: none;    
+    }
+    &.isSelected {
+        background-color: yellow;
+    }
+   
+ 
 `
 
-const PageItem = ({ value, content, setPage, page }) => {
+const PageItem = ({ value, content, setPage, currentPage }) => {
  
     return (
         <Button
         onClick={() => setPage(value)}
         value={value}
-        page={page}
-        className={page ? ".pageSelected" : " "}
+        page={currentPage}
+        className={currentPage === value ? "isSelected" : ""}
         >         
             {content}         
         </Button>

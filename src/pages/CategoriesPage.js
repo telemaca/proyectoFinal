@@ -51,7 +51,7 @@ const CategoriesPage = () => {
   const { categoryId, media } = useParams();
   const [categoriesMovies, setCategoriesMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { page, setPage, maxPage, setMaxPage } = usePaginationContext()
+  const { currentPage, setCurrentPage, maxPage, setMaxPage } = usePaginationContext()
 
   const categoryTitle = categoryId.split("_").join(" ");
   const upperCaseTitle =
@@ -63,15 +63,15 @@ const CategoriesPage = () => {
     axios
       .get(
         categoryId === "trending"
-          ? `${API_URL}${categoryId}/${media}/day?api_key=${API_KEY}&page=${page}`
-          : `${API_URL}${media}/${categoryId}?api_key=${API_KEY}&page=${page}`
+          ? `${API_URL}${categoryId}/${media}/day?api_key=${API_KEY}&page=${currentPage}`
+          : `${API_URL}${media}/${categoryId}?api_key=${API_KEY}&page=${currentPage}`
       )
       .then((response) => {
         setCategoriesMovies(response.data.results);        
         setMaxPage(response.data.total_pages);        
         setIsLoading(false);
       });
-  }, [categoryId, media, page]);
+  }, [categoryId, media, currentPage]);
 
   return isLoading ? (
     <LoadingPage />
@@ -88,8 +88,9 @@ const CategoriesPage = () => {
             <BasicCard data={movie} media_type={media} />
           ))}
         </ContainerFlex>
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage}/>
       </StyledSection>
-      <Pagination page={page} setPage={setPage} maxPage={maxPage}/>
+      
     </MainFlex>
   );
 };
