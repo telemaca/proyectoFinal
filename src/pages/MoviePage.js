@@ -17,8 +17,7 @@ import LoadingPage from "../pages/LoadingPage";
 
 const MoviePage = () => {
   const { movieId } = useParams();
-  const { path } = useRouteMatch();
-
+  const { path } = useRouteMatch();  
   const { popularMovies } = useMoviesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);

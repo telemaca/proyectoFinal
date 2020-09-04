@@ -2,7 +2,10 @@ import React from "react";
 
 import styled from "styled-components";
 
+import usePaginationContext from "../contexts/PaginationContext"
+
 import BasicCard from "../components/CardMovie";
+import Pagination from "../components/Pagination"
 
 const StyledSection = styled.section`
   display: flex;
@@ -35,6 +38,7 @@ const Text = styled.p`
 `;
 
 const SimilarMovies = ({ movies, notFound = false }) => {
+
   return (
     <StyledSection>
       {notFound && (
@@ -48,7 +52,7 @@ const SimilarMovies = ({ movies, notFound = false }) => {
             customStyle={{ marginBottom: "3vw" }}
           />
         ))}
-      </StyledContainer>
+      </StyledContainer>      
     </StyledSection>
   );
 };

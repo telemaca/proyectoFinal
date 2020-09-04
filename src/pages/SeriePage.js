@@ -17,8 +17,7 @@ import LoadingPage from "../pages/LoadingPage";
 
 const SeriePage = () => {
   const { tvId } = useParams();
-  const { path } = useRouteMatch();
-
+  const { path } = useRouteMatch();  
   const { popularSeries } = useSeriesContext();
   const [selectedSerie, setSelectedSerie] = useState({});
   const [similarSeries, setSimilarSeries] = useState([]);

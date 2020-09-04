@@ -1,10 +1,212 @@
 import React from 'react'
+import styled from "styled-components"
+import { RiArrowDropLeftLine as ArrowLeft, RiArrowDropRightLine as ArrowRight } from "react-icons/ri"
+import usePaginationContext from "../contexts/PaginationContext"
+import PageItem from "./PageItem"
 
-const Pagination = () => {
-  return (
-    <div>
-      
-    </div>
+const Container = styled.div `
+  width: 100%;  
+  margin-bottom: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media(max-width: 765px) {
+    margin-bottom: 5vh;
+  }
+  @media(max-width: 560px) {
+    padding-bottom: 5vh;    
+  }
+`
+const PaginationButton = styled.button `
+  margin-left: 2vw;
+  background-color: #000;
+  border: none;
+  &:focus {
+    outline: none;    
+  }
+`
+
+const StyledArrowLeft = styled(ArrowLeft) `
+  color: #fff;
+  font-size: 30px;
+  transition: 0.2s;
+  &:hover{
+    cursor: pointer;
+    color: #2296F3; 
+    transition: 0.2s;
+  }  
+`
+
+const StyledArrowRight = styled(ArrowRight) `
+  color: #fff;
+  font-size: 30px;
+  transition: 0.2s;
+  &:hover{
+    cursor: pointer;
+    color: #2296F3; 
+    transition: 0.2s;
+  }  
+`
+
+const Pagination = ({ currentPage, maxPage, setCurrentPage }) => {  
+  const { toPreviousPage, toNextPage } = usePaginationContext()
+  const pages = maxPage > 6 ? 6 : maxPage
+
+ return (    
+  <>     
+      {pages && 
+        <Container>
+          {currentPage > 1 && (
+            <PaginationButton onClick={() => toPreviousPage()}>
+              <StyledArrowLeft />
+            </PaginationButton>
+          )}
+          {pages >= 6 && currentPage < 5 && (
+            <>
+              {[...Array(5)].map((pageItem, index) => (
+                <PageItem
+                  setCurrentPage={setCurrentPage}
+                  page={currentPage}                 
+                  value={index + 1}
+                  content={index + 1}
+                />                
+              ))}
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}            
+                value={maxPage - 3}
+                content={"..."}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
+                value={maxPage}
+                content={maxPage}
+              /> 
+            </>
+          )}
+
+          {pages >= 6 && currentPage >= 5 && currentPage < maxPage - 4 && (
+            <>
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
+                value={1}
+                content={1}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
+                value={3}
+                content={"..."}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
+                value={currentPage- 1}
+                content={currentPage - 1}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
+                value={currentPage}
+                content={currentPage}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
+                value={currentPage + 1}
+                content={currentPage + 1}
+              /> 
+               <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
+                value={maxPage - 3}
+                content={"..."}
+              /> 
+               <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
+                value={maxPage}
+                content={maxPage}
+              /> 
+            </>
+          )}
+          {pages >= 6 && currentPage >= maxPage - 4 && (
+            <>
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
+                value={1}
+                content={1}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
+                value={4}
+                content={"..."}
+              /> 
+               <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}             
+                value={maxPage - 4}
+                content={maxPage - 4}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}                
+                value={maxPage - 3}
+                content={maxPage - 3}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}           
+                value={maxPage - 2}
+                content={maxPage - 2}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}             
+                value={maxPage - 1}
+                content={maxPage - 1}
+              /> 
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
+                value={maxPage}
+                content={maxPage}
+              /> 
+            </>
+          )}
+          {pages < 6 && (
+            <>
+            {[...Array(pages - 1)].map((pageItem, index) => (
+              <PageItem
+                setCurrentPage={setCurrentPage}
+                page={currentPage}               
+                value={index + 1}
+                content={index + 1}
+              />
+            ))}
+            <PageItem
+              setCurrentPage={setCurrentPage}
+              page={currentPage}
+              value={maxPage}          
+              content={maxPage}
+            />
+          </>
+          )}
+          {currentPage < maxPage && (
+            <PaginationButton             
+              onClick={() => toNextPage()}
+            >
+              <StyledArrowRight  />
+            </PaginationButton>
+          )}
+        </Container>
+      }  
+    </> 
   )
 }
 
