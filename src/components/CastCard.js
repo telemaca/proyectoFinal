@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledArticle = styled.article`
@@ -6,6 +7,10 @@ const StyledArticle = styled.article`
   font-family: "Roboto";
   margin-right: 4vw;
   position: relative;
+
+  @media (max-width: 850px) {
+    width: 27vw;
+  }
 `;
 
 const StyledImg = styled.img`
@@ -18,29 +23,44 @@ const StyledImg = styled.img`
     transition: 0.3s;
     cursor: pointer;
   }
+
+  @media (max-width: 850px) {
+    height: 40vw;
+  }
 `;
 
 const ActorName = styled.h3`
   font-size: 1vw;
   color: #fafafa;
+
+  @media (max-width: 850px) {
+    font-size: 2vw;
+    margin-bottom: 0;
+  }
 `;
 
 const CharacterName = styled.p`
   font-size: 0.8vw;
   color: grey;
   margin-bottom: 4vw;
+
+  @media (max-width: 850px) {
+    font-size: 1.6vw;
+  }
 `;
 
-const CastCard = ({ data, index }) => {
+const CastCard = ({ data }) => {
   const { profile_path, name, character, id } = data;
-  const [isPersonSelected, setIsPersonSelected] = useState(false);
+  const history = useHistory();
 
-  const handleClickClose = () => setIsPersonSelected(false);
+  const handleMediaClick = (id) => {
+    history.push(`/person/${id}`);
+  };
 
   return (
     <StyledArticle>
       <StyledImg
-        onClick={() => setIsPersonSelected(true)}
+        onClick={() => handleMediaClick(id)}
         src={
           profile_path === null
             ? "https://sainfoinc.com/wp-content/uploads/2018/02/image-not-available.jpg"

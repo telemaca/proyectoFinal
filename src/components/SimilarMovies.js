@@ -16,6 +16,11 @@ const StyledContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 3vw;
+  @media (max-width: 650px) {
+    justify-content: initial;
+    margin-left: 3vw;
+    margin-bottom: 15vw;
+  }
 `;
 
 const Text = styled.p`
@@ -24,6 +29,9 @@ const Text = styled.p`
   font-size: 1.5vw;
   text-align: center;
   margin-top: 4vw;
+  @media (max-width: 650px) {
+    font-size: 3vw;
+  }
 `;
 
 const SimilarMovies = ({ movies, notFound = false }) => {

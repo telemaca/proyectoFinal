@@ -9,11 +9,19 @@ const StyledSection = styled.section`
   font-family: "Roboto";
   background-color: #1d1d1d;
   box-shadow: inset 0px 30px 100px -30px #000;
+  @media (max-width: 850px) {
+    /* margin-bottom: 15vw; */
+    padding: 3vw 3vw 15vw 3vw;
+  }
 `;
 
 const StyledImg = styled.img`
   height: 25vw;
   width: 17vw;
+  @media (max-width: 850px) {
+    height: 59vw;
+    width: 40vw;
+  }
 `;
 
 const StyledContainer = styled.div`
@@ -21,8 +29,10 @@ const StyledContainer = styled.div`
 `;
 
 const StyledOverview = styled.div`
-  width: 90%;
-  margin-bottom: 2vw;
+  @media (min-width: 850px) {
+    width: 90%;
+    margin-bottom: 2vw;
+  }
 `;
 
 const StyledList = styled.ul`
@@ -38,14 +48,25 @@ const StyledListItem = styled.li`
 const StyledCategory = styled.div`
   width: 150px;
   font-size: 1vw;
+  @media (max-width: 850px) {
+    font-size: 2.3vw;
+    width: 11vw;
+  }
 `;
 
 const StyledTitle = styled.h2`
   font-size: 1.5vw;
+  @media (max-width: 850px) {
+    font-size: 4vw;
+    margin-top: 0;
+  }
 `;
 
 const StyledText = styled.div`
   font-size: 1vw;
+  @media (max-width: 850px) {
+    font-size: 2.3vw;
+  }
 `;
 
 const MovieInfo = ({ data }) => {

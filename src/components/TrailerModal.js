@@ -4,7 +4,7 @@ import axios from "axios";
 import styled, { keyframes } from "styled-components";
 import { CgCloseR as CloseIcon } from "react-icons/cg";
 
-import SmallLoader from "../components/SmallLoader";
+import SmallLoader from "./SmallLoader";
 
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
@@ -28,6 +28,9 @@ const Container = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 300;
+  @media (max-width: 650px) {
+    height: auto;
+  }
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`

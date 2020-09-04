@@ -15,11 +15,22 @@ const StyledList = styled.ul`
   width: 50%;
   margin: auto;
   padding: 1.5vw 0;
+  @media (max-width: 850px) {
+    background-color: #1d1c1c;
+    width: 100%;
+    padding: 3vw 0;
+  }
 `;
 
 const StyledListItem = styled.li`
   font-size: 1.3vw;
   font-family: "Roboto";
+  @media (max-width: 850px) {
+    font-size: 2vw;
+  }
+  @media (max-width: 650px) {
+    font-size: 3vw;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -32,13 +43,18 @@ const StyledNavLink = styled(NavLink)`
   &.selected {
     font-weight: 700;
     padding-bottom: 5px;
-    border-bottom: 3px solid;
+    border-bottom: 2px solid;
     letter-spacing: 1px;
+    @media (max-width: 850px) {
+      border-bottom: none;
+      color: #0d8cd6;
+      font-weight: normal;
+    }
   }
 `;
 
 const SerieNavLinks = () => {
-  const { seasonNumber } = useSeriesContext();  
+  const { seasonNumber } = useSeriesContext();
   const { url } = useRouteMatch();
 
   return (
@@ -50,7 +66,11 @@ const SerieNavLinks = () => {
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
-          <StyledNavLink exact to={`${url}/season/${seasonNumber}`} activeClassName="selected">
+          <StyledNavLink
+            exact
+            to={`${url}/season/${seasonNumber}`}
+            activeClassName="selected"
+          >
             SEASONS
           </StyledNavLink>
         </StyledListItem>

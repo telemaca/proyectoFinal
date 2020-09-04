@@ -1,13 +1,22 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { BsStar, BsStarHalf, BsStarFill } from "react-icons/bs";
+
+const fadeIn = keyframes`
+from {
+  transform: scale(2);
+}
+to {
+  transform: scale(1);
+}
+`;
 
 const StyledContainer = styled.div`
   display: flex;
-  margin-bottom: ${props => props.page === "home" ? 0 : "2vw"};
-  
-  @media(max-width: 950px) {
-    padding-top: 2vh;
+  margin-bottom: ${(props) => (props.page === "home" ? 0 : "2vw")};
+
+  @media (max-width: 650px) {
+    padding-top: 0;
   }
 `;
 
@@ -17,27 +26,38 @@ const StyledDescription = styled.p`
   margin: 0;
   padding-left: 1vw;
   font-size: 1rem;
+
+  @media (max-width: 650px) {
+    font-size: 2.5vw;
+  }
+`;
+
+const starsStyle = css`
+  padding-right: 5px;
+  color: #0d8cd6;
+  font-size: 1rem;
+  @media (max-width: 650px) {
+    font-size: 2.5vw;
+  }
 `;
 
 const StarFull = styled(BsStarFill)`
-  padding-right: 5px;
-  color: #0d8cd6;
-  font-size: 1rem;
+  ${starsStyle}
 `;
 
 const StarHalf = styled(BsStarHalf)`
-  padding-right: 5px;
-  color: #0d8cd6;
-  font-size: 1rem;
+  ${starsStyle}
 `;
 
 const StarEmpty = styled(BsStar)`
-  padding-right: 5px;
-  color: #0d8cd6;
-  font-size: 1rem;
+  ${starsStyle}
 `;
 
-const Rating = ({ rating, page }) => {
+const StyledSpan = styled.span`
+  animation: ${fadeIn} 0.5s ${(props) => props.delay};
+`;
+
+const Rating = ({ rating, page, component = "hero" }) => {
   const showRating = (rating) => {
     const fullStars = Math.floor(rating / 2);
     const halfStars = rating / 2 - fullStars;
@@ -54,9 +74,15 @@ const Rating = ({ rating, page }) => {
     return starArray;
   };
 
+  const finalRating = showRating(rating);
+
   return (
     <StyledContainer page={page}>
-      {showRating(rating)}
+      {component === "hero"
+        ? finalRating.map((star, i) => (
+            <StyledSpan delay={`${i / 3}s`}>{star}</StyledSpan>
+          ))
+        : finalRating}
       <StyledDescription>{rating}</StyledDescription>
     </StyledContainer>
   );
