@@ -1,81 +1,131 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { Link } from "react-router-dom";
 import { MdPlayArrow as PlayIcon } from "react-icons/md";
+
 import Rating from "./Rating";
-import TrailerPage from "../pages/TrailerPage";
+import TrailerModal from "./TrailerModal";
+
+const animatedFadeLeft = keyframes`
+    0% {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0)
+        opacity: 1;
+    }
+`;
+
+const animatedFadeRight = keyframes`
+    0% {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0)
+        opacity: 1;
+    }
+`;
+
+const animatedPlayIcon = keyframes`
+    0% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1)
+        opacity: 1;
+    }
+`;
 
 const StyledSection = styled.section`
-  height: ${(props) => (props.page === "home" ? "70vh" : "90vh")};
+  @media (min-width: 850px) {
+    height: ${(props) => props.page === "home" && "70vh"};
+  }
   display: flex;
   background-color: black;
   flex-direction: ${(props) =>
     props.page === "home" ? "row" : "column-reverse"};
   justify-content: ${(props) =>
     props.page === "home" ? "initial" : "flex-end"};
-
-  @media (max-width: 950px) {
-    flex-direction: column-reverse;
-    height: auto;
-    justify-content: flex-end;
-    /* margin-bottom: ${(props) => props.page === "secondary" && "2rem"}; */
-  }
 `;
 
 const StyledContainerInfo = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.page === "home" ? "column" : "row")};
+  flex-direction: column;
   justify-content: center;
-  width: ${(props) => (props.page === "home" ? "30%" : "auto")};
-  background-color: black;
-  padding: ${(props) => props.page === "secondary" && "4vw 0 0 2vw"};
-  padding-left: ${(props) => props.page === "home" && "3vw"};
-  @media (max-width: 950px) {
-    width: 90%;
-    justify-content: left;
-    margin: 6vw 0;
+  width: ${(props) => (props.page === "home" ? "30%" : "74.2%")};
+  background-color: rgba(0, 0, 0, 0.3);
+  padding-left: ${(props) => (props.page === "home" ? "3vw" : "20vw")};
+  position: ${(props) => props.page === "secondary" && "absolute"};
+  height: ${(props) => props.page === "secondary" && "50vw"};
+
+  @media (min-width: 850px) {
+    background-color: ${(props) => props.page === "home" && "black"};
+  }
+
+  @media (max-width: 850px) {
+    width: 80%;
+    position: absolute;
+    height: 50vw;
+  }
+
+  @media (max-width: 650px) {
+    justify-content: flex-end;
   }
 `;
 
 const Container = styled.div`
   padding-right: ${(props) => (props.page === "home" ? "0" : "5vw")};
-  max-width: ${(props) => props.page === "secondary" && "30%"};
-  @media (max-width: 950px) {
-    padding-left: ${(props) => props.page === "secondary" && "3vw"};
-    max-width: ${(props) => props.page === "secondary" && "100%"};
-  }
 `;
 
 const BackgrdImgContainer = styled.div`
   width: ${(props) => (props.page === "home" ? "100%" : "95vw")};
-  height: ${(props) => (props.page === "home" ? "auto" : "30vw")};
+  height: ${(props) => (props.page === "home" ? "auto" : "50vw")};
   background-image: url(${(props) => props.img});
   background-size: cover;
-  box-shadow: ${(props) =>
-    props.page === "home" ? "inset 50px -20px 60px 60px #000" : "none"};
 
-  @media (max-width: 950px) {
+  @media (min-width: 850px) {
+    box-shadow: ${(props) =>
+      props.page === "home" && "inset 50px -20px 60px 60px #000"};
+  }
+
+  @media (max-width: 850px) {
     width: 100vw;
-    height: 18rem;
-    box-shadow: inset 0px -20px 30px 6px #000;
-    background-position-x: center;
+    height: 50vw;
   }
 `;
 
 const StyledTitleLink = styled(Link)`
+  text-decoration: none;
+  color: #fafafa;
+
+  &:hover {
+    color: ${(props) => (props.page === "home" ? "#2196f3" : "#fafafa")};
+  }
+`;
+
+const StyledTitle = styled.h1`
   font-family: "Baloo Tamma 2";
   font-weight: 600;
   font-size: 3vw;
   line-height: 3vw;
-  padding-bottom: 2vw;
-  text-decoration: none;
-  color: #fafafa;
-  &:hover {
-    color: ${(props) => (props.page === "home" ? "#2196f3" : "#fafafa")};
+  margin: 0;
+  animation: ${animatedFadeLeft} 2s;
+
+  @media (max-width: 1050px) {
+    font-size: 4vw;
+    max-width: 70%;
   }
-  @media (max-width: 950px) {
-    font-size: 2.5rem;
-    line-height: 6vh;
+
+  @media (max-width: 750px) {
+    font-size: 6vw;
+    margin-bottom: 2vw;
+  }
+  @media (max-width: 650px) {
+    font-size: ${(props) => props.page === "home" && "7vw"};
+    line-height: 6vw;
   }
 `;
 
@@ -84,11 +134,22 @@ const StyledDescription = styled.p`
   color: #fafafa;
   font-size: 1vw;
   z-index: 200;
-  width: ${(props) => (props.page === "home" ? "auto" : "50%")};
+  width: ${(props) => (props.page === "home" ? "auto" : "70%")};
   margin: ${(props) => props.page === "secondary" && "0"};
+  animation: ${animatedFadeRight} 2s;
 
-  @media (max-width: 950px) {
-    display: none;
+  @media (max-width: 1050px) {
+    font-size: 1.3vw;
+  }
+
+  @media (max-width: 850px) {
+    width: 50%;
+    font-size: 1.4vw;
+  }
+
+  @media (max-width: 650px) {
+    display: ${(props) => props.page === "secondary" && "none"};
+    font-size: ${(props) => props.page === "home" && "2.3vw"};
   }
 `;
 
@@ -101,7 +162,8 @@ const Button = styled.button`
   align-items: center;
   padding-right: 0.7vw;
   transition: 0.2s;
-  width: ${(props) => props.page === "home" && "50%"};
+  width: ${(props) => (props.page === "home" ? "50%" : "10vw")};
+  margin-top: ${(props) => props.page === "secondary" && "3vw"};
 
   &:hover {
     cursor: pointer;
@@ -110,7 +172,28 @@ const Button = styled.button`
     transition: 0.2s;
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 750px) {
+    width: 15vw;
+    height: 4vw;
+  }
+
+  @media (max-width: 650px) {
+    display: none;
+  }
+`;
+
+const SmallButton = styled.button`
+  width: 10vw;
+  height: 10vw;
+  border-radius: 50%;
+  border: 2px solid #fafafa;
+  background-color: transparent;
+  position: absolute;
+  top: 35%;
+  left: 44%;
+  animation: ${animatedPlayIcon} 2s;
+
+  @media (min-width: 650px) {
     display: none;
   }
 `;
@@ -119,6 +202,11 @@ const StyledPlayIcon = styled(PlayIcon)`
   font-size: 1.3vw;
   color: #fff;
   margin-right: 0.7vw;
+`;
+
+const SmallPlayIcon = styled(PlayIcon)`
+  font-size: 6.5vw;
+  color: #fff;
 `;
 
 const Text = styled.p`
@@ -139,31 +227,26 @@ const Hero = ({ data, media_type, page = "home" }) => {
     <StyledSection page={page}>
       <StyledContainerInfo page={page}>
         <Container page={page}>
-          <StyledTitleLink page={page} to={`/${media_type}/${id}`}>
-            {title || name}
+          <StyledTitleLink page={page} to={`/${media_type}/${id}/info`}>
+            <StyledTitle page={page}>{title || name}</StyledTitle>
           </StyledTitleLink>
           <Rating rating={vote_average} page={page} />
-          {page === "secondary" && (
-            <Button onClick={handleClick}>
-              <StyledPlayIcon />
-              <Text>Watch Trailer</Text>
-            </Button>
-          )}
         </Container>
         <StyledDescription page={page}>{overview}</StyledDescription>
-        {page === "home" && (
-          <Button onClick={handleClick} page={page}>
-            <StyledPlayIcon />
-            <Text>Watch Trailer</Text>
-          </Button>
-        )}
+        <Button onClick={handleClick} page={page}>
+          <StyledPlayIcon />
+          <Text>Watch Trailer</Text>
+        </Button>
+        <SmallButton onClick={handleClick}>
+          <SmallPlayIcon />
+        </SmallButton>
       </StyledContainerInfo>
       <BackgrdImgContainer
         page={page}
         img={`https://image.tmdb.org/t/p/original${backdrop_path}`}
       ></BackgrdImgContainer>
       {isTrailerSelected && (
-        <TrailerPage
+        <TrailerModal
           media={media_type}
           id={id}
           onHandleClick={handleClickClose}

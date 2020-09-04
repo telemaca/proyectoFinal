@@ -6,6 +6,9 @@ const Card = styled.article`
   margin: 0 5vw 3vw 0;
   overflow: hidden;
   line-height: 20px;
+  @media (max-width: 650px) {
+    width: 85%;
+  }
 `;
 
 const Img = styled.img`

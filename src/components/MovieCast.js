@@ -11,6 +11,10 @@ const StyledSection = styled.section`
   background-color: black;
   background-color: #1d1d1d;
   box-shadow: inset -100px -50px 110px 41px #000;
+
+  @media (max-width: 850px) {
+    padding-bottom: 15vw;
+  }
 `;
 
 const MovieCast = ({ actors }) => {

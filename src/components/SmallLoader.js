@@ -16,14 +16,14 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  top: 65vh;
+  top: 50vh;
   left: 45%;
 `;
 
 const Dot = styled.div`
   width: 3vw;
   height: 3vw;
-  background-color: grey;
+  background-color: #2196f3;
   border-radius: 50%;
   animation: ${animate} 1s ${(props) => props.delay} infinite;
 `;
