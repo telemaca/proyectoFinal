@@ -6,7 +6,6 @@ import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
 
 import useSeriesContext from "../contexts/SeriesContext";
-import usePaginationContext from "../contexts/PaginationContext"
 
 import Hero from "../components/Hero";
 import SerieNavLinks from "../components/SerieNavLinks";
@@ -18,9 +17,7 @@ import LoadingPage from "../pages/LoadingPage";
 
 const SeriePage = () => {
   const { tvId } = useParams();
-  const { path } = useRouteMatch();
-
-  const { page } = usePaginationContext()
+  const { path } = useRouteMatch();  
   const { popularSeries } = useSeriesContext();
   const [selectedSerie, setSelectedSerie] = useState({});
   const [similarSeries, setSimilarSeries] = useState([]);
@@ -37,12 +34,12 @@ const SeriePage = () => {
       .catch((err) => console.log(err));
 
     axios
-      .get(`${API_URL}tv/${tvId}/similar?api_key=${API_KEY}&page=${page}`)
+      .get(`${API_URL}tv/${tvId}/similar?api_key=${API_KEY}`)
       .then((response) => {
         setSimilarSeries(response.data.results);
       })
       .catch((err) => console.log(err));
-  }, [tvId, page]);
+  }, [tvId]);
 
   return isSerieDataLoading ? (
     <LoadingPage />
