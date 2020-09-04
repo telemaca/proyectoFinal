@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
 
-const Button = styled.button `    
+const Button = styled.button`    
   margin: 0 1vw;
   color: #fff;
   background-color: black;
@@ -13,21 +13,25 @@ const Button = styled.button `
   &:hover {
       cursor: pointer;
       color: #2296F3;        
-      transition: 0.2s;
+      transition: 0.2s; 
   }   
   &:focus {
       outline: none;    
+  }
+  &.selected {
+    color: #2296F3;
   }       
 `
 
-const PageItem = ({ value, setCurrentPage, currentPage, content }) => {
+const PageItem = ({ value, setCurrentPage, page, content }) => {
   return (
     <Button
       onClick={() => setCurrentPage(value)}
       value={value}
-      page={currentPage}        
-    >         
-      {content}         
+      page={page}
+      className={value === page ? "selected" : ""}
+    >
+      {content}
     </Button>
   )
 }

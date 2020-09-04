@@ -36,7 +36,7 @@ const ContainerFlex = styled.div`
 const Title = styled.h3`
   margin: 0 2.4vw;
   padding: 2vw 0;
-  font-size: 5vw;
+  font-size: 2vw;
   font-weight: 400;
   font-family: roboto;
   letter-spacing: 0.4px;
@@ -44,6 +44,7 @@ const Title = styled.h3`
 
   @media (max-width: 850px) {
     margin: 4vw 0 0 7vw;
+    font-size: 5vw;
   }
 `;
 
@@ -59,7 +60,7 @@ const CategoriesPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    
+
     axios
       .get(
         categoryId === "trending"
@@ -67,8 +68,8 @@ const CategoriesPage = () => {
           : `${API_URL}${media}/${categoryId}?api_key=${API_KEY}&page=${currentPage}`
       )
       .then((response) => {
-        setCategoriesMovies(response.data.results);        
-        setMaxPage(response.data.total_pages);        
+        setCategoriesMovies(response.data.results);
+        setMaxPage(response.data.total_pages);
         setIsLoading(false);
       });
   }, [categoryId, media, currentPage]);
@@ -76,23 +77,23 @@ const CategoriesPage = () => {
   return isLoading ? (
     <LoadingPage />
   ) : (
-    <MainFlex>
-      <StyledSection>
-        <Title>
-          {media === "tv"
-            ? `${upperCaseTitle} TV Shows`
-            : `${upperCaseTitle} Movies`}
-        </Title>
-        <ContainerFlex>
-          {categoriesMovies.map((movie) => (
-            <BasicCard data={movie} media_type={media} />
-          ))}
-        </ContainerFlex>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage}/>
-      </StyledSection>
-      
-    </MainFlex>
-  );
+      <MainFlex>
+        <StyledSection>
+          <Title>
+            {media === "tv"
+              ? `${upperCaseTitle} TV Shows`
+              : `${upperCaseTitle} Movies`}
+          </Title>
+          <ContainerFlex>
+            {categoriesMovies.map((movie) => (
+              <BasicCard data={movie} media_type={media} />
+            ))}
+          </ContainerFlex>
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage} />
+        </StyledSection>
+
+      </MainFlex>
+    );
 };
 
 export default CategoriesPage;
