@@ -14,6 +14,7 @@ import SerieSeasons from "../components/SerieSeasons";
 import SimilarSeries from "../components/SimilarSeries";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
+import ButtonBack from "../components/ButtonBack"
 
 const SeriePage = () => {
   const { tvId } = useParams();
@@ -44,7 +45,8 @@ const SeriePage = () => {
   return isSerieDataLoading ? (
     <LoadingPage />
   ) : (
-    <MainFlex>
+    <MainFlex>    
+      <ButtonBack/>
       <Hero data={selectedSerie} media_type="tv" page="secondary" />
       <SerieNavLinks />
       <Switch>

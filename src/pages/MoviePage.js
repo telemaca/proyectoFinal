@@ -14,6 +14,7 @@ import MovieCast from "../components/MovieCast";
 import SimilarMovies from "../components/SimilarMovies";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
+import ButtonBack from "../components/ButtonBack"
 
 const MoviePage = () => {
   const { movieId } = useParams();
@@ -49,7 +50,11 @@ const MoviePage = () => {
   return isMovieDataLoading ? (
     <LoadingPage />
   ) : (
+    <>
+    
+   
     <MainFlex>
+      <ButtonBack/>      
       <Hero data={selectedMovie} media_type="movie" page="secondary" />
       <MovieNavLinks />
       <Switch>
@@ -65,8 +70,9 @@ const MoviePage = () => {
             notFound={similarMovies.length === 0}
           />
         </Route>
-      </Switch>
+      </Switch>    
     </MainFlex>
+    </>
   );
 };
 

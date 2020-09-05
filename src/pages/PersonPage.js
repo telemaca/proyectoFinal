@@ -10,14 +10,12 @@ import PersonInfo from "../components/PersonInfo";
 import BasicCard from "../components/CardMovie";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
+import ButtonBack from "../components/ButtonBack"
 
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0 3vw;
-  @media (max-width: 850px) {
-    padding-bottom: 16vw;
-  }
 `;
 
 const SectionTitle = styled.h3`
@@ -34,6 +32,10 @@ const SectionTitle = styled.h3`
     font-size: 4.5vw;
   }
 `;
+const StyledButtonBack = styled(ButtonBack) `
+position: absolute;
+  top: 0;
+`
 
 const PersonPage = () => {
   const { personId } = useParams();
@@ -74,6 +76,7 @@ const PersonPage = () => {
     <LoadingPage />
   ) : (
     <MainFlex style={{ backgroundColor: "#191919" }}>
+      <ButtonBack/>
       <PersonInfo data={personData} />
       <SectionTitle>You may know {gender} for...</SectionTitle>
       <StyledContainer style={{ borderBottom: "1px dashed #fafafa" }}>
