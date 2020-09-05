@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import { Route, Switch, useParams, useRouteMatch, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import API_KEY from "../data/apiKey";
@@ -14,15 +14,21 @@ import SerieSeasons from "../components/SerieSeasons";
 import SimilarSeries from "../components/SimilarSeries";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
+import ButtonBack from "../components/ButtonBack"
 
 const SeriePage = () => {
   const { tvId } = useParams();
-  const { path } = useRouteMatch();  
+  const { path } = useRouteMatch();
+  const history = useHistory()  
   const { popularSeries } = useSeriesContext();
   const [selectedSerie, setSelectedSerie] = useState({});
   const [similarSeries, setSimilarSeries] = useState([]);
-  const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);
-
+  const [isSerieDataLoading, setIsSerieDataLoading] = useState(true); 
+  
+  const handleGoBackClick = () => {
+    history.push("/tv")
+  }
+  
   useEffect(() => {
     setIsSerieDataLoading(true);
     axios
@@ -44,7 +50,8 @@ const SeriePage = () => {
   return isSerieDataLoading ? (
     <LoadingPage />
   ) : (
-    <MainFlex>
+    <MainFlex>    
+      <ButtonBack handleClick={handleGoBackClick}/>
       <Hero data={selectedSerie} media_type="tv" page="secondary" />
       <SerieNavLinks />
       <Switch>

@@ -13,7 +13,16 @@ const textSharedStyle = css`
 
 const PersonDetails = styled.div`
   display: flex;
-  padding: 3vw;
+  padding: 4.5vw;
+  @media (max-width: 1030px) {
+    padding-top: 5.5vw;
+  }
+  @media (max-width: 610px) {
+    padding-top: 9vw;
+  }
+  @media (max-width: 280px) {
+    padding-top: 12vw;
+  }
 `;
 
 const PersonImg = styled.img`

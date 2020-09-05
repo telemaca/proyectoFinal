@@ -6,7 +6,7 @@ const Button = styled.button`
   color: #fff;
   background-color: black;
   border: none;
-  font-size: 14px;
+  font-size: 1.2vw;
   width: 2vw;
   font-family: roboto;
   transition: 0.2s;
@@ -18,9 +18,7 @@ const Button = styled.button`
   &:focus {
       outline: none;    
   }
-  &.selected {
-    color: #2296F3;
-  }       
+    
 `
 
 const PageItem = ({ value, setCurrentPage, page, content }) => {
@@ -28,8 +26,7 @@ const PageItem = ({ value, setCurrentPage, page, content }) => {
     <Button
       onClick={() => setCurrentPage(value)}
       value={value}
-      page={page}
-      className={value === page ? "selected" : ""}
+      page={page}      
     >
       {content}
     </Button>

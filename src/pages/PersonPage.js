@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -10,14 +10,12 @@ import PersonInfo from "../components/PersonInfo";
 import BasicCard from "../components/CardMovie";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
+import ButtonBack from "../components/ButtonBack"
 
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0 3vw;
-  @media (max-width: 850px) {
-    padding-bottom: 16vw;
-  }
 `;
 
 const SectionTitle = styled.h3`
@@ -37,12 +35,17 @@ const SectionTitle = styled.h3`
 
 const PersonPage = () => {
   const { personId } = useParams();
-
+  const history = useHistory()
+  
   const [personData, setPersonData] = useState({});
   const [personMovies, setPersonMovies] = useState([]);
   const [personSeries, setPersonSeries] = useState([]);
-  const [isDataLoading, setIsDataLoading] = useState(true);
+  const [isDataLoading, setIsDataLoading] = useState(true);  
 
+  const handleGoBackClick = () => {
+    history.go(-1)
+  }
+  
   useEffect(() => {
     setIsDataLoading(true);
     axios
@@ -74,6 +77,7 @@ const PersonPage = () => {
     <LoadingPage />
   ) : (
     <MainFlex style={{ backgroundColor: "#191919" }}>
+      <ButtonBack handleClick={handleGoBackClick}/>
       <PersonInfo data={personData} />
       <SectionTitle>You may know {gender} for...</SectionTitle>
       <StyledContainer style={{ borderBottom: "1px dashed #fafafa" }}>
