@@ -25,7 +25,7 @@ const MoviesPage = () => {
   return isMoviesDataLoading ? (
     <LoadingPage />
   ) : (
-    <MainFlex>
+    <MainFlex>    
       <Hero data={popularMovie} media_type="movie" />
 
       <CardListPreview

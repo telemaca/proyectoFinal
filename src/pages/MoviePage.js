@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import { Route, Switch, useParams, useRouteMatch, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import API_KEY from "../data/apiKey";
@@ -19,11 +19,16 @@ import ButtonBack from "../components/ButtonBack"
 const MoviePage = () => {
   const { movieId } = useParams();
   const { path } = useRouteMatch();  
+  const history = useHistory()
   const { popularMovies } = useMoviesContext();
   const [selectedMovie, setSelectedMovie] = useState({});
   const [selectedMovieCast, setSelectedMovieCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
-  const [isMovieDataLoading, setIsMovieDataLoading] = useState(true);
+  const [isMovieDataLoading, setIsMovieDataLoading] = useState(true);  
+
+  const handleGoBackClick = () => {
+    history.push("/movie")
+  }
 
   useEffect(() => {
     setIsMovieDataLoading(true);
@@ -54,7 +59,7 @@ const MoviePage = () => {
     
    
     <MainFlex>
-      <ButtonBack/>      
+      <ButtonBack handleClick={handleGoBackClick}/>      
       <Hero data={selectedMovie} media_type="movie" page="secondary" />
       <MovieNavLinks />
       <Switch>

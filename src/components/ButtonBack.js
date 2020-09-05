@@ -1,7 +1,6 @@
 import React from 'react'
 import { BiArrowBack as ArrowBack } from "react-icons/bi"
 import styled from "styled-components"
-import { useHistory } from "react-router-dom"
 
 const StyledArrowBack = styled(ArrowBack) `
     color: #fff;  
@@ -39,15 +38,10 @@ const Button = styled.button `
     }
 `
 
-const ButtonBack = () => {
-    const history = useHistory()
-    const handleGoBackClick = () => {
-        history.go(-1)
-    }
-
+const ButtonBack = ({ handleClick }) => {  
     return (
         <Button >
-            <StyledArrowBack onClick={handleGoBackClick}/>
+            <StyledArrowBack onClick={handleClick}/>
         </Button>
     )
 }

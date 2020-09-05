@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -32,19 +32,20 @@ const SectionTitle = styled.h3`
     font-size: 4.5vw;
   }
 `;
-const StyledButtonBack = styled(ButtonBack) `
-position: absolute;
-  top: 0;
-`
 
 const PersonPage = () => {
   const { personId } = useParams();
-
+  const history = useHistory()
+  
   const [personData, setPersonData] = useState({});
   const [personMovies, setPersonMovies] = useState([]);
   const [personSeries, setPersonSeries] = useState([]);
-  const [isDataLoading, setIsDataLoading] = useState(true);
+  const [isDataLoading, setIsDataLoading] = useState(true);  
 
+  const handleGoBackClick = () => {
+    history.go(-1)
+  }
+  
   useEffect(() => {
     setIsDataLoading(true);
     axios
@@ -76,7 +77,7 @@ const PersonPage = () => {
     <LoadingPage />
   ) : (
     <MainFlex style={{ backgroundColor: "#191919" }}>
-      <ButtonBack/>
+      <ButtonBack handleClick={handleGoBackClick}/>
       <PersonInfo data={personData} />
       <SectionTitle>You may know {gender} for...</SectionTitle>
       <StyledContainer style={{ borderBottom: "1px dashed #fafafa" }}>
