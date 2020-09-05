@@ -26,22 +26,27 @@ const Home = () => {
   return isMoviesDataLoading && isSeriesDataLoading ? (
     <LoadingPage />
   ) : (
-    <MainFlex>
-      <Hero data={trendingMovie} media_type="movie" page="home" />    
-      <CardListPreview
-        title="Trending Movies"
-        elements={trendingMovies}
-        media_type="movie"
-        categoryId="trending"
-      /> 
-      <CardListPreview
-        title="Trending Tv Show"
-        elements={trendingSeries}
-        media_type="tv"
-        categoryId="trending"
-      />
-    </MainFlex>
+    <Bodycontainer>
+      <MainFlex>
+        <Hero data={trendingMovie} media_type="movie" page="home" />
+
+        <CardListPreview
+          title="Trending Movies"
+          elements={trendingMovies}
+          media_type="movie"
+          categoryId="trending"
+        />
+        <CardListPreview
+          title="Trending Tv Show"
+          elements={trendingSeries}
+          media_type="tv"
+          categoryId="trending"
+        />
+      </MainFlex>
+      <Footer />
+    </Bodycontainer>
   );
 };
 
 export default Home;
+
