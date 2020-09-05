@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useMoviesContext from "../contexts/MoviesContext";
 import useSeriesContext from "../contexts/SeriesContext";
 
+import "../styles/carousel.scss";
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
 import MainFlex from "../components/MainFlex";

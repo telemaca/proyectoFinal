@@ -1,0 +1,24 @@
+.slick-arrow {
+    position: absolute;  
+    top: 12vw;
+    z-index: 200;
+}
+.slick-prev {    
+    left: -10px;  
+}
+.slick-arrow:before {    
+    font-size: 28px;
+}
+.slick-next {
+    right: -4px;
+    
+}
+.slick-initialized {
+    margin: 0 15px;
+}
+.slick-track {
+    margin: 0 15px;
+}
+.slick-list {
+    margin: 0 10px;
+}
