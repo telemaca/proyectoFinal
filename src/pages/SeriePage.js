@@ -17,7 +17,7 @@ import LoadingPage from "../pages/LoadingPage";
 
 const SeriePage = () => {
   const { tvId } = useParams();
-  const { path } = useRouteMatch();  
+  const { path } = useRouteMatch();
   const { popularSeries } = useSeriesContext();
   const [selectedSerie, setSelectedSerie] = useState({});
   const [similarSeries, setSimilarSeries] = useState([]);
@@ -28,7 +28,7 @@ const SeriePage = () => {
     axios
       .get(`${API_URL}tv/${tvId}?api_key=${API_KEY}`)
       .then((response) => {
-        setSelectedSerie(response.data);        
+        setSelectedSerie(response.data);
         setIsSerieDataLoading(false);
       })
       .catch((err) => console.log(err));

@@ -66,7 +66,7 @@ const StyledContainerInfo = styled.div`
   }
 
   @media (max-width: 850px) {
-    width: 80%;
+    width: 95%;
     position: absolute;
     height: 50vw;
   }
@@ -172,7 +172,7 @@ const Button = styled.button`
     transition: 0.2s;
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 850px) {
     width: 15vw;
     height: 4vw;
   }
