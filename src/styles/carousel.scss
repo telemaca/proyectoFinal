@@ -2,15 +2,22 @@
     position: absolute;  
     top: 12vw;
     z-index: 200;
+    opacity: 0.5;
+    transition: 0.2s;
+    &:hover {
+        color: #515963;
+        transition: 0.2s;
+    }
+
 }
 .slick-prev {    
-    left: -10px;  
+    left: -8px;  
 }
 .slick-arrow:before {    
     font-size: 28px;
 }
 .slick-next {
-    right: -4px;
+    right: 0;
     
 }
 .slick-initialized {
@@ -20,5 +27,5 @@
     margin: 0 15px;
 }
 .slick-list {
-    margin: 0 10px;
+    margin-left: 10px;
 }

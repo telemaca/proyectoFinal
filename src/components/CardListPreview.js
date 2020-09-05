@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
 
 import BasicCard from "./CardMovie";
 import Section from "./native components/Section";
@@ -33,6 +34,13 @@ const StyledExploreLink = styled(Link)`
 `;
 
 const CardListPreview = ({ title, elements, categoryId, media_type }) => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5
+}
   return (
     <Section>
       <StyledContainerFlex>
@@ -42,14 +50,19 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
           Explore All
         </StyledExploreLink>
       </StyledContainerFlex>
-      <ContainerFlex>
+      <Slider {...settings}>
+            {elements && elements.map((element, i) => (
+              <BasicCard key={i} data={element} media_type={media_type} />
+            ))}
+        </Slider>
+      {/* <ContainerFlex>
         {elements &&
           elements
             .slice(0, 5)
             .map((element, i) => (
               <BasicCard key={i} data={element} media_type={media_type} />
             ))}
-      </ContainerFlex>
+      </ContainerFlex> */}
     </Section>
   );
 };
