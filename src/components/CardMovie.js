@@ -5,8 +5,8 @@ import styled from "styled-components";
 import Rating from "./Rating";
 
 const Card = styled.article`
-  width: 17%;
-  margin-top: 1vw;
+  
+  margin: 0.2vw;
   @media (max-width: 850px) {
     width: 26vw;
     margin-right: 3vw;
@@ -14,7 +14,7 @@ const Card = styled.article`
 `;
 
 const Img = styled.img`
-  width: 100%;
+  /* width: 100%; */
   height: 23vw;
   transition: 0.3s;
   &:hover {
@@ -34,6 +34,7 @@ const Title = styled.h3`
   font-family: roboto;
   letter-spacing: 0.4px;
   color: #fff;
+  width: 90%;
 `;
 
 const BasicCard = ({ data, customStyle, media_type, ...props }) => {

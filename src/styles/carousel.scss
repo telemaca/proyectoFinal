@@ -1,0 +1,34 @@
+.slick-arrow {
+    position: absolute;  
+    top: 12vw;
+    z-index: 200;
+    opacity: 0.5;
+    transition: 0.2s;
+    &:hover {
+        color: #515963;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+}
+.slick-prev {    
+    left: -12px;  
+}
+
+.slick-arrow:before {    
+    font-size: 28px;
+}
+.slick-next {
+    right: 10px;
+    @media(max-width: 900px) {
+        right: -6px;
+    }    
+}
+.slick-initialized {
+    margin: 0 15px;
+}
+.slick-track {
+    margin: 0 4px;
+}
+.slick-list {
+    margin-left: 10px;
+}

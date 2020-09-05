@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "../styles/carousel.scss";
 
 import BasicCard from "./CardMovie";
 import Section from "./native components/Section";
@@ -22,6 +24,9 @@ const Title = styled.h3`
   font-family: roboto;
   letter-spacing: 0.4px;
   color: #fff;
+  @media(max-width: 280px) {
+    font-size: 1rem;
+  }
 `;
 
 const StyledExploreLink = styled(Link)`
@@ -33,6 +38,44 @@ const StyledExploreLink = styled(Link)`
 `;
 
 const CardListPreview = ({ title, elements, categoryId, media_type }) => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true
+        }
+      },     
+      {
+        breakpoint: 760,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          slidesToScroll: 3,
+          initialSlide: 3,
+          arrows: false
+        }        
+      },
+      {
+        breakpoint: 280,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          arrows: false
+        }        
+      }
+    ]
+  }
   return (
     <Section>
       <StyledContainerFlex>
@@ -42,14 +85,11 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
           Explore All
         </StyledExploreLink>
       </StyledContainerFlex>
-      <ContainerFlex>
-        {elements &&
-          elements
-            .slice(0, 5)
-            .map((element, i) => (
-              <BasicCard key={i} data={element} media_type={media_type} />
-            ))}
-      </ContainerFlex>
+      <Slider {...settings}>
+        {elements && elements.map((element, i) => (
+          <BasicCard key={i} data={element} media_type={media_type} />
+        ))}
+      </Slider>      
     </Section>
   );
 };
