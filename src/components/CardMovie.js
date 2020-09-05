@@ -5,8 +5,8 @@ import styled from "styled-components";
 import Rating from "./Rating";
 
 const Card = styled.article`
-  width: 100%;
-  margin-top: 1vw;
+  
+  margin: 0.2vw;
   @media (max-width: 850px) {
     width: 26vw;
     margin-right: 3vw;

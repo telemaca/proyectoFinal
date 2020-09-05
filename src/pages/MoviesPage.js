@@ -19,8 +19,7 @@ const MoviesPage = () => {
 
   //Ordeno por la mayor cantidad de votos para que no muestre en la pagina principal pelis medio random
   const filteredTopRatedMovies = topRatedMovies
-    .sort((a, b) => b.vote_count - a.vote_count)
-    .slice(0, 5);
+    .sort((a, b) => b.vote_count - a.vote_count)    
 
   return isMoviesDataLoading ? (
     <LoadingPage />

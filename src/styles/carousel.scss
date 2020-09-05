@@ -8,23 +8,25 @@
         color: #515963;
         transition: 0.2s;
     }
-
 }
 .slick-prev {    
-    left: -8px;  
+    left: -12px;  
 }
+
 .slick-arrow:before {    
     font-size: 28px;
 }
 .slick-next {
-    right: 0;
-    
+    right: 10px;
+    @media(max-width: 900px) {
+        right: -6px;
+    }    
 }
 .slick-initialized {
     margin: 0 15px;
 }
 .slick-track {
-    margin: 0 15px;
+    margin: 0 4px;
 }
 .slick-list {
     margin-left: 10px;
