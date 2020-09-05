@@ -59,16 +59,17 @@ const StyledContainerInfo = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   padding-left: ${(props) => (props.page === "home" ? "3vw" : "20vw")};
   position: ${(props) => props.page === "secondary" && "absolute"};
-  height: ${(props) => props.page === "secondary" && "50vw"};
+  height: ${(props) => props.page === "secondary" && "53vw"};
 
   @media (min-width: 850px) {
     background-color: ${(props) => props.page === "home" && "black"};
   }
 
   @media (max-width: 850px) {
-    width: 95%;
+    width: 78vw;
     position: absolute;
-    height: 50vw;
+    height: 53vw;
+    padding-left: 20vw;
   }
 
   @media (max-width: 650px) {
@@ -82,7 +83,7 @@ const Container = styled.div`
 
 const BackgrdImgContainer = styled.div`
   width: ${(props) => (props.page === "home" ? "100%" : "95vw")};
-  height: ${(props) => (props.page === "home" ? "auto" : "50vw")};
+  height: ${(props) => (props.page === "home" ? "auto" : "53vw")};
   background-image: url(${(props) => props.img});
   background-size: cover;
 
@@ -92,8 +93,8 @@ const BackgrdImgContainer = styled.div`
   }
 
   @media (max-width: 850px) {
-    width: 100vw;
-    height: 50vw;
+    width: 98vw;
+    height: 53vw;
   }
 `;
 
@@ -143,7 +144,7 @@ const StyledDescription = styled.p`
   }
 
   @media (max-width: 850px) {
-    width: 50%;
+    width: 75%;
     font-size: 1.4vw;
   }
 
@@ -192,6 +193,7 @@ const SmallButton = styled.button`
   top: 35%;
   left: 44%;
   animation: ${animatedPlayIcon} 2s;
+  display: ${(props) => props.page === "home" && "none"};
 
   @media (min-width: 650px) {
     display: none;
@@ -202,6 +204,9 @@ const StyledPlayIcon = styled(PlayIcon)`
   font-size: 1.3vw;
   color: #fff;
   margin-right: 0.7vw;
+  @media (max-width: 850px) {
+    font-size: 1.5vw;
+  }
 `;
 
 const SmallPlayIcon = styled(PlayIcon)`
@@ -214,6 +219,9 @@ const Text = styled.p`
   font-family: roboto;
   font-size: 0.8vw;
   letter-spacing: 0.1em;
+  @media (max-width: 850px) {
+    font-size: 1.1vw;
+  }
 `;
 
 const Hero = ({ data, media_type, page = "home" }) => {
@@ -237,7 +245,7 @@ const Hero = ({ data, media_type, page = "home" }) => {
           <StyledPlayIcon />
           <Text>Watch Trailer</Text>
         </Button>
-        <SmallButton onClick={handleClick}>
+        <SmallButton onClick={handleClick} page={page}>
           <SmallPlayIcon />
         </SmallButton>
       </StyledContainerInfo>

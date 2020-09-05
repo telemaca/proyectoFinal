@@ -70,7 +70,7 @@ const Option = styled.option`
   @media (max-width: 850px) {
     font-size: 1.4vw;
   }
-  @media (max-width: 850px) {
+  @media (max-width: 650px) {
     font-size: 2.5vw;
   }
 `;
@@ -91,7 +91,7 @@ const Text = styled.p`
     font-size: 1.5vw;
     margin: 1.1vw 2vw;
   }
-  @media (max-width: 850px) {
+  @media (max-width: 650px) {
     font-size: 2.5vw;
     margin: 1.9vw 3vw;
   }

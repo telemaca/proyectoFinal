@@ -19,6 +19,10 @@ const StyledImg = styled.img`
   height: 25vw;
   width: 17vw;
   @media (max-width: 850px) {
+    height: 46vw;
+    width: 30vw;
+  }
+  @media (max-width: 650px) {
     height: 59vw;
     width: 40vw;
   }
@@ -49,23 +53,35 @@ const StyledCategory = styled.div`
   width: 150px;
   font-size: 1vw;
   @media (max-width: 850px) {
+    font-size: 1.5vw;
+  }
+  @media (max-width: 650px) {
     font-size: 2.3vw;
-    width: 11vw;
+    width: 20vw;
   }
 `;
 
 const StyledTitle = styled.h2`
   font-size: 1.5vw;
   @media (max-width: 850px) {
-    font-size: 4vw;
+    font-size: 2.5vw;
     margin-top: 0;
+  }
+  @media (max-width: 650px) {
+    font-size: 4vw;
+    /* margin-top: 0; */
   }
 `;
 
 const StyledText = styled.div`
   font-size: 1vw;
   @media (max-width: 850px) {
+    font-size: 1.5vw;
+    max-width: 84%;
+  }
+  @media (max-width: 650px) {
     font-size: 2.3vw;
+    width: -webkit-fill-available;
   }
 `;
 

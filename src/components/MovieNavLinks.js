@@ -17,6 +17,8 @@ const StyledList = styled.ul`
   @media (max-width: 850px) {
     background-color: #1d1c1c;
     width: 100%;
+  }
+  @media (max-width: 650px) {
     padding: 3vw 0;
   }
 `;
