@@ -1,34 +1,65 @@
 .slick-arrow {
-    position: absolute;  
-    top: 12vw;
-    z-index: 200;
-    opacity: 0.5;
+  position: absolute;
+  top: 12vw;
+  z-index: 200;
+  opacity: 0.5;
+  transition: 0.2s;
+  &:hover {
+    color: #515963;
     transition: 0.2s;
-    &:hover {
-        color: #515963;
-        transition: 0.2s;
-        cursor: pointer;
-    }
+    cursor: pointer;
+  }
 }
-.slick-prev {    
-    left: -12px;  
+.slick {
+  &-prev {
+    left: -15px;
+  }
+
+  &-next {
+    right: 0;
+  }
+
+  &-next,
+  &-prev {
+    top: 40%;
+    width: 5vw;
+    height: 24vw;
+    background: black;
+
+    &:hover {
+      opacity: 0.5;
+      background: black;
+      transition: 0.6s;
+    }
+    &:focus {
+      transition: 0.6s;
+      background: black;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 850px) {
+      height: 32vw;
+      top: 37%;
+      width: 8vw;
+    }
+  }
 }
 
-.slick-arrow:before {    
-    font-size: 28px;
+.slick-arrow:before {
+  font-size: 28px;
 }
 .slick-next {
-    right: 10px;
-    @media(max-width: 900px) {
-        right: -6px;
-    }    
+  right: 10px;
+  @media (max-width: 900px) {
+    right: -6px;
+  }
 }
 .slick-initialized {
-    margin: 0 15px;
+  margin: 0 15px;
 }
 .slick-track {
-    margin: 0 4px;
+  margin: 0 4px;
 }
 .slick-list {
-    margin-left: 10px;
+  margin-left: 10px;
 }

@@ -123,6 +123,7 @@ const StyledTitle = styled.h1`
   @media (max-width: 750px) {
     font-size: 6vw;
     margin-bottom: 2vw;
+    line-height: 5vw;
   }
   @media (max-width: 650px) {
     font-size: ${(props) => props.page === "home" && "7vw"};
@@ -220,7 +221,7 @@ const Text = styled.p`
   font-size: 0.8vw;
   letter-spacing: 0.1em;
   @media (max-width: 850px) {
-    font-size: 1.1vw;
+    font-size: 1.2vw;
   }
 `;
 

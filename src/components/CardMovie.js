@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Rating from "./Rating";
 
 const Card = styled.article`
-  
   margin: 0.2vw;
   @media (max-width: 850px) {
     width: 26vw;
@@ -14,7 +13,7 @@ const Card = styled.article`
 `;
 
 const Img = styled.img`
-  /* width: 100%; */
+  width: 15.4vw;
   height: 23vw;
   transition: 0.3s;
   &:hover {
@@ -23,7 +22,7 @@ const Img = styled.img`
     cursor: pointer;
   }
   @media (max-width: 850px) {
-    height: 40vw;
+    height: ${(props) => (props.component === "list" ? "40vw" : "30vw")};
   }
 `;
 
@@ -37,7 +36,13 @@ const Title = styled.h3`
   width: 90%;
 `;
 
-const BasicCard = ({ data, customStyle, media_type, ...props }) => {
+const BasicCard = ({
+  data,
+  customStyle,
+  media_type,
+  component = "list",
+  ...props
+}) => {
   const { title, poster_path, vote_average, name, id } = data;
   const history = useHistory();
 
@@ -51,9 +56,11 @@ const BasicCard = ({ data, customStyle, media_type, ...props }) => {
       id={id}
       style={customStyle}
       media_type={media_type}
+      component={component}
       {...props}
     >
       <Img
+        component={component}
         src={
           poster_path === null
             ? "https://sainfoinc.com/wp-content/uploads/2018/02/image-not-available.jpg"

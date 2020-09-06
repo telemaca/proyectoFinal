@@ -16,7 +16,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  top: 50vh;
+  top: ${(props) => (props.type === "trailer" ? "50vh" : "130vh")};
   left: 45%;
 `;
 
@@ -28,9 +28,9 @@ const Dot = styled.div`
   animation: ${animate} 1s ${(props) => props.delay} infinite;
 `;
 
-const SmallLoader = () => {
+const SmallLoader = ({ type = "trailer" }) => {
   return (
-    <Container>
+    <Container type={type}>
       <Dot delay="0s" />
       <Dot delay=".3s" />
       <Dot delay=".6s" />
