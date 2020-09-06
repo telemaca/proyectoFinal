@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
+import useLanguageContext from "../contexts/LanguageContext";
+
+import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
 const StyledSection = styled.section`
   display: flex;
@@ -85,7 +91,31 @@ const StyledText = styled.div`
   }
 `;
 
+const TITLES = {
+  eng: [
+    "Storyline",
+    "Original Title",
+    "Runtime",
+    "Genre",
+    "Released",
+    "Budget",
+    "Not reported",
+  ],
+  spa: [
+    "Sinopsis",
+    "Título original",
+    "Duración",
+    "Género(s)",
+    "Estreno",
+    "Presupuesto",
+    "No informado",
+  ],
+};
+
 const MovieInfo = ({ data }) => {
+  const { language } = useLanguageContext();
+  const [translations, setTranslations] = useState([]);
+
   const {
     overview,
     poster_path,
@@ -95,6 +125,7 @@ const MovieInfo = ({ data }) => {
     budget,
     original_language,
     original_title,
+    id,
   } = data;
   const movieHours = Math.floor(runtime / 60);
   const movieMinutes = runtime - movieHours * 60;
@@ -115,36 +146,71 @@ const MovieInfo = ({ data }) => {
       "November",
       "December",
     ];
+    const meses = [
+      "enero",
+      "febrero",
+      "marzo",
+      "abril",
+      "mayo",
+      "junio",
+      "julio",
+      "agosto",
+      "septiembre",
+      "octubre",
+      "noviembre",
+      "diciembre",
+    ];
     const movieDate = new Date(release_date);
-    return `${movieDate.getDate() + 1} ${
-      months[movieDate.getMonth()]
+    return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
+      language === "eng"
+        ? months[movieDate.getMonth()]
+        : meses[movieDate.getMonth()]
     }, ${movieDate.getFullYear()}`;
   };
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}movie/${id}/translations?api_key=${API_KEY}`)
+      .then((response) => {
+        setTranslations(response.data.translations);
+      });
+  }, [language]);
+
+  const spanishText = translations.find(
+    (translation) => translation.name === "Español"
+  );
+
+  const hasSpanishTranslation =
+    translations.length > 1 &&
+    spanishText !== undefined &&
+    spanishText.data.overview !== "";
 
   return (
     <StyledSection>
       <StyledImg src={`https://image.tmdb.org/t/p/original${poster_path}`} />
       <StyledContainer>
         <StyledOverview>
-          <StyledTitle>Storyline</StyledTitle>
-          <StyledText>{overview}</StyledText>
+          <StyledTitle>{TITLES[language][0]}</StyledTitle>
+          <StyledText>
+            {hasSpanishTranslation ? spanishText.data.overview : overview}
+          </StyledText>
         </StyledOverview>
         <div>
           <StyledList>
             {original_language !== "en" && (
               <StyledListItem>
-                <StyledCategory>Original Title</StyledCategory>
+                <StyledCategory>{TITLES[language][1]}</StyledCategory>
                 <StyledText>{original_title}</StyledText>
               </StyledListItem>
             )}
             <StyledListItem>
-              <StyledCategory>Runtime</StyledCategory>
+              <StyledCategory>{TITLES[language][2]}</StyledCategory>
               <StyledText>
                 {movieHours}h {movieMinutes}min
               </StyledText>
             </StyledListItem>
             <StyledListItem>
-              <StyledCategory>Genre</StyledCategory>
+              <StyledCategory>{TITLES[language][3]}</StyledCategory>
               <StyledText>
                 {genres.map((genre, i) => (
                   <span>
@@ -155,14 +221,16 @@ const MovieInfo = ({ data }) => {
               </StyledText>
             </StyledListItem>
             <StyledListItem>
-              <StyledCategory>Released</StyledCategory>
+              <StyledCategory>{TITLES[language][4]}</StyledCategory>
               <StyledText>{getReleaseDate()}</StyledText>
             </StyledListItem>
             <StyledListItem>
-              <StyledCategory>Budget</StyledCategory>
+              <StyledCategory>{TITLES[language][5]}</StyledCategory>
               <StyledText>
                 {/* Algunas pelis no traen presupuesto, por eso agrego este ternario */}
-                {budget === 0 ? "Not reported" : `$${budget.toLocaleString()}`}
+                {budget === 0
+                  ? TITLES[language][6]
+                  : `$${budget.toLocaleString()}`}
               </StyledText>
             </StyledListItem>
           </StyledList>

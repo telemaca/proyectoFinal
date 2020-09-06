@@ -65,7 +65,7 @@ const CardEpisode = ({ data }) => {
   const episodeDay = date.getDate() + 1;
 
   const getEpisodeMonth = () => {
-    const meses = [
+    const months = [
       "January",
       "February",
       "March",
@@ -79,8 +79,8 @@ const CardEpisode = ({ data }) => {
       "November",
       "December",
     ];
-    const mes = meses[episodeMonth];
-    return mes;
+
+    return months[episodeMonth];
   };
 
   return (

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import useMoviesContext from "../contexts/MoviesContext";
 import useSeriesContext from "../contexts/SeriesContext";
+import useLanguageContext from "../contexts/LanguageContext";
 
 import Hero from "../components/Hero";
 import CardListPreview from "../components/CardListPreview";
@@ -15,7 +16,14 @@ const Bodycontainer = styled.div`
   flex-direction: column;
 `;
 
+const TITLES = {
+  eng: ["Trending Movies", "Trending Tv Show"],
+  spa: ["Películas en tendencia", "Series en tendencia"],
+};
+
 const Home = () => {
+  const { language } = useLanguageContext();
+
   const {
     trendingMovie,
     trendingMovies,
@@ -31,13 +39,13 @@ const Home = () => {
         <Hero data={trendingMovie} media_type="movie" page="home" />
 
         <CardListPreview
-          title="Trending Movies"
+          title={TITLES[language][0]}
           elements={trendingMovies}
           media_type="movie"
           categoryId="trending"
         />
         <CardListPreview
-          title="Trending Tv Show"
+          title={TITLES[language][1]}
           elements={trendingSeries}
           media_type="tv"
           categoryId="trending"

@@ -9,6 +9,8 @@ import {
   BsSearch as SearchIcon,
 } from "react-icons/bs";
 
+import useLanguageContext from "../contexts/LanguageContext";
+
 const StyledNav = styled.nav`
   width: 5vw;
   display: flex;
@@ -50,7 +52,30 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const StyledSelect = styled.select`
+  background-color: black;
+  color: #fafafa;
+  height: 3vw;
+  font-size: 1vw;
+  font-family: "Roboto";
+  border-radius: 3px;
+  position: absolute;
+  bottom: 10%;
+  @media (max-width: 850px) {
+    font-size: 2vw;
+    position: relative;
+  }
+`;
+
+const StyledOption = styled.option`
+  font-family: "Roboto";
+`;
+
 const NavLinks = () => {
+  const { setLanguage } = useLanguageContext();
+
+  const handleChange = (event) => setLanguage(event.target.value);
+
   return (
     <StyledNav>
       <IconContext.Provider value={{ style: { cursor: "pointer" } }}>
@@ -66,6 +91,10 @@ const NavLinks = () => {
         <StyledNavLink to="/discover" activeClassName="selected">
           <SearchIcon />
         </StyledNavLink>
+        <StyledSelect onChange={handleChange}>
+          <StyledOption value="eng">ENG</StyledOption>
+          <StyledOption value="spa">SPA</StyledOption>
+        </StyledSelect>
       </IconContext.Provider>
     </StyledNav>
   );

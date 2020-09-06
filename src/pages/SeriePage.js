@@ -32,7 +32,7 @@ const SeriePage = () => {
   const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);
 
   const handleGoBackClick = () => {
-    history.push("/tv");
+    history.goBack();
   };
 
   useEffect(() => {

@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { MdPlayArrow as PlayIcon } from "react-icons/md";
+import axios from "axios";
+
+import useLanguageContext from "../contexts/LanguageContext";
 
 import Rating from "./Rating";
 import TrailerModal from "./TrailerModal";
+
+import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
 const animatedFadeLeft = keyframes`
     0% {
@@ -225,26 +231,61 @@ const Text = styled.p`
   }
 `;
 
+const TRAILER_TEXT = {
+  eng: "Watch Trailer",
+  spa: "Ver trailer",
+};
+
 const Hero = ({ data, media_type, page = "home" }) => {
   const { title, overview, backdrop_path, vote_average, name, id } = data;
   const [isTrailerSelected, setIsTrailerSelected] = useState(false);
+  const [translations, setTranslations] = useState([]);
+  const { language } = useLanguageContext();
 
   const handleClick = () => setIsTrailerSelected(true);
   const handleClickClose = () => setIsTrailerSelected(false);
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}${media_type}/${id}/translations?api_key=${API_KEY}`)
+      .then((response) => {
+        setTranslations(response.data.translations);
+      });
+  }, [language]);
+
+  const spanishText = translations.find(
+    (translation) => translation.name === "Español"
+  );
+
+  const hasSpanishTranslation =
+    translations.length > 1 && spanishText !== undefined;
 
   return (
     <StyledSection page={page}>
       <StyledContainerInfo page={page}>
         <Container page={page}>
           <StyledTitleLink page={page} to={`/${media_type}/${id}/info`}>
-            <StyledTitle page={page}>{title || name}</StyledTitle>
+            <StyledTitle page={page}>
+              {language === "spa" &&
+              hasSpanishTranslation &&
+              ((media_type === "tv" && spanishText.data.name !== "") ||
+                (media_type === "movie" && spanishText.data.title !== ""))
+                ? spanishText.data.title || spanishText.data.name
+                : title || name}
+            </StyledTitle>
           </StyledTitleLink>
           <Rating rating={vote_average} page={page} />
         </Container>
-        <StyledDescription page={page}>{overview}</StyledDescription>
+        <StyledDescription page={page}>
+          {language === "spa" &&
+          hasSpanishTranslation &&
+          spanishText.data.overview !== ""
+            ? spanishText.data.overview
+            : overview}
+        </StyledDescription>
         <Button onClick={handleClick} page={page}>
           <StyledPlayIcon />
-          <Text>Watch Trailer</Text>
+          <Text>{TRAILER_TEXT[language]}</Text>
         </Button>
         <SmallButton onClick={handleClick} page={page}>
           <SmallPlayIcon />
