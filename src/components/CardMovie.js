@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Rating from "./Rating";
 
 const Card = styled.article`
-  
   margin: 0.2vw;
   @media (max-width: 850px) {
     width: 26vw;
@@ -35,6 +34,7 @@ const Title = styled.h3`
   letter-spacing: 0.4px;
   color: #fff;
   width: 90%;
+  max-width: 15vw;
 `;
 
 const BasicCard = ({ data, customStyle, media_type, ...props }) => {
