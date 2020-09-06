@@ -71,16 +71,10 @@ const StyledSearchIcon = styled(SearchIcon) `
 `
 
 const SearchPage = () => {
-  const {results, setResults, handleMediaClick, handleInputChange, inputValue, setInputValue, media, showResults,  setShowResults} = useSearchContext()
+  const {handleShowResultsClick, newResults, results, setResults, handleMediaClick, handleInputChange, inputValue, setInputValue, media, showResults,  setShowResults} = useSearchContext()
   
   const handleOnKeyDown = () => {     
-  }
-  const handleShowResultsClick = (event) => {        
-      
-        setShowResults(inputValue) 
-  }; 
-
-  
+  }  
 
   return (
     <>
@@ -105,19 +99,18 @@ const SearchPage = () => {
         </Label>
       </Form>
     
-      <Form type= "submit" onChange={(event) => handleInputChange(event)} >
-        <InputSearch onChange={(event) => handleInputChange(event)} value={inputValue} type="search" placeholder="Search..." name="search"/>
-        <Button onClick={handleShowResultsClick}   >
-         <StyledSearchIcon onClick={handleShowResultsClick}/> 
+      <Form type= "submit" >
+        <InputSearch onChange={(event) => handleInputChange(event)} value={inputValue} type="text" placeholder="Search..." name="text"/>
+        <Button onClick={()=>handleShowResultsClick()}   >
+         <StyledSearchIcon onClick={()=>handleShowResultsClick()}/> 
         </Button>
       </Form>   
    
      <Container>
-        { showResults &&
-          <SearchResults/>}
-        {/* { results?.map((result) => (
-            <BasicCard key={result.id} id={result.id} data={result} media_type={media} />
-          ))} */}
+        
+          
+            {showResults && <SearchResults/>}
+        
       </Container> 
     
        

@@ -13,13 +13,20 @@ const SearchProvider = ({ children }) => {
     const [ newSearch, setNewSearch ] = useState(false);  
     const [ results, setResults] = useState([])
     const [ showResults, setShowResults] = useState(false)
+    const [newResults, setNewResults] = useState(false)
 
-    
+    const handleShowResultsClick = (event) => {        
+        
+       /*  setInputValue(event.target.value); */
+        
+         setShowResults(true) 
+        
+    }; 
 
-    const handleInputChange = (event) => {
+   const handleInputChange = (event) => {
         setInputValue(event.target.value);
-        setShowResults(false)    
-    };
+         setNewResults(true)  
+    }; 
 
     const handleMediaClick = (event) => {
         setMedia(event.target.value);
@@ -27,10 +34,11 @@ const SearchProvider = ({ children }) => {
 
     useEffect(() => { 
   
-        axios
+         axios
           .get(`https://api.themoviedb.org/3/search/${media}?api_key=${API_KEY}&query=${inputValue}`)
           .then((response) => {
             setResults(response.data.results)
+            setNewResults(false)
             console.log(response.data.results)           
         });
     }, [media, inputValue]);
@@ -42,10 +50,12 @@ const SearchProvider = ({ children }) => {
             media,
             setMedia,
             handleMediaClick,
-            handleInputChange,         
+             handleInputChange,     
             showResults,
             setShowResults,                  
-            setNewSearch,            
+            setNewSearch,  
+            handleShowResultsClick,
+            newResults,        
         }}>
             {children}
         </SearchContext.Provider>

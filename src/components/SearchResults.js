@@ -15,7 +15,7 @@ const SearchResults = () => {
     const {  showResults, results, media, setShowResults} = useSearchContext()
     return (
         <Container>
-        { results?.map((result) => (
+        { results && results.map((result) => (
             <BasicCard key={result.id} id={result.id} data={result} media_type={media} />
           ))}
       </Container>
