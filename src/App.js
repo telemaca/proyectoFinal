@@ -13,6 +13,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage";
 import DiscoverPage from "./pages/DiscoverPage";
 import ErrorPage from "./pages/ErrorPage";
+import DiscoverPage from "./pages/DiscoverPage";
 
 const GlobalStyle = createGlobalStyle`
 body {

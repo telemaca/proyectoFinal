@@ -1,11 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  Route,
-  Switch,
-  useParams,
-  useRouteMatch,
-  useHistory,
-} from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
