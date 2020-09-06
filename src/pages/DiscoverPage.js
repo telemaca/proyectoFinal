@@ -163,13 +163,20 @@ const Text = styled.p`
 `;
 
 const DiscoverPage = () => {
+  const [isDataLoading, setIsDataLoading] = useState();
   const [isSent, setIsSent] = useState(false);
-  const [selectedMedia, setSelectedMedia] = useState("movie");
-  const [isSerieDataLoading, setIsSerieDataLoading] = useState();
   const [handleToggle, setHandleToggle] = useState(false);
-  const [results, setResults] = useState();
   const [genres, setGenres] = useState([{}]);
   const [oldestYear, setOldestYear] = useState();
+  const [results, setResults] = useState();
+  const [selectedMedia, setSelectedMedia] = useState("movie");
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedParameter, setSelectedParameter] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+  const [genreQuery, setGenreQuery] = useState("");
+  const [parameterQuery, setParameterQuery] = useState("");
+  const [sortByQuery, setSortByQuery] = useState("");
 
   const {
     currentPage,
@@ -179,38 +186,82 @@ const DiscoverPage = () => {
   } = usePaginationContext();
 
   const handleClick = () => {
+    selectedGenre &&
+      setGenreQuery(
+        selectedGenre === "all" ? "" : `&with_genres=${selectedGenre}`
+      );
+    selectedYear === "all" ? setParameterQuery("") : getYearsByParameter();
+    selectedSort &&
+      setSortByQuery(selectedSort ? `&sort_by=${selectedSort}` : "");
     setIsSent(!isSent);
     setHandleToggle(false);
   };
-
-  // useEffect(() => {
-  //   setIsSerieDataLoading(true);
-  //   axios
-  //     .get(`${API_URL}discover/${selectedMedia}?api_key=${API_KEY}`)
-  //     .then((response) => {
-  //       setResults(response.data.results);
-  //       console.log(results);
-  //       //   setOldestYear(results.map((result) => {
-  //       //       r
-  //       //   }))
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
 
   const handleMedia = (e) => {
     setSelectedMedia(e.target.value);
   };
 
+  const handleGenre = (e) => {
+    setSelectedGenre(e.target.value);
+  };
+
+  const handleParameter = (e) => {
+    setSelectedParameter(e.target.value);
+  };
+
+  const handleYear = (e) => {
+    setSelectedYear(e.target.value);
+  };
+
+  const handleSort = (e) => {
+    setSelectedSort(e.target.value);
+  };
+
+  const getYearsByParameter = () => {
+    if (selectedParameter === "before") {
+      setParameterQuery(
+        selectedMedia === "movie"
+          ? `&release_date.lte=${selectedYear}-01-01`
+          : `&first_air_date.lte=${selectedYear}-01-01`
+      );
+    } else if (selectedParameter === "exact") {
+      setParameterQuery(
+        selectedMedia === "movie"
+          ? `&primary_release_year=${selectedYear}`
+          : `&first_air_date_year=${selectedYear}`
+      );
+    } else if (selectedParameter === "after") {
+      setParameterQuery(
+        selectedMedia === "movie"
+          ? `&release_date.gte=${selectedYear}-01-01`
+          : `&first_air_date.gte=${selectedYear}-01-01`
+      );
+    }
+  };
+
+  const getYears = () => {
+    const year = new Date().getFullYear();
+    const yearsArray = [];
+
+    for (let i = 0; i <= year - oldestYear; i++) {
+      yearsArray[i] = oldestYear + i;
+    }
+
+    return yearsArray;
+  };
+
+  oldestYear && getYears();
+
   useEffect(() => {
-    setIsSerieDataLoading(true);
+    setIsDataLoading(true);
     axios
       .get(
-        `${API_URL}discover/${selectedMedia}?api_key=${API_KEY}&page=${currentPage}`
+        `${API_URL}discover/${selectedMedia}?api_key=${API_KEY}${genreQuery}${parameterQuery}${sortByQuery}&page=${currentPage}`
       )
       .then((response) => {
         setResults(response.data.results);
         setMaxPage(response.data.total_pages);
-        setIsSerieDataLoading(false);
+        setIsDataLoading(false);
       })
       .catch((err) => console.log(err));
   }, [isSent, currentPage]);
@@ -222,26 +273,29 @@ const DiscoverPage = () => {
         setGenres(response.data.genres);
       })
       .catch((err) => console.log(err));
+    axios
+      .get(
+        `${API_URL}discover/${selectedMedia}?api_key=${API_KEY}&sort_by=primary_release_date.asc`
+      )
+      .then((response) => {
+        selectedMedia === "tv"
+          ? setOldestYear(
+              new Date(
+                response.data.results.find(
+                  (result) =>
+                    new Date(result.first_air_date).getFullYear() > 1800 &&
+                    new Date(result.first_air_date).getFullYear() < 2000
+                ).first_air_date
+              ).getFullYear()
+            )
+          : setOldestYear(
+              new Date(response.data.results[0].release_date).getFullYear()
+            );
+      })
+      .catch((err) => console.log(err));
   }, [selectedMedia]);
 
-  //   useEffect(() => {
-  //     for (let i = 1; i <= maxPage; i++) {
-  //       axios
-  //         .get(`${API_URL}discover/${selectedMedia}?api_key=${API_KEY}&page=${i}`)
-  //         .then((response) => {
-  //           setOldestYear(
-  //             response.data.results.reduce((a, b) =>
-  //               a.release_date < b.release_date ? a : b
-  //             )
-  //           );
-  //         })
-  //         .catch((err) => console.log(err));
-  //     }
-  //   }, [selectedMedia]);
-
-  console.log(oldestYear);
-
-  return isSerieDataLoading ? (
+  return isDataLoading ? (
     <LoadingPage />
   ) : (
     <>
@@ -270,45 +324,63 @@ const DiscoverPage = () => {
         <FilterContainer>
           <StyledTitle>Filter By</StyledTitle>
           <Select onChange={handleMedia}>
-            <Option disabled selected>
-              Choose by media:
+            <Option disabled>Choose by media:</Option>
+            <Option defaultValue value={"movie"}>
+              Movies
             </Option>
-            <Option value={"movie"}>Movies</Option>
-            <Option value={"tv"}>TV Series</Option>
+            <Option value={"tv"}>TV series</Option>
           </Select>
-          <Select>
+          <Select onChange={handleGenre}>
             <Option disabled selected>
               Choose by genre:
             </Option>
-            {genres && genres.map((genre) => <Option>{genre.name}</Option>)}
+            <Option value={"all"}>All</Option>
+            {genres &&
+              genres.map((genre) => (
+                <Option value={genre.id}>{genre.name}</Option>
+              ))}
           </Select>
-          <Select>
+          <Select onChange={handleParameter}>
             <Option disabled selected>
               Choose release parameter:
             </Option>
-            <Option>Before than</Option>
-            <Option>Exact year</Option>
-            <Option>After than</Option>
+            <Option value={"before"}>Before than</Option>
+            <Option value={"exact"}>Exact year</Option>
+            <Option value={"after"}>After than</Option>
           </Select>
-          <Select>
+          <Select onChange={handleYear}>
             <Option disabled selected>
               Choose parameter year:
             </Option>
-            <Option>Movies</Option>
-            <Option>TV Series</Option>
+            <Option value={"all"}>All</Option>
+            {oldestYear && getYears().map((year) => <Option>{year}</Option>)}
           </Select>
-          <Select>
+          <Select onChange={handleSort}>
             <Option disabled selected>
               Order by:
             </Option>
-            Más populares Menos populares Más nuevas Más viejas Con más
-            recaudación Con menos recaudación
-            <Option>Most popular</Option>
-            <Option>Less popular</Option>
-            <Option>Newest</Option>
-            <Option>Oldest</Option>
-            <Option>Higher incomes</Option>
-            <Option>Lower incomes</Option>
+            <Option value={"popularity.desc"}>Most popular</Option>
+            <Option value={"popularity.asc"}>Less popular</Option>
+            <Option
+              value={
+                selectedMedia === "movie"
+                  ? "primary_release_date.desc"
+                  : "first_air_date.desc"
+              }
+            >
+              Newest
+            </Option>
+            <Option
+              value={
+                selectedMedia === "movie"
+                  ? "primary_release_date.asc"
+                  : "first_air_date.asc"
+              }
+            >
+              Oldest
+            </Option>
+            <Option value={"revenue.desc"}>Higher incomes</Option>
+            <Option value={"revenue.asc"}>Lower incomes</Option>
           </Select>
           <Button onClick={handleClick}>
             <Text>Show Results</Text>
