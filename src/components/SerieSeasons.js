@@ -124,7 +124,7 @@ const SerieSeasons = ({ data }) => {
   }, [seasonNumber]);
 
   return isSerieDataLoading ? (
-    <SmallLoader />
+    <SmallLoader type="season" />
   ) : (
     <StyledSection>
       {tvId && seasons && (

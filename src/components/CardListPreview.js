@@ -24,7 +24,7 @@ const Title = styled.h3`
   font-family: roboto;
   letter-spacing: 0.4px;
   color: #fff;
-  @media(max-width: 280px) {
+  @media (max-width: 280px) {
     font-size: 1rem;
   }
 `;
@@ -51,9 +51,9 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
           slidesToShow: 4,
           slidesToScroll: 4,
           infinite: true,
-          dots: true
-        }
-      },     
+          dots: true,
+        },
+      },
       {
         breakpoint: 760,
         settings: {
@@ -61,8 +61,8 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
           slidesToScroll: 3,
           slidesToScroll: 3,
           initialSlide: 3,
-          arrows: false
-        }        
+          arrows: false,
+        },
       },
       {
         breakpoint: 280,
@@ -71,11 +71,11 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
           slidesToScroll: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-          arrows: false
-        }        
-      }
-    ]
-  }
+          arrows: false,
+        },
+      },
+    ],
+  };
   return (
     <Section>
       <StyledContainerFlex>
@@ -86,10 +86,16 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
         </StyledExploreLink>
       </StyledContainerFlex>
       <Slider {...settings}>
-        {elements && elements.map((element, i) => (
-          <BasicCard key={i} data={element} media_type={media_type} />
-        ))}
-      </Slider>      
+        {elements &&
+          elements.map((element, i) => (
+            <BasicCard
+              component="carousel"
+              key={i}
+              data={element}
+              media_type={media_type}
+            />
+          ))}
+      </Slider>
     </Section>
   );
 };

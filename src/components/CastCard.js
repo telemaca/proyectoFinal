@@ -9,7 +9,7 @@ const StyledArticle = styled.article`
   position: relative;
 
   @media (max-width: 850px) {
-    width: 27vw;
+    width: 26vw;
   }
 `;
 
@@ -25,7 +25,7 @@ const StyledImg = styled.img`
   }
 
   @media (max-width: 850px) {
-    height: 40vw;
+    height: 38vw;
   }
 `;
 
