@@ -34,6 +34,7 @@ const Title = styled.h3`
   letter-spacing: 0.4px;
   color: #fff;
   width: 90%;
+  max-width: 15vw;
 `;
 
 const BasicCard = ({

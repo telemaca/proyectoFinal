@@ -11,7 +11,9 @@ import SeriePage from "./pages/SeriePage";
 import PersonPage from "./pages/PersonPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage";
+import DiscoverPage from "./pages/DiscoverPage";
 import ErrorPage from "./pages/ErrorPage";
+import DiscoverPage from "./pages/DiscoverPage";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -33,7 +35,8 @@ const App = () => {
         <Route path="/tv/:tvId" component={SeriePage} />
         <Route exact path="/person/:personId" component={PersonPage} />
         <Route path="/category/:categoryId/:media" component={CategoriesPage} />
-        <Route exact path="/discover" component={SearchPage} />
+        <Route exact path="/search" component={SearchPage} />
+        <Route exact path="/discover" component={DiscoverPage} />
         <Route>
           <ErrorPage />
         </Route>
