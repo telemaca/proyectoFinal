@@ -12,7 +12,7 @@ const Container = styled.div `
     justify-content: space-around;
 `
 const SearchResults = () => {
-    const {  showResults, results, media, setShowResults} = useSearchContext()
+    const { results, media} = useSearchContext()
     return (
         <Container>
         { results && results.map((result) => (

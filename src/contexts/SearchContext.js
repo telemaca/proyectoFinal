@@ -9,36 +9,34 @@ const SearchContext = createContext()
 
 const SearchProvider = ({ children }) => {  
     const [media, setMedia] = useState("movie")
-    const [inputValue, setInputValue] = useState("")    
-    const [ newSearch, setNewSearch ] = useState(false);  
+    const [inputValue, setInputValue] = useState("")   
+    
     const [ results, setResults] = useState([])
+    const [searchResults, setSearchResults] = useState([])
     const [ showResults, setShowResults] = useState(false)
-    const [newResults, setNewResults] = useState(false)
 
-    const handleShowResultsClick = (event) => {        
-        
-       /*  setInputValue(event.target.value); */
-        
-         setShowResults(true) 
-        
+    const [searchBarVisible, setSearchBarVisible] = useState(false)
+    const [visibleResults, setVisibleResults] = useState(false)
+
+    const handleShowResultsClick = (event) => {  
+       
     }; 
 
-   const handleInputChange = (event) => {
+   const handleInputChange = (event) => {       
         setInputValue(event.target.value);
-         setNewResults(true)  
+        setVisibleResults(true);
     }; 
 
     const handleMediaClick = (event) => {
         setMedia(event.target.value);
     };
 
-    useEffect(() => { 
-  
-         axios
+    useEffect(() => {   
+         axios         
           .get(`https://api.themoviedb.org/3/search/${media}?api_key=${API_KEY}&query=${inputValue}`)
           .then((response) => {
-            setResults(response.data.results)
-            setNewResults(false)
+           
+            setSearchResults(response.data.results)        
             console.log(response.data.results)           
         });
     }, [media, inputValue]);
@@ -50,12 +48,15 @@ const SearchProvider = ({ children }) => {
             media,
             setMedia,
             handleMediaClick,
-             handleInputChange,     
+            handleInputChange,     
             showResults,
-            setShowResults,                  
-            setNewSearch,  
-            handleShowResultsClick,
-            newResults,        
+            setShowResults,              
+            handleShowResultsClick,           
+            searchBarVisible,
+            setSearchBarVisible,   
+            searchResults,  
+            visibleResults,
+            setVisibleResults,  
         }}>
             {children}
         </SearchContext.Provider>
