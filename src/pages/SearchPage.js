@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
 import { BsSearch as SearchIcon } from "react-icons/bs";
 import { useHistory } from "react-router-dom"
+
 import useSearchContext from "../contexts/SearchContext"
 
 import BasicCard from "../components/CardMovie"
@@ -70,10 +71,16 @@ const StyledSearchIcon = styled(SearchIcon) `
 `
 
 const SearchPage = () => {
-  const {handleMediaClick, handleInputChange, inputValue, results, media, showResults, handleShowResultsClick, setShowResults} = useSearchContext()
+  const {results, setResults, handleMediaClick, handleInputChange, inputValue, setInputValue, media, showResults,  setShowResults} = useSearchContext()
   
   const handleOnKeyDown = () => {     
   }
+  const handleShowResultsClick = (event) => {        
+      
+        setShowResults(inputValue) 
+  }; 
+
+  
 
   return (
     <>
@@ -99,14 +106,15 @@ const SearchPage = () => {
       </Form>
     
       <Form type= "submit" onChange={(event) => handleInputChange(event)} >
-        <InputSearch onKeyPress={handleOnKeyDown} value={inputValue} type="search" placeholder="Search..." name="search"/>
-        <Button onClick={handleShowResultsClick} type="submit"  >
+        <InputSearch onChange={(event) => handleInputChange(event)} value={inputValue} type="search" placeholder="Search..." name="search"/>
+        <Button onClick={handleShowResultsClick}   >
          <StyledSearchIcon onClick={handleShowResultsClick}/> 
         </Button>
       </Form>   
    
      <Container>
-        <SearchResults/>
+        { showResults &&
+          <SearchResults/>}
         {/* { results?.map((result) => (
             <BasicCard key={result.id} id={result.id} data={result} media_type={media} />
           ))} */}

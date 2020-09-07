@@ -4,6 +4,7 @@ import axios from "axios";
 
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
+import { FaGalacticSenate } from "react-icons/fa";
 const SearchContext = createContext()
 
 const SearchProvider = ({ children }) => {  
@@ -13,16 +14,15 @@ const SearchProvider = ({ children }) => {
     const [ results, setResults] = useState([])
     const [ showResults, setShowResults] = useState(false)
 
-    const handleShowResultsClick = () => {        
     
-    }; 
 
     const handleInputChange = (event) => {
-        setInputValue(event.target.value);    
+        setInputValue(event.target.value);
+        setShowResults(false)    
     };
 
     const handleMediaClick = (event) => {
-    setMedia(event.target.value);
+        setMedia(event.target.value);
     };
 
     useEffect(() => { 
