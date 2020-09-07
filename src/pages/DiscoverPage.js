@@ -26,7 +26,6 @@ const ContainerFlex = styled.div`
   padding-bottom: 4vw;
   width: 93vw;
   margin-top: 5vw;
-
   @media (max-width: 850px) {
     justify-content: initial;
     margin: 2vw 0 0 7vw;
@@ -137,12 +136,10 @@ const Button = styled.button`
     border: solid #2f2f2f;
     transition: 0.2s;
   }
-
   @media (max-width: 850px) {
     width: 15vw;
     height: 4vw;
   }
-
   @media (max-width: 650px) {
     display: none;
   }
@@ -298,8 +295,13 @@ const DiscoverPage = () => {
       <Input />
       <ContainerToggle
         onClick={() => {
+<<<<<<< HEAD
           setHandleToggle(!handleToggle);
           setIsSent(false);
+=======
+        setHandleToggle(!handleToggle);
+        setIsSent(false);
+>>>>>>> e6afa4e... rebase
         }}
       >
         <ToggleStarWars />

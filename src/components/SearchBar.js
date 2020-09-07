@@ -5,9 +5,6 @@ import { useHistory } from "react-router-dom"
 
 import useSearchContext from "../contexts/SearchContext"
 
-import BasicCard from "../components/CardMovie"
-import Section from "../components/native components/Section"
-import SearchResults from "../components/SearchResults"
 
 const Button = styled.button `
   width: 4.5vw;
@@ -21,6 +18,10 @@ const Button = styled.button `
   &:focus {
     outline: none;
   }
+  @media (max-width: 850px) {
+    top: 7.2vw;
+    right: 44.1vw;
+    }
 `
 const InputSearch = styled.input `
   width: 50vw;
@@ -53,11 +54,18 @@ const Form = styled.form `
   margin-left: 4vw;
 `
 const StyledSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  margin-left: 40px;
-  height: 100vh;
-  padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 6vw;
+    padding-top: 20px;
+    position: absolute;
+    z-index: 600;
+    width: 100%;
+    background-color: black;      
+    @media (max-width: 850px) {
+        margin: 0;
+       
+    }
 `
 const InputRadio = styled.input `
 
@@ -70,11 +78,14 @@ const StyledSearchIcon = styled(SearchIcon) `
   }    
 `
 
-const SearchPage = () => {
-  const {handleShowResultsClick, newResults, results, setResults, handleMediaClick, handleInputChange, inputValue, setInputValue, media, showResults,  setShowResults} = useSearchContext()
-  
-  const handleOnKeyDown = () => {     
-  }  
+const SearchBar = () => {
+  const { setNewSearch, setShowResults,  handleMediaClick, handleInputChange, inputValue } = useSearchContext()
+  const history = useHistory()
+
+  const handleClick = () => {
+    history.push("/discover");   
+    setShowResults(false);
+  };
 
   return (
     <>
@@ -99,26 +110,15 @@ const SearchPage = () => {
         </Label>
       </Form>
     
-      <Form type= "submit" >
+      <Form type= "submit"  >
         <InputSearch onChange={(event) => handleInputChange(event)} value={inputValue} type="text" placeholder="Search..." name="text"/>
-        <Button onClick={()=>handleShowResultsClick()}   >
-         <StyledSearchIcon onClick={()=>handleShowResultsClick()}/> 
-        </Button>
-      </Form>   
-   
-     <Container>
-        
-          
-            {showResults && <SearchResults/>}
-        
-      </Container> 
-    
-       
+       <Button onClick={handleClick}>
+         <StyledSearchIcon /> 
+        </Button> 
+      </Form>         
     </StyledSection>
     </>
   )
 }
 
-export default SearchPage
-
-
+export default SearchBar

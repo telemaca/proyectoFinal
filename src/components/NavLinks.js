@@ -8,6 +8,7 @@ import {
   BsHouse as HomeIcon,
   BsSearch as SearchIcon,
 } from "react-icons/bs";
+import useSearchContext from "../contexts/SearchContext"
 
 import useLanguageContext from "../contexts/LanguageContext";
 
@@ -51,6 +52,22 @@ const StyledNavLink = styled(NavLink)`
     }
   }
 `;
+const StyledNavItem = styled.div `
+  svg {
+    color: #fafafa;
+    font-size: 1.5vw;
+    margin-bottom: 3vw;
+    @media (max-width: 850px) {
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+  }
+  &.selected {
+    svg {
+      color: #2196f3;
+    }
+  }
+`
 
 const StyledSelect = styled.select`
   background-color: black;
@@ -76,6 +93,14 @@ const NavLinks = () => {
 
   const handleChange = (event) => setLanguage(event.target.value);
 
+  
+  const { setSearchBarVisible, searchBarVisible, setVisibleResults } = useSearchContext()
+
+  const handleClick = () => {   
+    setSearchBarVisible(!searchBarVisible);
+    setVisibleResults(false)
+   
+  }
   return (
     <StyledNav>
       <IconContext.Provider value={{ style: { cursor: "pointer" } }}>
@@ -88,13 +113,15 @@ const NavLinks = () => {
         <StyledNavLink to="/tv" activeClassName="selected">
           <TvIcon />
         </StyledNavLink>
-        <StyledNavLink to="/discover" activeClassName="selected">
-          <SearchIcon />
-        </StyledNavLink>
+
+        <StyledNavItem>
+          <SearchIcon onClick={handleClick} />
+        </StyledNavItem>
         <StyledSelect onChange={handleChange}>
           <StyledOption value="eng">ENG</StyledOption>
           <StyledOption value="spa">SPA</StyledOption>
         </StyledSelect>
+
       </IconContext.Provider>
     </StyledNav>
   );
