@@ -8,7 +8,6 @@ import {
   BsHouse as HomeIcon,
   BsSearch as SearchIcon,
 } from "react-icons/bs";
-import useSearchContext from "../contexts/SearchContext"
 
 import useLanguageContext from "../contexts/LanguageContext";
 
@@ -34,9 +33,7 @@ const StyledNav = styled.nav`
     bottom: 0;
   }
 `;
-const Container = styled.div `
 
-`
 const StyledNavLink = styled(NavLink)`
   /* cursor: pointer; */
   svg {
@@ -54,15 +51,6 @@ const StyledNavLink = styled(NavLink)`
     }
   }
 `;
-const StyledSearchIcon = styled(SearchIcon)`
-  color: #fafafa;
-    font-size: 1.5vw;
-    margin-bottom: 3vw;
-    @media (max-width: 850px) {
-      font-size: 2rem;
-      margin-bottom: 0;
-    }
-`
 
 const StyledSelect = styled.select`
   background-color: black;
@@ -101,6 +89,7 @@ const NavLinks = () => {
         <StyledNavLink to="/tv" activeClassName="selected">
           <TvIcon />
         </StyledNavLink>
+
        {/*  <Container>
            <StyledSearchIcon onClick={() => handleSearchBarVisibleClick()}/>
         </Container> */}
@@ -112,6 +101,7 @@ const NavLinks = () => {
           <StyledOption value="eng">ENG</StyledOption>
           <StyledOption value="spa">SPA</StyledOption>
         </StyledSelect>
+
       </IconContext.Provider>
     </StyledNav>
   );

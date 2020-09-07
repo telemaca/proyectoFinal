@@ -2,8 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
-import useSearchContext from "./contexts/SearchContext"
-
 import NavLinks from "./components/NavLinks";
 import Home from "./pages/Home";
 import MoviesPage from "./pages/MoviesPage";
