@@ -1,11 +1,9 @@
 import React from "react";
-
 import styled from "styled-components";
 
-import usePaginationContext from "../contexts/PaginationContext"
+import useLanguageContext from "../contexts/LanguageContext";
 
 import BasicCard from "../components/CardMovie";
-import Pagination from "../components/Pagination"
 
 const StyledSection = styled.section`
   display: flex;
@@ -37,13 +35,18 @@ const Text = styled.p`
   }
 `;
 
+const NOT_FOUND = {
+  eng: "Similar Movies not found. Showing Popular Movies instead.",
+  spa:
+    "No se encontraron películas similares. Se muestran las películas más populares.",
+};
+
 const SimilarMovies = ({ movies, notFound = false }) => {
+  const { language } = useLanguageContext();
 
   return (
     <StyledSection>
-      {notFound && (
-        <Text>Similar Movies not found. Showing Popular Movies instead.</Text>
-      )}
+      {notFound && <Text>{NOT_FOUND[language]}</Text>}
       <StyledContainer>
         {movies.map((movie) => (
           <BasicCard
@@ -52,7 +55,7 @@ const SimilarMovies = ({ movies, notFound = false }) => {
             customStyle={{ marginBottom: "3vw" }}
           />
         ))}
-      </StyledContainer>      
+      </StyledContainer>
     </StyledSection>
   );
 };

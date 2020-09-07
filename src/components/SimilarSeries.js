@@ -1,11 +1,9 @@
 import React from "react";
-
 import styled from "styled-components";
 
-import usePaginationContext from "../contexts/PaginationContext";
+import useLanguageContext from "../contexts/LanguageContext";
 
 import BasicCard from "../components/CardMovie";
-import Pagination from "../components/Pagination";
 
 const StyledSection = styled.section`
   display: flex;
@@ -36,12 +34,18 @@ const Text = styled.p`
   }
 `;
 
+const NOT_FOUND = {
+  eng: "Similar Series not found. Showing Popular Series instead.",
+  spa:
+    "No se encontraron series similares. Se muestran las series más populares.",
+};
+
 const SimilarSeries = ({ series, notFound = false }) => {
+  const { language } = useLanguageContext();
+
   return (
     <StyledSection>
-      {notFound && (
-        <Text>Similar Series not found. Showing Popular Series instead.</Text>
-      )}
+      {notFound && <Text>{NOT_FOUND[language]}</Text>}
       <StyledContainer>
         {series.map((serie) => (
           <BasicCard

@@ -5,12 +5,12 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 import BasicCard from "../components/CardMovie";
-import Section from "../components/native components/Section";
-import Pagination from "../components/Pagination"
+import Pagination from "../components/Pagination";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
 
-import usePaginationContext from "../contexts/PaginationContext"
+import usePaginationContext from "../contexts/PaginationContext";
+import useLanguageContext from "../contexts/LanguageContext";
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
 
@@ -48,15 +48,52 @@ const Title = styled.h3`
   }
 `;
 
+const CATEGORIES_NAMES = {
+  eng: {
+    movie: {
+      trending: "Trending Movies",
+      popular: "Popular Movies",
+      top_rated: "Top Rated Movies",
+      now_playing: "Now Playing Movies",
+    },
+    tv: {
+      trending: "Trending TV Shows",
+      popular: "Popular TV Shows",
+      top_rated: "Top Rated TV Shows",
+      on_the_air: "TV Shows Airing Today",
+    },
+  },
+  spa: {
+    movie: {
+      trending: "Películas en tendencia",
+      popular: "Películas más populares",
+      top_rated: "Películas mejor calificadas",
+      now_playing: "Películas que se pueden ver ahora",
+    },
+    tv: {
+      trending: "Series en tendencia",
+      popular: "Series más populares",
+      top_rated: "Series mejor calificadas",
+      on_the_air: "Series que se pueden ver ahora",
+    },
+  },
+};
+
 const CategoriesPage = () => {
   const { categoryId, media } = useParams();
   const [categoriesMovies, setCategoriesMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { currentPage, setCurrentPage, maxPage, setMaxPage } = usePaginationContext()
+  const {
+    currentPage,
+    setCurrentPage,
+    maxPage,
+    setMaxPage,
+  } = usePaginationContext();
+  const { language } = useLanguageContext();
 
-  const categoryTitle = categoryId.split("_").join(" ");
-  const upperCaseTitle =
-    categoryTitle[0].toUpperCase() + categoryTitle.slice(1);
+  // const categoryTitle = categoryId.split("_").join(" ");
+  // const upperCaseTitle =
+  //   categoryTitle[0].toUpperCase() + categoryTitle.slice(1);
 
   useEffect(() => {
     setIsLoading(true);
@@ -77,23 +114,22 @@ const CategoriesPage = () => {
   return isLoading ? (
     <LoadingPage />
   ) : (
-      <MainFlex>
-        <StyledSection>
-          <Title>
-            {media === "tv"
-              ? `${upperCaseTitle} TV Shows`
-              : `${upperCaseTitle} Movies`}
-          </Title>
-          <ContainerFlex>
-            {categoriesMovies.map((movie) => (
-              <BasicCard data={movie} media_type={media} />
-            ))}
-          </ContainerFlex>
-          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage} />
-        </StyledSection>
-
-      </MainFlex>
-    );
+    <MainFlex>
+      <StyledSection>
+        <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
+        <ContainerFlex>
+          {categoriesMovies.map((movie) => (
+            <BasicCard data={movie} media_type={media} />
+          ))}
+        </ContainerFlex>
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          maxPage={maxPage}
+        />
+      </StyledSection>
+    </MainFlex>
+  );
 };
 
 export default CategoriesPage;

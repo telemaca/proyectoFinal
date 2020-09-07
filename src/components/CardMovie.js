@@ -23,6 +23,10 @@ const Img = styled.img`
   }
   @media (max-width: 850px) {
     height: ${(props) => (props.component === "list" ? "40vw" : "30vw")};
+    width: ${(props) => (props.component === "list" ? "100%" : "90%")};
+  }
+  @media (max-width: 760px) {
+    height: ${(props) => props.component === "carousel" && "40vw"};
   }
 `;
 

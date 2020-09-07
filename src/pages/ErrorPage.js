@@ -1,16 +1,23 @@
 import React from "react";
 
+import useLanguageContext from "../contexts/LanguageContext";
+
 import "../styles/error-page.scss";
+
+const ERROR_MSG = {
+  eng: "This is NOT the page you are \nlooking for.",
+  spa: "Esta NO es la página que \nestás buscando.",
+};
 
 //Coustard
 const ErrorPage = () => {
+  const { language } = useLanguageContext();
+
   return (
     <section className="error-section">
       <div className="error-msg">
         <p className="code404">-ERROR 404-</p>
-        <h3>
-          This is not the page you are <br /> looking for.
-        </h3>
+        <h3 style={{ whiteSpace: "pre-line" }}>{ERROR_MSG[language]}</h3>
       </div>
       <div className="at-at">
         <div className="at-at-content">

@@ -157,7 +157,7 @@ const Text = styled.p`
 
 const DiscoverPage = () => {
   const [isDataLoading, setIsDataLoading] = useState();
-  const [isSent, setIsSent] = useState(false);
+  const [isSent, setIsSent] = useState(true);
   const [handleToggle, setHandleToggle] = useState(false);
   const [genres, setGenres] = useState([{}]);
   const [oldestYear, setOldestYear] = useState();
@@ -166,7 +166,7 @@ const DiscoverPage = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedParameter, setSelectedParameter] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
-  const [selectedSort, setSelectedSort] = useState("");
+  const [selectedSort, setSelectedSort] = useState();
   const [genreQuery, setGenreQuery] = useState("");
   const [parameterQuery, setParameterQuery] = useState("");
   const [sortByQuery, setSortByQuery] = useState("");
@@ -186,9 +186,12 @@ const DiscoverPage = () => {
     selectedYear === "all" ? setParameterQuery("") : getYearsByParameter();
     selectedSort &&
       setSortByQuery(selectedSort ? `&sort_by=${selectedSort}` : "");
-    setIsSent(!isSent);
+    setIsSent(true);
     setHandleToggle(false);
+    setSelectedSort("popularity.desc");
   };
+
+  console.log(selectedSort);
 
   const handleMedia = (e) => {
     setSelectedMedia(e.target.value);
@@ -293,7 +296,12 @@ const DiscoverPage = () => {
   ) : (
     <>
       <Input />
-      <ContainerToggle onClick={() => setHandleToggle(!handleToggle)}>
+      <ContainerToggle
+        onClick={() => {
+          setHandleToggle(!handleToggle);
+          setIsSent(false);
+        }}
+      >
         <ToggleStarWars />
       </ContainerToggle>
       <MainFlex>

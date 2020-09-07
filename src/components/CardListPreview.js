@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "../styles/carousel.scss";
 
+import useLanguageContext from "../contexts/LanguageContext";
+
 import BasicCard from "./CardMovie";
 import Section from "./native components/Section";
 
@@ -37,7 +39,14 @@ const StyledExploreLink = styled(Link)`
   color: #2196f3;
 `;
 
+const TITLE = {
+  eng: "Explore All",
+  spa: "Ver todas",
+};
+
 const CardListPreview = ({ title, elements, categoryId, media_type }) => {
+  const { language } = useLanguageContext();
+
   const settings = {
     dots: true,
     infinite: true,
@@ -82,7 +91,7 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
         <Title>{title}</Title>
         <StyledExploreLink to={`category/${categoryId}/${media_type}`}>
           {" "}
-          Explore All
+          {TITLE[language]}
         </StyledExploreLink>
       </StyledContainerFlex>
       <Slider {...settings}>

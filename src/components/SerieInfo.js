@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
+import useLanguageContext from "../contexts/LanguageContext";
+
+import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
 const StyledSection = styled.section`
   display: flex;
@@ -85,7 +91,29 @@ const StyledText = styled.div`
   }
 `;
 
+const TITLES = {
+  eng: [
+    "Storyline",
+    "Original Title",
+    "Genre",
+    "Released",
+    "Seasons",
+    "Episodes",
+  ],
+  spa: [
+    "Sinopsis",
+    "Título original",
+    "Género(s)",
+    "Estreno",
+    "Temporadas",
+    "Episodios",
+  ],
+};
+
 const SerieInfo = ({ data }) => {
+  const { language } = useLanguageContext();
+  const [translations, setTranslations] = useState([]);
+
   const {
     overview,
     poster_path,
@@ -95,6 +123,7 @@ const SerieInfo = ({ data }) => {
     number_of_episodes,
     original_language,
     original_name,
+    id,
   } = data;
 
   const getReleaseDate = () => {
@@ -112,19 +141,56 @@ const SerieInfo = ({ data }) => {
       "November",
       "December",
     ];
+    const meses = [
+      "enero",
+      "febrero",
+      "marzo",
+      "abril",
+      "mayo",
+      "junio",
+      "julio",
+      "agosto",
+      "septiembre",
+      "octubre",
+      "noviembre",
+      "diciembre",
+    ];
     const serieDate = new Date(first_air_date);
-    return `${serieDate.getDate() + 1} ${
-      months[serieDate.getMonth()]
+    return `${serieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
+      language === "eng"
+        ? months[serieDate.getMonth()]
+        : meses[serieDate.getMonth()]
     }, ${serieDate.getFullYear()}`;
   };
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}tv/${id}/translations?api_key=${API_KEY}`)
+      .then((response) => {
+        setTranslations(response.data.translations);
+      });
+  }, [language]);
+
+  const spanishText = translations.find(
+    (translation) => translation.name === "Español"
+  );
+
+  const hasSpanishTranslation =
+    translations.length > 1 &&
+    spanishText !== undefined &&
+    spanishText.data.overview !== "";
 
   return (
     <StyledSection>
       <StyledImg src={`https://image.tmdb.org/t/p/original${poster_path}`} />
       <StyledContainer>
         <StyledOverview>
-          <StyledTitle>Storyline</StyledTitle>
-          <StyledText>{overview}</StyledText>
+          <StyledTitle>{TITLES[language][0]}</StyledTitle>
+          <StyledText>
+            {language === "spa" && hasSpanishTranslation
+              ? spanishText.data.overview
+              : overview}
+          </StyledText>
         </StyledOverview>
         <div>
           <StyledList>
@@ -137,13 +203,13 @@ const SerieInfo = ({ data }) => {
                     letterSpacing: "1px",
                   }}
                 >
-                  Original Title
+                  {TITLES[language][1]}
                 </StyledCategory>
                 <StyledText>{original_name}</StyledText>
               </StyledListItem>
             )}
             <StyledListItem>
-              <StyledCategory>Genre</StyledCategory>
+              <StyledCategory>{TITLES[language][2]}</StyledCategory>
               <StyledText>
                 {genres.map((genre, i) => (
                   <span>
@@ -154,15 +220,15 @@ const SerieInfo = ({ data }) => {
               </StyledText>
             </StyledListItem>
             <StyledListItem>
-              <StyledCategory>Released</StyledCategory>
+              <StyledCategory>{TITLES[language][3]}</StyledCategory>
               <StyledText>{getReleaseDate()}</StyledText>
             </StyledListItem>
             <StyledListItem>
-              <StyledCategory>Seasons</StyledCategory>
+              <StyledCategory>{TITLES[language][4]}</StyledCategory>
               <StyledText>{number_of_seasons}</StyledText>
             </StyledListItem>
             <StyledListItem>
-              <StyledCategory>Episodes</StyledCategory>
+              <StyledCategory>{TITLES[language][5]}</StyledCategory>
               <StyledText>{number_of_episodes}</StyledText>
             </StyledListItem>
           </StyledList>
