@@ -10,6 +10,7 @@ import CardListPreview from "../components/CardListPreview";
 import MainFlex from "../components/MainFlex";
 import Footer from "../components/Footer";
 import LoadingPage from "./LoadingPage";
+import SearchBar from "../components/SearchBar"
 
 const Bodycontainer = styled.div`
   display: flex;
