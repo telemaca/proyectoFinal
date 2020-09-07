@@ -153,6 +153,11 @@ const StyledDescription = styled.p`
   @media (max-width: 850px) {
     width: 75%;
     font-size: 1.4vw;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
   }
 
   @media (max-width: 650px) {

@@ -187,7 +187,9 @@ const SerieInfo = ({ data }) => {
         <StyledOverview>
           <StyledTitle>{TITLES[language][0]}</StyledTitle>
           <StyledText>
-            {hasSpanishTranslation ? spanishText.data.overview : overview}
+            {language === "spa" && hasSpanishTranslation
+              ? spanishText.data.overview
+              : overview}
           </StyledText>
         </StyledOverview>
         <div>
