@@ -4,6 +4,8 @@ import axios from "axios";
 import styled, { keyframes } from "styled-components";
 import { CgCloseR as CloseIcon } from "react-icons/cg";
 
+import "../styles/trailer.scss";
+
 import SmallLoader from "./SmallLoader";
 
 import API_KEY from "../data/apiKey";
@@ -53,7 +55,18 @@ const StyledText = styled.p`
 const StyledPlayer = styled(ReactPlayer)`
   z-index: 400;
   animation: ${move} 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  @media (max-width: 450px) {
+    width: 88vw;
+  }
 `;
+
+const PlayerContainer = styled.div `
+  @media (max-width: 450px) {
+    width: 98vw;
+    height: 53vw;
+  }
+    
+`
 
 const TrailerPage = ({ media, id, onHandleClick }) => {
   const [trailerData, setTrailerData] = useState([]);
@@ -79,15 +92,17 @@ const TrailerPage = ({ media, id, onHandleClick }) => {
       {trailerData.length === 0 ? (
         <StyledText>Sorry, no video found</StyledText>
       ) : (
-        <StyledPlayer
-          url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
-          width="71vw"
-          height="85vh"
-          volume="0.5"
-          controls
-          onReady
-          light
-        />
+        <PlayerContainer>
+          <StyledPlayer
+            url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
+            width="100%"
+            height="100%"
+            volume="0.5"
+            controls
+            onReady
+            light
+          />
+        </PlayerContainer>
       )}
     </Container>
   );

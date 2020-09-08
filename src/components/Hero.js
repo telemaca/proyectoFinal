@@ -5,6 +5,7 @@ import { MdPlayArrow as PlayIcon } from "react-icons/md";
 import axios from "axios";
 
 import useLanguageContext from "../contexts/LanguageContext";
+import "../styles/trailer.scss";
 
 import Rating from "./Rating";
 import TrailerModal from "./TrailerModal";
