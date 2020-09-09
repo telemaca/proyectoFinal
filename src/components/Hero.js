@@ -186,6 +186,9 @@ const Button = styled.button`
     border: solid #2f2f2f;
     transition: 0.2s;
   }
+  &:focus {
+    outline: none;
+  }
 
   @media (max-width: 850px) {
     width: 15vw;

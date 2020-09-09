@@ -9,8 +9,6 @@ import SmallLoader from "./SmallLoader";
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
 
-import "../styles/trailer.scss";
-
 const move = keyframes`
 from {
     transform: scale(0.2);
