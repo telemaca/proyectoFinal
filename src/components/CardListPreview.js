@@ -67,8 +67,7 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
         breakpoint: 760,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 3,          
           initialSlide: 3,
           arrows: false,
         },
@@ -77,8 +76,7 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
         breakpoint: 280,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 2,          
           initialSlide: 2,
           arrows: false,
         },
