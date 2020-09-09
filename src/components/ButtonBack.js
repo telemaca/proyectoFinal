@@ -26,7 +26,7 @@ const Button = styled.button `
    left: 6vw;
    background-color: transparent;
    border: none;
-   z-index: 400;  
+   z-index: 200;  
    &:hover {
         cursor: pointer;        
     }
