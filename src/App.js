@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
+import useSearchContext from "./contexts/SearchContext" 
+
 import NavLinks from "./components/NavLinks";
 import Home from "./pages/Home";
 import MoviesPage from "./pages/MoviesPage";
@@ -13,6 +15,10 @@ import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage";
 import DiscoverPage from "./pages/DiscoverPage";
 import ErrorPage from "./pages/ErrorPage";
+<<<<<<< HEAD
+=======
+import SearchBar from "./components/SearchBar"
+>>>>>>> e6afa4e... rebase
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -22,10 +28,13 @@ body {
 `;
 
 const App = () => {
+  const {searchBarVisible} = useSearchContext()
   return (
     <Router>
       <GlobalStyle />
       <NavLinks />
+      {searchBarVisible &&
+       <SearchBar/>}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/movie" component={MoviesPage} />

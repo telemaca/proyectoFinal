@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
+import useLanguageContext from "../contexts/LanguageContext";
+
 import MainFlex from "../components/MainFlex";
 import LoadingBB8 from "../components/LoadingBB8";
 
@@ -35,11 +37,18 @@ const loadingPageStyle = {
   alignItems: "center",
 };
 
+const LOADING_TEXT = {
+  eng: "Loading",
+  spa: "Cargando",
+};
+
 const LoadingPage = () => {
+  const { language } = useLanguageContext();
+
   return (
     <MainFlex style={loadingPageStyle}>
       <Text>
-        Loading
+        {LOADING_TEXT[language]}
         <MovingDot delay=".66s">.</MovingDot>
         <MovingDot delay="0s">.</MovingDot>
         <MovingDot delay=".33s">.</MovingDot>

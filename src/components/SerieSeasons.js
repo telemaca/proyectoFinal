@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { FaArrowDown } from "react-icons/fa";
 
-import API_KEY from "../data/apiKey";
-import API_URL from "../utils/API_URL";
-
+import useLanguageContext from "../contexts/LanguageContext";
 import useSeriesContext from "../contexts/SeriesContext";
 
 import CardEpisode from "../components/CardEpisode";
 import SmallLoader from "./SmallLoader";
+
+import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
 const StyledSection = styled.section`
   display: flex;
@@ -97,11 +97,17 @@ const Text = styled.p`
   }
 `;
 
+const SEASON_DATA = {
+  eng: ["Season", "episodes"],
+  spa: ["Temporada", "episodios"],
+};
+
 const SerieSeasons = ({ data }) => {
   const { tvId, seasonNumber } = useParams();
   const [isSerieDataLoading, setIsSerieDataLoading] = useState(true);
   const [episodes, setEpisodes] = useState();
   const { setSeasonNumber } = useSeriesContext();
+  const { language } = useLanguageContext();
   const { seasons } = data;
 
   const history = useHistory();
@@ -136,13 +142,15 @@ const SerieSeasons = ({ data }) => {
                   .filter((season) => season.name !== "Specials")
                   .map((season, index) => (
                     <Option value={index + 1} key={season.id} id={season.id}>
-                      Season {index + 1}
+                      {SEASON_DATA[language][0]} {index + 1}
                     </Option>
                   ))}
               </Select>
               {episodes && (
                 <StyledOverview>
-                  <Text>{episodes.episodes.length} episodes</Text>
+                  <Text>
+                    {episodes.episodes.length} {SEASON_DATA[language][1]}
+                  </Text>
                 </StyledOverview>
               )}
             </Container>

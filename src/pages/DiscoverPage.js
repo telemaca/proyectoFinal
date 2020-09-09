@@ -25,7 +25,6 @@ const ContainerFlex = styled.div`
   padding-bottom: 4vw;
   width: 93vw;
   margin-top: 5vw;
-
   @media (max-width: 850px) {
     margin: 25vw 0 0;
     padding-bottom: 15vw;
@@ -148,7 +147,6 @@ const Button = styled.button`
     border: solid #2f2f2f;
     transition: 0.2s;
   }
-
   @media (max-width: 850px) {
     width: 35vw;
     height: 7vw;
@@ -202,8 +200,6 @@ const DiscoverPage = () => {
     setHandleToggle(false);
     setSelectedSort("popularity.desc");
   };
-
-  console.log(handleToggle);
 
   const handleMedia = (e) => {
     setSelectedMedia(e.target.value);

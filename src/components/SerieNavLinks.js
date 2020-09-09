@@ -1,7 +1,9 @@
 import React from "react";
 import { useRouteMatch, NavLink } from "react-router-dom";
 import styled from "styled-components";
+
 import useSeriesContext from "../contexts/SeriesContext";
+import useLanguageContext from "../contexts/LanguageContext";
 
 const StyledNav = styled.nav`
   width: 100%;
@@ -55,8 +57,14 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const TITLES = {
+  eng: ["INFO", "SEASONS", "SIMILAR SERIES"],
+  spa: ["INFORMACIÓN", "TEMPORADAS", "SERIES SIMILARES"],
+};
+
 const SerieNavLinks = () => {
   const { seasonNumber } = useSeriesContext();
+  const { language } = useLanguageContext();
   const { url } = useRouteMatch();
 
   return (
@@ -64,7 +72,7 @@ const SerieNavLinks = () => {
       <StyledList>
         <StyledListItem>
           <StyledNavLink to={`${url}/info`} activeClassName="selected">
-            INFO
+            {TITLES[language][0]}
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
@@ -73,12 +81,12 @@ const SerieNavLinks = () => {
             to={`${url}/season/${seasonNumber}`}
             activeClassName="selected"
           >
-            SEASONS
+            {TITLES[language][1]}
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink to={`${url}/similar`} activeClassName="selected">
-            SIMILAR SERIES
+            {TITLES[language][2]}
           </StyledNavLink>
         </StyledListItem>
       </StyledList>

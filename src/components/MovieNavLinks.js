@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 
+import useLanguageContext from "../contexts/LanguageContext";
+
 const StyledNav = styled.nav`
   width: 100%;
   background-color: black;
@@ -54,25 +56,31 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const TITLES = {
+  eng: ["INFO", "CAST", "SIMILAR MOVIES"],
+  spa: ["INFORMACIÓN", "ELENCO", "PELÍCULAS SIMILARES"],
+};
+
 const MovieNavLinks = () => {
   const { url } = useRouteMatch();
+  const { language } = useLanguageContext();
 
   return (
     <StyledNav>
       <StyledList>
         <StyledListItem>
           <StyledNavLink exact to={`${url}/info`} activeClassName="selected">
-            INFO
+            {TITLES[language][0]}
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink exact to={`${url}/cast`} activeClassName="selected">
-            CAST
+            {TITLES[language][1]}
           </StyledNavLink>
         </StyledListItem>
         <StyledListItem>
           <StyledNavLink exact to={`${url}/similar`} activeClassName="selected">
-            SIMILAR MOVIES
+            {TITLES[language][2]}
           </StyledNavLink>
         </StyledListItem>
       </StyledList>

@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled, { css } from "styled-components";
 import { SiImdb } from "react-icons/si";
+
+import useLanguageContext from "../contexts/LanguageContext";
+
+import API_KEY from "../data/apiKey";
+import API_URL from "../utils/API_URL";
 
 const textSharedStyle = css`
   font-family: "Roboto";
@@ -107,6 +113,11 @@ const StyledBiography = styled.p`
   }
 `;
 
+const PERSON_TEXT = {
+  eng: ["Born on", "years", "Died on", "Place of birth:"],
+  spa: ["Nació el", "años", "Murió el", "Lugar de nacimiento:"],
+};
+
 const PersonInfo = ({ data }) => {
   const {
     birthday,
@@ -116,7 +127,10 @@ const PersonInfo = ({ data }) => {
     deathday,
     place_of_birth,
     biography,
+    id,
   } = data;
+  const [translations, setTranslations] = useState([]);
+  const { language } = useLanguageContext();
 
   const getDate = (date) => {
     const months = [
@@ -133,9 +147,25 @@ const PersonInfo = ({ data }) => {
       "November",
       "December",
     ];
+    const meses = [
+      "enero",
+      "febrero",
+      "marzo",
+      "abril",
+      "mayo",
+      "junio",
+      "julio",
+      "agosto",
+      "septiembre",
+      "octubre",
+      "noviembre",
+      "diciembre",
+    ];
     const specificDate = new Date(date);
-    return `${months[specificDate.getMonth()]} ${
-      specificDate.getDate() + 1
+    return `${specificDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
+      language === "eng"
+        ? months[specificDate.getMonth()]
+        : meses[specificDate.getMonth()]
     }, ${specificDate.getFullYear()}`;
   };
 
@@ -150,6 +180,21 @@ const PersonInfo = ({ data }) => {
 
     return hadBirthday ? yearDifference : yearDifference - 1;
   };
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}person/${id}/translations?api_key=${API_KEY}`)
+      .then((response) => {
+        setTranslations(response.data.translations);
+      });
+  }, [language, data]);
+
+  const spanishText = translations.find(
+    (translation) => translation.name === "Español"
+  );
+
+  const hasSpanishTranslation =
+    translations.length > 1 && spanishText !== undefined;
 
   return (
     <PersonDetails>
@@ -171,18 +216,22 @@ const PersonInfo = ({ data }) => {
           </StyledLink>
         </FlexContainer>
         <StyledText>
-          Born on {getDate(birthday)}{" "}
+          {PERSON_TEXT[language][0]} {getDate(birthday)}{" "}
           {deathday === null
-            ? `(${getAge()} years)`
-            : `  -  Died on ${getDate(deathday)}`}
+            ? `(${getAge()} ${PERSON_TEXT[language][1]})`
+            : `  -  ${PERSON_TEXT[language][2]} ${getDate(deathday)}`}
         </StyledText>
         {place_of_birth !== null && (
           <StyledText style={{ marginTop: 0 }}>
-            Place of birth: {place_of_birth}
+            {PERSON_TEXT[language][3]} {place_of_birth}
           </StyledText>
         )}
         <StyledBiography style={{ whiteSpace: "pre-line" }}>
-          {biography}
+          {language === "spa" &&
+          hasSpanishTranslation &&
+          spanishText.data.biography !== ""
+            ? spanishText.data.biography
+            : biography}
         </StyledBiography>
       </StyledContainerName>
     </PersonDetails>
