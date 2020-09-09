@@ -27,9 +27,14 @@ const ContainerFlex = styled.div`
   margin-top: 5vw;
 
   @media (max-width: 850px) {
-    justify-content: initial;
-    margin: 2vw 0 0 7vw;
+    margin: 25vw 0 0;
     padding-bottom: 15vw;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: 1050px) {
+    margin-top: 15vw;
   }
 `;
 
@@ -59,6 +64,9 @@ const FilterContainer = styled.div`
   right: 0;
   letter-spacing: 12px;
   z-index: 3;
+  @media (max-width: 850px) {
+    width: 40vw;
+  }
 `;
 
 const ContainerToggle = styled.div`
@@ -82,11 +90,11 @@ const Select = styled.select`
     width: 13vw;
   }
   @media (max-width: 650px) {
-    font-size: 2.5vw;
+    font-size: 3.5vw;
     height: 7vw;
-    width: 22vw;
+    width: 35vw;
     border-radius: 6px;
-    padding-left: 2vw;
+    padding: 0 2vw;
   }
 `;
 
@@ -112,8 +120,12 @@ const StyledTitle = styled.h2`
   width: 16vw;
   margin: 6vw 0 1vw;
   @media (max-width: 850px) {
-    font-size: 4vw;
-    margin-top: 0;
+    font-size: 5vw;
+    width: 40vw;
+    margin-top: 25vw;
+  }
+  @media (max-width: 1325px) {
+    margin-top: 17vw;
   }
 `;
 
@@ -138,12 +150,8 @@ const Button = styled.button`
   }
 
   @media (max-width: 850px) {
-    width: 15vw;
-    height: 4vw;
-  }
-
-  @media (max-width: 650px) {
-    display: none;
+    width: 35vw;
+    height: 7vw;
   }
 `;
 
@@ -152,6 +160,11 @@ const Text = styled.p`
   font-family: roboto;
   font-size: 0.8vw;
   letter-spacing: 0.1em;
+  @media (max-width: 850px) {
+    margin: 0;
+    padding: 1.5vw;
+    font-size: 3.5vw;
+  }
 `;
 
 const DiscoverPage = () => {
@@ -190,7 +203,7 @@ const DiscoverPage = () => {
     setSelectedSort("popularity.desc");
   };
 
-  console.log(selectedSort);
+  console.log(handleToggle);
 
   const handleMedia = (e) => {
     setSelectedMedia(e.target.value);
@@ -332,7 +345,7 @@ const DiscoverPage = () => {
           </Select>
           <Select onChange={handleGenre}>
             <Option disabled selected>
-              Choose by genre:
+              By genre:
             </Option>
             <Option value={"all"}>All</Option>
             {genres &&
@@ -342,7 +355,7 @@ const DiscoverPage = () => {
           </Select>
           <Select onChange={handleParameter}>
             <Option disabled selected>
-              Choose release parameter:
+              Release filter:
             </Option>
             <Option value={"before"}>Before than</Option>
             <Option value={"exact"}>Exact year</Option>
@@ -350,7 +363,7 @@ const DiscoverPage = () => {
           </Select>
           <Select onChange={handleYear}>
             <Option disabled selected>
-              Choose parameter year:
+              Year of filter:
             </Option>
             <Option value={"all"}>All</Option>
             {oldestYear && getYears().map((year) => <Option>{year}</Option>)}

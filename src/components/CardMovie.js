@@ -7,8 +7,7 @@ import Rating from "./Rating";
 const Card = styled.article`
   margin: 0.2vw;
   @media (max-width: 850px) {
-    width: 26vw;
-    margin-right: 3vw;
+    width: 40vw;
   }
 `;
 
@@ -22,7 +21,10 @@ const Img = styled.img`
     cursor: pointer;
   }
   @media (max-width: 850px) {
-    height: ${(props) => (props.component === "list" ? "40vw" : "30vw")};
+    //height: ${(props) => (props.component === "list" ? "auto" : "40vw")};
+    width: 40vw;
+    //width: ${(props) => (props.component === "list" ? "40vw" : "auto")};
+    height: auto;
   }
 `;
 
@@ -35,6 +37,10 @@ const Title = styled.h3`
   color: #fff;
   width: 90%;
   max-width: 15vw;
+  @media (max-width: 850px) {
+    width: 100%;
+    min-width: 40vw;
+  }
 `;
 
 const BasicCard = ({
