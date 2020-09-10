@@ -1,6 +1,6 @@
 #nav-container {
   position: fixed;
-  top: -0.5vw;
+  top: -1.5vw;
   right: 0vw;
   z-index: 4;
   @media (min-width: 310px) {
@@ -8,28 +8,28 @@
     right: -2vw;
   }
   @media (min-width: 370px) {
-    top: 0.5vw;
-    right: 0vw;
+    top: -1.5vw;
+    right: 2vw;
   }
   @media (min-width: 400px) {
     top: -0.5vw;
     right: -1vw;
   }
   @media (min-width: 700px) {
-    top: 1.5vw;
-    right: 1vw;
+    top: -0.5vw;
+    right: 5vw;
   }
   @media (min-width: 850px) {
-    top: 1.5vw;
+    top: -0.5vw;
     right: 2vw;
   }
   @media (min-width: 1020px) {
-    top: 2.5vw;
-    right: 3vw;
+    top: -0.5vw;
+    right: 2vw;
   }
   @media (min-width: 1300px) {
     top: -0.3vw;
-    right: 0vw;
+    right: 2vw;
   }
 }
 

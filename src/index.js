@@ -8,17 +8,20 @@ import { MoviesProvider } from "../src/contexts/MoviesContext";
 import { SeriesProvider } from "../src/contexts/SeriesContext";
 import { PaginationProvider } from "./contexts/PaginationContext";
 import { SearchProvider } from "./contexts/SearchContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <PaginationProvider>
-      <SearchProvider>
-        <MoviesProvider>
-          <SeriesProvider>
-            <App />
-          </SeriesProvider>
-        </MoviesProvider>
-      </SearchProvider>
+      <LanguageProvider>
+        <SearchProvider>
+          <MoviesProvider>
+            <SeriesProvider>
+              <App />
+            </SeriesProvider>
+          </MoviesProvider>
+        </SearchProvider>
+      </LanguageProvider>
     </PaginationProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -43,12 +43,12 @@ const LOADING_TEXT = {
 };
 
 const LoadingPage = () => {
-  // const { language } = useLanguageContext();
+  const { language } = useLanguageContext();
 
   return (
     <MainFlex style={loadingPageStyle}>
       <Text>
-        {/* {LOADING_TEXT[language]} */}
+        {LOADING_TEXT[language]}
         <MovingDot delay=".66s">.</MovingDot>
         <MovingDot delay="0s">.</MovingDot>
         <MovingDot delay=".33s">.</MovingDot>

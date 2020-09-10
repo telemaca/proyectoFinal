@@ -89,9 +89,9 @@ const StyledOption = styled.option`
 `;
 
 const NavLinks = () => {
-  // const { setLanguage } = useLanguageContext();
+  const { setLanguage } = useLanguageContext();
 
-  // const handleChange = (event) => setLanguage(event.target.value);
+  const handleChange = (event) => setLanguage(event.target.value);
 
   const {
     setSearchBarVisible,
@@ -119,7 +119,7 @@ const NavLinks = () => {
         <StyledNavItem>
           <SearchIcon onClick={handleClick} />
         </StyledNavItem>
-        <StyledSelect /*onChange={handleChange}*/>
+        <StyledSelect onChange={handleChange}>
           <StyledOption value="eng">ENG</StyledOption>
           <StyledOption value="spa">SPA</StyledOption>
         </StyledSelect>
