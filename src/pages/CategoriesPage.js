@@ -83,12 +83,7 @@ const CategoriesPage = () => {
   const { categoryId, media } = useParams();
   const [categoriesMovies, setCategoriesMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    currentPage,
-    setCurrentPage,
-    maxPage,
-    setMaxPage,
-  } = usePaginationContext();
+  const { currentPage, setMaxPage } = usePaginationContext();
   const { language } = useLanguageContext();
 
   // const categoryTitle = categoryId.split("_").join(" ");
@@ -122,11 +117,7 @@ const CategoriesPage = () => {
             <BasicCard data={movie} media_type={media} />
           ))}
         </ContainerFlex>
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          maxPage={maxPage}
-        />
+        <Pagination />
       </StyledSection>
     </MainFlex>
   );

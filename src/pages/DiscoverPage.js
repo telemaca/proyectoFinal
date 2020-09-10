@@ -273,17 +273,17 @@ const DiscoverPage = () => {
       .then((response) => {
         selectedMedia === "tv"
           ? setOldestYear(
-              new Date(
-                response.data.results.find(
-                  (result) =>
-                    new Date(result.first_air_date).getFullYear() > 1800 &&
-                    new Date(result.first_air_date).getFullYear() < 2000
-                ).first_air_date
-              ).getFullYear()
-            )
+            new Date(
+              response.data.results.find(
+                (result) =>
+                  new Date(result.first_air_date).getFullYear() > 1800 &&
+                  new Date(result.first_air_date).getFullYear() < 2000
+              ).first_air_date
+            ).getFullYear()
+          )
           : setOldestYear(
-              new Date(response.data.results[0].release_date).getFullYear()
-            );
+            new Date(response.data.results[0].release_date).getFullYear()
+          );
       })
       .catch((err) => console.log(err));
   }, [selectedMedia]);
@@ -291,107 +291,102 @@ const DiscoverPage = () => {
   return isDataLoading ? (
     <LoadingPage />
   ) : (
-    <>
-      <Input />
-      <ContainerToggle
-        onClick={() => {
-<<<<<<< HEAD
-          setHandleToggle(!handleToggle);
-          setIsSent(false);
-=======
-        setHandleToggle(!handleToggle);
-        setIsSent(false);
->>>>>>> e6afa4e... rebase
-        }}
-      >
-        <ToggleStarWars />
-      </ContainerToggle>
-      <MainFlex>
-        {results && (
-          <StyledSection>
-            <ContainerFlex>
-              {results &&
-                results.map((result) => (
-                  <BasicCard data={result} media_type={selectedMedia} />
+      <>
+        <Input />
+        <ContainerToggle
+          onClick={() => {
+            setHandleToggle(!handleToggle);
+            setIsSent(false);
+          }}
+        >
+          <ToggleStarWars />
+        </ContainerToggle>
+        <MainFlex>
+          {results && (
+            <StyledSection>
+              <ContainerFlex>
+                {results &&
+                  results.map((result) => (
+                    <BasicCard data={result} media_type={selectedMedia} />
+                  ))}
+              </ContainerFlex>
+              <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                maxPage={maxPage}
+              />
+            </StyledSection>
+          )}
+        </MainFlex>
+        {handleToggle && (
+          <FilterContainer>
+            <StyledTitle>Filter By</StyledTitle>
+            <Select onChange={handleMedia}>
+              <Option disabled>Choose by media:</Option>
+              <Option defaultValue value={"movie"}>
+                Movies
+            </Option>
+              <Option value={"tv"}>TV series</Option>
+            </Select>
+            <Select onChange={handleGenre}>
+              <Option disabled selected>
+                Choose by genre:
+            </Option>
+              <Option value={"all"}>All</Option>
+              {genres &&
+                genres.map((genre) => (
+                  <Option value={genre.id}>{genre.name}</Option>
                 ))}
-            </ContainerFlex>
-            <Pagination
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              maxPage={maxPage}
-            />
-          </StyledSection>
+            </Select>
+            <Select onChange={handleParameter}>
+              <Option disabled selected>
+                Choose release parameter:
+            </Option>
+              <Option value={"before"}>Before than</Option>
+              <Option value={"exact"}>Exact year</Option>
+              <Option value={"after"}>After than</Option>
+            </Select>
+            <Select onChange={handleYear}>
+              <Option disabled selected>
+                Choose parameter year:
+            </Option>
+              <Option value={"all"}>All</Option>
+              {oldestYear && getYears().map((year) => <Option>{year}</Option>)}
+            </Select>
+            <Select onChange={handleSort}>
+              <Option disabled selected>
+                Order by:
+            </Option>
+              <Option value={"popularity.desc"}>Most popular</Option>
+              <Option value={"popularity.asc"}>Less popular</Option>
+              <Option
+                value={
+                  selectedMedia === "movie"
+                    ? "primary_release_date.desc"
+                    : "first_air_date.desc"
+                }
+              >
+                Newest
+            </Option>
+              <Option
+                value={
+                  selectedMedia === "movie"
+                    ? "primary_release_date.asc"
+                    : "first_air_date.asc"
+                }
+              >
+                Oldest
+            </Option>
+              <Option value={"revenue.desc"}>Higher incomes</Option>
+              <Option value={"revenue.asc"}>Lower incomes</Option>
+            </Select>
+            <Button onClick={handleClick}>
+              <Text>Show Results</Text>
+            </Button>
+          </FilterContainer>
         )}
-      </MainFlex>
-      {handleToggle && (
-        <FilterContainer>
-          <StyledTitle>Filter By</StyledTitle>
-          <Select onChange={handleMedia}>
-            <Option disabled>Choose by media:</Option>
-            <Option defaultValue value={"movie"}>
-              Movies
-            </Option>
-            <Option value={"tv"}>TV series</Option>
-          </Select>
-          <Select onChange={handleGenre}>
-            <Option disabled selected>
-              Choose by genre:
-            </Option>
-            <Option value={"all"}>All</Option>
-            {genres &&
-              genres.map((genre) => (
-                <Option value={genre.id}>{genre.name}</Option>
-              ))}
-          </Select>
-          <Select onChange={handleParameter}>
-            <Option disabled selected>
-              Choose release parameter:
-            </Option>
-            <Option value={"before"}>Before than</Option>
-            <Option value={"exact"}>Exact year</Option>
-            <Option value={"after"}>After than</Option>
-          </Select>
-          <Select onChange={handleYear}>
-            <Option disabled selected>
-              Choose parameter year:
-            </Option>
-            <Option value={"all"}>All</Option>
-            {oldestYear && getYears().map((year) => <Option>{year}</Option>)}
-          </Select>
-          <Select onChange={handleSort}>
-            <Option disabled selected>
-              Order by:
-            </Option>
-            <Option value={"popularity.desc"}>Most popular</Option>
-            <Option value={"popularity.asc"}>Less popular</Option>
-            <Option
-              value={
-                selectedMedia === "movie"
-                  ? "primary_release_date.desc"
-                  : "first_air_date.desc"
-              }
-            >
-              Newest
-            </Option>
-            <Option
-              value={
-                selectedMedia === "movie"
-                  ? "primary_release_date.asc"
-                  : "first_air_date.asc"
-              }
-            >
-              Oldest
-            </Option>
-            <Option value={"revenue.desc"}>Higher incomes</Option>
-            <Option value={"revenue.asc"}>Lower incomes</Option>
-          </Select>
-          <Button onClick={handleClick}>
-            <Text>Show Results</Text>
-          </Button>
-        </FilterContainer>
-      )}
-    </>
-  );
+      </>
+    );
 };
 
 export default DiscoverPage;

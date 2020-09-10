@@ -1,69 +1,35 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-import axios from "axios";
+const SearchContext = createContext();
 
-import API_KEY from "../data/apiKey";
-import API_URL from "../utils/API_URL";
-import { FaGalacticSenate } from "react-icons/fa";
-const SearchContext = createContext()
+const SearchProvider = ({ children }) => {
+  const [media, setMedia] = useState("movie");
+  const [query, setQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
-const SearchProvider = ({ children }) => {  
-    const [media, setMedia] = useState("movie")
-    const [inputValue, setInputValue] = useState("")   
-    
-    const [ results, setResults] = useState([])
-    const [searchResults, setSearchResults] = useState([])
-    const [ showResults, setShowResults] = useState(false)
+  return (
+    <SearchContext.Provider
+      value={{
+        media,
+        setMedia,
+        searchResults,
+        setSearchResults,
+        isLoading,
+        setIsLoading,
+        isSent,
+        setIsSent,
+        query,
+        setQuery,
+      }}
+    >
+      {children}
+    </SearchContext.Provider>
+  );
+};
 
-    const [searchBarVisible, setSearchBarVisible] = useState(false)
-    const [visibleResults, setVisibleResults] = useState(false)
+const useSearchContext = () => useContext(SearchContext);
 
-    const handleShowResultsClick = (event) => {  
-       
-    }; 
-
-   const handleInputChange = (event) => {       
-        setInputValue(event.target.value);
-        setVisibleResults(true);
-    }; 
-
-    const handleMediaClick = (event) => {
-        setMedia(event.target.value);
-    };
-
-    useEffect(() => {   
-         axios         
-          .get(`https://api.themoviedb.org/3/search/${media}?api_key=${API_KEY}&query=${inputValue}`)
-          .then((response) => {
-           
-            setSearchResults(response.data.results)        
-            console.log(response.data.results)           
-        });
-    }, [media, inputValue]);
-      
-    return (
-        <SearchContext.Provider value={{            
-            results,
-            setResults,
-            media,
-            setMedia,
-            handleMediaClick,
-            handleInputChange,     
-            showResults,
-            setShowResults,              
-            handleShowResultsClick,           
-            searchBarVisible,
-            setSearchBarVisible,   
-            searchResults,  
-            visibleResults,
-            setVisibleResults,  
-        }}>
-            {children}
-        </SearchContext.Provider>
-    )
-}
-
-const useSearchContext = () => useContext(SearchContext)
-
-export { SearchProvider }
-export default useSearchContext
+export { SearchProvider };
+export default useSearchContext;

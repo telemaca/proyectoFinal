@@ -8,8 +8,8 @@ import {
   BsHouse as HomeIcon,
   BsSearch as SearchIcon,
 } from "react-icons/bs";
-import useSearchContext from "../contexts/SearchContext"
-
+import useSearchContext from "../contexts/SearchContext";
+import usePaginationContext from "../contexts/PaginationContext";
 import useLanguageContext from "../contexts/LanguageContext";
 
 const StyledNav = styled.nav`
@@ -52,22 +52,6 @@ const StyledNavLink = styled(NavLink)`
     }
   }
 `;
-const StyledNavItem = styled.div `
-  svg {
-    color: #fafafa;
-    font-size: 1.5vw;
-    margin-bottom: 3vw;
-    @media (max-width: 850px) {
-      font-size: 2rem;
-      margin-bottom: 0;
-    }
-  }
-  &.selected {
-    svg {
-      color: #2196f3;
-    }
-  }
-`
 
 const StyledSelect = styled.select`
   background-color: black;
@@ -78,9 +62,11 @@ const StyledSelect = styled.select`
   border-radius: 3px;
   position: absolute;
   bottom: 10%;
+  cursor: pointer;
   @media (max-width: 850px) {
     font-size: 2vw;
     position: relative;
+    height: 4vw;
   }
 `;
 
@@ -90,17 +76,18 @@ const StyledOption = styled.option`
 
 const NavLinks = () => {
   const { setLanguage } = useLanguageContext();
+  const { setCurrentPage } = usePaginationContext();
+  const { setMedia, setSearchResults, setQuery } = useSearchContext();
 
   const handleChange = (event) => setLanguage(event.target.value);
 
-  
-  const { setSearchBarVisible, searchBarVisible, setVisibleResults } = useSearchContext()
+  const handleClick = () => {
+    setMedia("movie");
+    setQuery("");
+    setCurrentPage(1);
+    setSearchResults([]);
+  };
 
-  const handleClick = () => {   
-    setSearchBarVisible(!searchBarVisible);
-    setVisibleResults(false)
-   
-  }
   return (
     <StyledNav>
       <IconContext.Provider value={{ style: { cursor: "pointer" } }}>
@@ -113,15 +100,17 @@ const NavLinks = () => {
         <StyledNavLink to="/tv" activeClassName="selected">
           <TvIcon />
         </StyledNavLink>
-
-        <StyledNavItem>
-          <SearchIcon onClick={handleClick} />
-        </StyledNavItem>
+        <StyledNavLink
+          to="/search"
+          activeClassName="selected"
+          onClick={handleClick}
+        >
+          <SearchIcon />
+        </StyledNavLink>
         <StyledSelect onChange={handleChange}>
           <StyledOption value="eng">ENG</StyledOption>
           <StyledOption value="spa">SPA</StyledOption>
         </StyledSelect>
-
       </IconContext.Provider>
     </StyledNav>
   );

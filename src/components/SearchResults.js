@@ -1,25 +1,33 @@
-import React from 'react'
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 
-import useSearchContext from "../contexts/SearchContext"
+import useSearchContext from "../contexts/SearchContext";
+import LoadingPage from "../pages/LoadingPage";
+import BasicCard from "./CardMovie";
 
-import BasicCard from "./CardMovie"
-
-const Container = styled.div `
- margin: 0 3vw;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-`
+const StyledSection = styled.section`
+  padding: 3vw 7vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #1d1d1d;
+  box-shadow: inset -100px -50px 110px 41px #000;
+`;
 const SearchResults = () => {
-    const { results, media} = useSearchContext()
-    return (
-        <Container>
-        { results && results.map((result) => (
-            <BasicCard key={result.id} id={result.id} data={result} media_type={media} />
-          ))}
-      </Container>
-    )
-}
+  const { media, searchResults } = useSearchContext();
 
-export default SearchResults
+  return (
+    <StyledSection>
+      {searchResults.map((result) => (
+        <BasicCard
+          key={result.id}
+          id={result.id}
+          data={result}
+          media_type={media}
+        />
+      ))}
+    </StyledSection>
+  );
+};
+
+export default SearchResults;

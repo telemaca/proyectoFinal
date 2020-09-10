@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+import usePaginationContext from "../contexts/PaginationContext";
+
 const Button = styled.button`
   margin: 0 1vw;
   color: #fff;
-  background-color: black;
+  background-color: transparent;
   border: none;
   font-size: 1.2vw;
   width: 2vw;
@@ -24,13 +26,13 @@ const Button = styled.button`
   }
 `;
 
-const PageItem = ({ value, setCurrentPage, page, content }) => {
+const PageItem = ({ value, content }) => {
+  const { setCurrentPage, currentPage } = usePaginationContext();
   return (
     <Button
       onClick={() => setCurrentPage(value)}
       value={value}
-      page={page}
-      className={value === page ? "selected" : ""}
+      className={value === currentPage ? "selected" : ""}
     >
       {content}
     </Button>

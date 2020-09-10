@@ -7,33 +7,22 @@ import App from "./App";
 import { MoviesProvider } from "../src/contexts/MoviesContext";
 import { SeriesProvider } from "../src/contexts/SeriesContext";
 import { PaginationProvider } from "./contexts/PaginationContext";
-<<<<<<< HEAD
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { SearchProvider } from "./contexts/SearchContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <LanguageProvider>
       <PaginationProvider>
-=======
-import { SearchProvider } from "./contexts/SearchContext";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <PaginationProvider>
-      <SearchProvider>
->>>>>>> 1e28517... rebase
-        <MoviesProvider>
-          <SeriesProvider>
-            <App />
-          </SeriesProvider>
-        </MoviesProvider>
-<<<<<<< HEAD
+        <SearchProvider>
+          <MoviesProvider>
+            <SeriesProvider>
+              <App />
+            </SeriesProvider>
+          </MoviesProvider>
+        </SearchProvider>
       </PaginationProvider>
     </LanguageProvider>
-=======
-      </SearchProvider>
-    </PaginationProvider>
->>>>>>> 1e28517... rebase
   </React.StrictMode>,
   document.getElementById("root")
 );
