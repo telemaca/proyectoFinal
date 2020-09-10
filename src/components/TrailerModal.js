@@ -20,27 +20,39 @@ to {
 
 const Container = styled.div`
   position: absolute;
-  width: 95%;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 300;
-  @media (max-width: 650px) {
-    height: auto;
-  }
+  z-index: 300;  
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
   color: #fff;
   position: absolute;
   top: 1vw;
-  right: 5vw;
+  right: 6vw;
   font-size: 2.5vw;
+  z-index: 500;
   &:hover {
     cursor: pointer;
+  }
+  @media (max-width: 1024px) {
+    right: 7vw;    
+  }
+  @media (max-width: 850px) {
+    top: 2vw;    
+    right: 3vw;
+  }
+  @media(max-width: 768px) {   
+    right: 2vw;
+  }  
+  @media (max-width: 414px) {
+    right: 3vw;
+    font-size: 4vw;
   }
 `;
 
@@ -55,6 +67,44 @@ const StyledPlayer = styled(ReactPlayer)`
   animation: ${move} 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 `;
 
+const MainPlayerContainer = styled.div `
+  width: 100%;
+  height: 100%;  
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+`
+const PlayerContainer = styled.div `
+  width: 70%;
+  height: 85%;  
+  z-index: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media(max-width: 1260px) {
+    width: 80%;
+    height: 70%; 
+  }
+ @media (max-width: 1060px) {
+    width: 95%;
+    height: 70%;
+  } 
+  @media (max-width: 920px) {
+    width: 95%;
+    height: 60%;
+  } 
+   @media(max-width: 700px) {
+    
+    height: 50%; 
+  }  
+  @media(max-width: 620px) {
+    width: 95%;
+    height: 40%; 
+  }    
+  @media (max-width: 420px) {
+    height: 27%;
+  }   
+`
 const TrailerPage = ({ media, id, onHandleClick }) => {
   const [trailerData, setTrailerData] = useState([]);
   const [isTrailerDataLoading, setIsTrailerDataLoading] = useState(true);
@@ -79,15 +129,20 @@ const TrailerPage = ({ media, id, onHandleClick }) => {
       {trailerData.length === 0 ? (
         <StyledText>Sorry, no video found</StyledText>
       ) : (
-        <StyledPlayer
-          url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
-          width="71vw"
-          height="85vh"
-          volume="0.5"
-          controls
-          onReady
-          light
-        />
+        <MainPlayerContainer>
+        <PlayerContainer>
+          <StyledPlayer
+            className= "react-player"
+            url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
+            width="100%"
+            height="100%"
+            volume="0.5"
+            controls
+            onReady
+            light
+          />
+        </PlayerContainer>
+        </MainPlayerContainer>
       )}
     </Container>
   );

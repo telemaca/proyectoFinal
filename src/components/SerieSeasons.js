@@ -46,6 +46,10 @@ const Select = styled.select`
   background-color: #1d1d1d;
   text-align: center;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
   @media (max-width: 850px) {
     font-size: 1.4vw;
     height: 4vw;

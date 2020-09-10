@@ -78,6 +78,9 @@ const StyledSelect = styled.select`
   border-radius: 3px;
   position: absolute;
   bottom: 10%;
+  &:focus {
+    outline: none;
+  }
   @media (max-width: 850px) {
     font-size: 2vw;
     position: relative;
