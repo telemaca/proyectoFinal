@@ -8,7 +8,7 @@ import {
   BsHouse as HomeIcon,
   BsSearch as SearchIcon,
 } from "react-icons/bs";
-import useSearchContext from "../contexts/SearchContext"
+import useSearchContext from "../contexts/SearchContext";
 
 import useLanguageContext from "../contexts/LanguageContext";
 
@@ -52,7 +52,7 @@ const StyledNavLink = styled(NavLink)`
     }
   }
 `;
-const StyledNavItem = styled.div `
+const StyledNavItem = styled.div`
   svg {
     color: #fafafa;
     font-size: 1.5vw;
@@ -67,7 +67,7 @@ const StyledNavItem = styled.div `
       color: #2196f3;
     }
   }
-`
+`;
 
 const StyledSelect = styled.select`
   background-color: black;
@@ -93,14 +93,16 @@ const NavLinks = () => {
 
   const handleChange = (event) => setLanguage(event.target.value);
 
-  
-  const { setSearchBarVisible, searchBarVisible, setVisibleResults } = useSearchContext()
+  const {
+    setSearchBarVisible,
+    searchBarVisible,
+    setVisibleResults,
+  } = useSearchContext();
 
-  const handleClick = () => {   
+  const handleClick = () => {
     setSearchBarVisible(!searchBarVisible);
-    setVisibleResults(false)
-   
-  }
+    setVisibleResults(false);
+  };
   return (
     <StyledNav>
       <IconContext.Provider value={{ style: { cursor: "pointer" } }}>
@@ -121,7 +123,6 @@ const NavLinks = () => {
           <StyledOption value="eng">ENG</StyledOption>
           <StyledOption value="spa">SPA</StyledOption>
         </StyledSelect>
-
       </IconContext.Provider>
     </StyledNav>
   );
