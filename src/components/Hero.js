@@ -6,6 +6,8 @@ import axios from "axios";
 
 import useLanguageContext from "../contexts/LanguageContext";
 
+
+
 import Rating from "./Rating";
 import TrailerModal from "./TrailerModal";
 
@@ -183,6 +185,9 @@ const Button = styled.button`
     background-color: #2f2f2f;
     border: solid #2f2f2f;
     transition: 0.2s;
+  }
+  &:focus {
+    outline: none;
   }
 
   @media (max-width: 850px) {

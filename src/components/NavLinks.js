@@ -63,6 +63,9 @@ const StyledSelect = styled.select`
   position: absolute;
   bottom: 10%;
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
   @media (max-width: 850px) {
     font-size: 2vw;
     position: relative;
