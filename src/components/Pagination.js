@@ -28,6 +28,17 @@ const PaginationButton = styled.button`
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 850px) {
+    margin: 0 3vw;
+    color: #fff;
+    background-color: black;
+    border: none;
+    font-size: 5vw;
+    width: 5.5vw;
+    font-family: roboto;
+    transition: 0.2s;
+  }
 `;
 
 const StyledArrowLeft = styled(ArrowLeft)`

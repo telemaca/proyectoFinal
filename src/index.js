@@ -7,13 +7,13 @@ import App from "./App";
 import { MoviesProvider } from "../src/contexts/MoviesContext";
 import { SeriesProvider } from "../src/contexts/SeriesContext";
 import { PaginationProvider } from "./contexts/PaginationContext";
-import { LanguageProvider } from "./contexts/LanguageContext";
 import { SearchProvider } from "./contexts/SearchContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <LanguageProvider>
-      <PaginationProvider>
+    <PaginationProvider>
+      <LanguageProvider>
         <SearchProvider>
           <MoviesProvider>
             <SeriesProvider>
@@ -21,8 +21,8 @@ ReactDOM.render(
             </SeriesProvider>
           </MoviesProvider>
         </SearchProvider>
-      </PaginationProvider>
-    </LanguageProvider>
+      </LanguageProvider>
+    </PaginationProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
