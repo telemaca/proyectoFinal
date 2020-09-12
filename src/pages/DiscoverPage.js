@@ -13,6 +13,7 @@ import LoadingPage from "../pages/LoadingPage";
 import ToggleStarWars from "../components/ToggleStarWars";
 
 import usePaginationContext from "../contexts/PaginationContext";
+import useLanguageContext from "../contexts/LanguageContext";
 
 const Bodycontainer = styled.div`
   display: flex;
@@ -171,6 +172,11 @@ const Text = styled.p`
   }
 `;
 
+const FILTER_TEXTS = {
+  eng: ["Choose by media:", "Movie", "TV Show", "By genre:", "All", "Release filter:", "Before than", "Exact year", "After than", "Year of filter:", "Order by:", "Most popular", "Less popular", "Newest", "Oldest", "Higher incomes", "Lower incomes", "Show Results", "Filter by:"],
+  spa: ["Elegí el medio:", "Película", "Serie", "Por género", "Todos", "Por año de estreno", "Antes de", "Año exacto", "Después de", "Año", "Ordenar por:", "Más popular", "Menos popular", "Más nuevo", "Más viejo", "Mayores ingresos", "Menores ingresos", "Mostrar", "Filtrar por"]
+}
+
 const DiscoverPage = () => {
   const [isDataLoading, setIsDataLoading] = useState();
   const [isSent, setIsSent] = useState(true);
@@ -193,6 +199,8 @@ const DiscoverPage = () => {
     maxPage,
     setMaxPage,
   } = usePaginationContext();
+
+  const { language } = useLanguageContext();
 
   const handleClick = () => {
     selectedGenre &&
@@ -324,8 +332,8 @@ const DiscoverPage = () => {
               <StyledSection>
                 <ContainerFlex>
                   {results &&
-                    results.map((result) => (
-                      <BasicCard data={result} media_type={selectedMedia} />
+                    results.map((result, i) => (
+                      <BasicCard key={i} data={result} media_type={selectedMedia} />
                     ))}
                 </ContainerFlex>
                 <Pagination
@@ -340,19 +348,19 @@ const DiscoverPage = () => {
         </Bodycontainer>
         {handleToggle && (
           <FilterContainer>
-            <StyledTitle>Filter By</StyledTitle>
+            <StyledTitle>{FILTER_TEXTS[language][18]}</StyledTitle>
             <Select onChange={handleMedia}>
-              <Option disabled>Choose by media:</Option>
+              <Option disabled>{FILTER_TEXTS[language][0]}</Option>
               <Option defaultValue value={"movie"}>
-                Movies
-            </Option>
-              <Option value={"tv"}>TV series</Option>
+                {FILTER_TEXTS[language][1]}
+              </Option>
+              <Option value={"tv"}>{FILTER_TEXTS[language][2]}</Option>
             </Select>
             <Select onChange={handleGenre}>
               <Option disabled selected>
-                By genre:
-            </Option>
-              <Option value={"all"}>All</Option>
+                {FILTER_TEXTS[language][3]}
+              </Option>
+              <Option value={"all"}>{FILTER_TEXTS[language][4]}</Option>
               {genres &&
                 genres.map((genre) => (
                   <Option value={genre.id}>{genre.name}</Option>
@@ -360,25 +368,25 @@ const DiscoverPage = () => {
             </Select>
             <Select onChange={handleParameter}>
               <Option disabled selected>
-                Release filter:
-            </Option>
-              <Option value={"before"}>Before than</Option>
-              <Option value={"exact"}>Exact year</Option>
-              <Option value={"after"}>After than</Option>
+                {FILTER_TEXTS[language][5]}
+              </Option>
+              <Option value={"before"}>{FILTER_TEXTS[language][6]}</Option>
+              <Option value={"exact"}>{FILTER_TEXTS[language][7]}</Option>
+              <Option value={"after"}>{FILTER_TEXTS[language][8]}</Option>
             </Select>
             <Select onChange={handleYear}>
               <Option disabled selected>
-                Year of filter:
-            </Option>
-              <Option value={"all"}>All</Option>
+                {FILTER_TEXTS[language][9]}
+              </Option>
+              <Option value={"all"}>{FILTER_TEXTS[language][4]}</Option>
               {oldestYear && getYears().map((year) => <Option>{year}</Option>)}
             </Select>
             <Select onChange={handleSort}>
               <Option disabled selected>
-                Order by:
-            </Option>
-              <Option value={"popularity.desc"}>Most popular</Option>
-              <Option value={"popularity.asc"}>Less popular</Option>
+                {FILTER_TEXTS[language][10]}
+              </Option>
+              <Option value={"popularity.desc"}>{FILTER_TEXTS[language][11]}</Option>
+              <Option value={"popularity.asc"}>{FILTER_TEXTS[language][12]}</Option>
               <Option
                 value={
                   selectedMedia === "movie"
@@ -386,8 +394,8 @@ const DiscoverPage = () => {
                     : "first_air_date.desc"
                 }
               >
-                Newest
-            </Option>
+                {FILTER_TEXTS[language][13]}
+              </Option>
               <Option
                 value={
                   selectedMedia === "movie"
@@ -395,13 +403,13 @@ const DiscoverPage = () => {
                     : "first_air_date.asc"
                 }
               >
-                Oldest
-            </Option>
-              <Option value={"revenue.desc"}>Higher incomes</Option>
-              <Option value={"revenue.asc"}>Lower incomes</Option>
+                {FILTER_TEXTS[language][14]}
+              </Option>
+              <Option value={"revenue.desc"}>{FILTER_TEXTS[language][15]}</Option>
+              <Option value={"revenue.asc"}>{FILTER_TEXTS[language][16]}</Option>
             </Select>
             <Button onClick={handleClick}>
-              <Text>Show Results</Text>
+              <Text>{FILTER_TEXTS[language][17]}</Text>
             </Button>
           </FilterContainer>
         )}

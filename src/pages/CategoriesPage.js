@@ -118,8 +118,8 @@ const CategoriesPage = () => {
           <StyledSection>
             <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
             <ContainerFlex>
-              {categoriesMovies.map((movie) => (
-                <BasicCard data={movie} media_type={media} />
+              {categoriesMovies.map((movie, i) => (
+                <BasicCard key={i} data={movie} media_type={media} />
               ))}
             </ContainerFlex>
             <Pagination />
