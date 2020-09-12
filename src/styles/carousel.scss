@@ -62,4 +62,7 @@
 }
 .slick-list {
   margin-left: 10px;
+  @media (max-width: 650px) {
+    margin-left: 0;
+  }
 }

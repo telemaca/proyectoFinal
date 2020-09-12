@@ -74,7 +74,7 @@ const StyledContainerInfo = styled.div`
   }
 
   @media (max-width: 850px) {
-    width: 78vw;
+    width: 80vw;
     position: absolute;
     height: 53vw;
     padding-left: 20vw;
@@ -97,11 +97,11 @@ const BackgrdImgContainer = styled.div`
 
   @media (min-width: 850px) {
     box-shadow: ${(props) =>
-      props.page === "home" && "inset 50px -20px 60px 60px #000"};
+    props.page === "home" && "inset 50px -20px 60px 60px #000"};
   }
 
   @media (max-width: 850px) {
-    width: 98vw;
+    width: 100vw;
     height: 53vw;
   }
 `;
@@ -134,7 +134,7 @@ const StyledTitle = styled.h1`
     line-height: 5vw;
   }
   @media (max-width: 650px) {
-    font-size: ${(props) => props.page === "home" && "7vw"};
+    font-size: ${(props) => props.page === "home" && "8vw"};
     line-height: 6vw;
   }
 `;
@@ -277,9 +277,9 @@ const Hero = ({ data, media_type, page = "home" }) => {
           <StyledTitleLink page={page} to={`/${media_type}/${id}/info`}>
             <StyledTitle page={page}>
               {language === "spa" &&
-              hasSpanishTranslation &&
-              ((media_type === "tv" && spanishText.data.name !== "") ||
-                (media_type === "movie" && spanishText.data.title !== ""))
+                hasSpanishTranslation &&
+                ((media_type === "tv" && spanishText.data.name !== "") ||
+                  (media_type === "movie" && spanishText.data.title !== ""))
                 ? spanishText.data.title || spanishText.data.name
                 : title || name}
             </StyledTitle>
@@ -288,8 +288,8 @@ const Hero = ({ data, media_type, page = "home" }) => {
         </Container>
         <StyledDescription page={page}>
           {language === "spa" &&
-          hasSpanishTranslation &&
-          spanishText.data.overview !== ""
+            hasSpanishTranslation &&
+            spanishText.data.overview !== ""
             ? spanishText.data.overview
             : overview}
         </StyledDescription>

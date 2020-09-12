@@ -27,8 +27,7 @@ const ContainerFlex = styled.div`
   width: 93vw;
 
   @media (max-width: 850px) {
-    justify-content: initial;
-    margin: 2vw 0 0 7vw;
+    margin-top: 2vw;
     padding-bottom: 15vw;
   }
 `;
@@ -109,18 +108,18 @@ const CategoriesPage = () => {
   return isLoading ? (
     <LoadingPage />
   ) : (
-    <MainFlex>
-      <StyledSection>
-        <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
-        <ContainerFlex>
-          {categoriesMovies.map((movie) => (
-            <BasicCard data={movie} media_type={media} />
-          ))}
-        </ContainerFlex>
-        <Pagination />
-      </StyledSection>
-    </MainFlex>
-  );
+      <MainFlex>
+        <StyledSection>
+          <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
+          <ContainerFlex>
+            {categoriesMovies.map((movie) => (
+              <BasicCard data={movie} media_type={media} />
+            ))}
+          </ContainerFlex>
+          <Pagination />
+        </StyledSection>
+      </MainFlex>
+    );
 };
 
 export default CategoriesPage;

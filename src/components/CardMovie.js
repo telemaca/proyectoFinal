@@ -11,6 +11,7 @@ const Card = styled.article`
   }
 `;
 
+
 const Img = styled.img`
   width: 15.4vw;
   height: 23vw;
@@ -21,10 +22,8 @@ const Img = styled.img`
     cursor: pointer;
   }
   @media (max-width: 850px) {
-    //height: ${(props) => (props.component === "list" ? "auto" : "40vw")};
-    width: 40vw;
-    //width: ${(props) => (props.component === "list" ? "40vw" : "auto")};
-    height: auto;
+    height: ${(props) => (props.component === "list" ? "auto" : "40vw")};
+    width: ${(props) => (props.component === "list" ? "40vw" : "auto")};
   }
 `;
 
@@ -38,8 +37,7 @@ const Title = styled.h3`
   width: 90%;
   max-width: 15vw;
   @media (max-width: 850px) {
-    width: 100%;
-    min-width: 40vw;
+    max-width: ${(props) => (props.component === "list" ? "40vw" : "30vw")};
   }
 `;
 

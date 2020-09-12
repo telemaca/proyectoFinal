@@ -26,8 +26,11 @@ const Title = styled.h3`
   font-family: roboto;
   letter-spacing: 0.4px;
   color: #fff;
-  @media (max-width: 280px) {
-    font-size: 1rem;
+  @media (max-width: 650px) {
+    margin-left: 3.5vw;
+  }
+  @media (max-width: 650px) {
+    font-size: 3.5vw;
   }
 `;
 
@@ -48,36 +51,25 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
   const { language } = useLanguageContext();
 
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
     responsive: [
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 760,
+        breakpoint: 850,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,          
+          slidesToScroll: 3,
           initialSlide: 3,
-          arrows: false,
         },
       },
       {
-        breakpoint: 280,
+        breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,          
-          initialSlide: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          initialSlide: 3,
           arrows: false,
         },
       },
