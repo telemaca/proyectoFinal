@@ -87,6 +87,9 @@ const StyledContainerInfo = styled.div`
 
 const Container = styled.div`
   padding-right: ${(props) => (props.page === "home" ? "0" : "5vw")};
+  @media (max-width: 650px) {
+    padding-bottom: ${(props) => props.page === "home" && "2vw"};
+  }
 `;
 
 const BackgrdImgContainer = styled.div`
@@ -134,8 +137,8 @@ const StyledTitle = styled.h1`
     line-height: 5vw;
   }
   @media (max-width: 650px) {
-    font-size: ${(props) => props.page === "home" && "8vw"};
-    line-height: 6vw;
+    line-height: 4.5vw;
+    font-size: 5.5vw;
   }
 `;
 
@@ -163,7 +166,7 @@ const StyledDescription = styled.p`
   }
 
   @media (max-width: 650px) {
-    display: ${(props) => props.page === "secondary" && "none"};
+    display: none;
     font-size: ${(props) => props.page === "home" && "2.3vw"};
   }
 `;
@@ -210,7 +213,6 @@ const SmallButton = styled.button`
   top: 35%;
   left: 44%;
   animation: ${animatedPlayIcon} 2s;
-  display: ${(props) => props.page === "home" && "none"};
 
   @media (min-width: 650px) {
     display: none;

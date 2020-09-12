@@ -86,7 +86,7 @@ const StyledText = styled.div`
     max-width: 84%;
   }
   @media (max-width: 650px) {
-    font-size: 2.3vw;
+    font-size: 2.5vw;
     width: -webkit-fill-available;
   }
 `;
@@ -156,11 +156,10 @@ const SerieInfo = ({ data }) => {
       "diciembre",
     ];
     const serieDate = new Date(first_air_date);
-    return `${serieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
-      language === "eng"
-        ? months[serieDate.getMonth()]
-        : meses[serieDate.getMonth()]
-    }, ${serieDate.getFullYear()}`;
+    return `${serieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${language === "eng"
+      ? months[serieDate.getMonth()]
+      : meses[serieDate.getMonth()]
+      }, ${serieDate.getFullYear()}`;
   };
 
   useEffect(() => {
@@ -199,8 +198,6 @@ const SerieInfo = ({ data }) => {
                 <StyledCategory
                   style={{
                     fontWeight: 800,
-                    fontSize: "1.2vw",
-                    letterSpacing: "1px",
                   }}
                 >
                   {TITLES[language][1]}

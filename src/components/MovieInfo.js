@@ -86,7 +86,7 @@ const StyledText = styled.div`
     max-width: 84%;
   }
   @media (max-width: 650px) {
-    font-size: 2.3vw;
+    font-size: 2.5vw;
     width: -webkit-fill-available;
   }
 `;
@@ -161,11 +161,10 @@ const MovieInfo = ({ data }) => {
       "diciembre",
     ];
     const movieDate = new Date(release_date);
-    return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
-      language === "eng"
+    return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${language === "eng"
         ? months[movieDate.getMonth()]
         : meses[movieDate.getMonth()]
-    }, ${movieDate.getFullYear()}`;
+      }, ${movieDate.getFullYear()}`;
   };
 
   useEffect(() => {
