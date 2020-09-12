@@ -8,10 +8,16 @@ import API_URL from "../utils/API_URL";
 import Pagination from "../components/Pagination";
 import MainFlex from "../components/MainFlex";
 import BasicCard from "../components/CardMovie";
+import Footer from "../components/Footer";
 import LoadingPage from "../pages/LoadingPage";
 import ToggleStarWars from "../components/ToggleStarWars";
 
 import usePaginationContext from "../contexts/PaginationContext";
+
+const Bodycontainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const StyledSection = styled.section`
   background-color: #1d1d1d;
@@ -312,23 +318,26 @@ const DiscoverPage = () => {
         >
           <ToggleStarWars />
         </ContainerToggle>
-        <MainFlex>
-          {results && (
-            <StyledSection>
-              <ContainerFlex>
-                {results &&
-                  results.map((result) => (
-                    <BasicCard data={result} media_type={selectedMedia} />
-                  ))}
-              </ContainerFlex>
-              <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                maxPage={maxPage}
-              />
-            </StyledSection>
-          )}
-        </MainFlex>
+        <Bodycontainer>
+          <MainFlex>
+            {results && (
+              <StyledSection>
+                <ContainerFlex>
+                  {results &&
+                    results.map((result) => (
+                      <BasicCard data={result} media_type={selectedMedia} />
+                    ))}
+                </ContainerFlex>
+                <Pagination
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  maxPage={maxPage}
+                />
+              </StyledSection>
+            )}
+          </MainFlex>
+          <Footer />
+        </Bodycontainer>
         {handleToggle && (
           <FilterContainer>
             <StyledTitle>Filter By</StyledTitle>

@@ -84,7 +84,7 @@ const Pagination = () => {
           {pages >= 6 && currentPage < 5 && (
             <>
               {[...Array(5)].map((pageItem, index) => (
-                <PageItem value={index + 1} content={index + 1} />
+                <PageItem key={index} value={index + 1} content={index + 1} />
               ))}
               <PageItem value={maxPage - 3} content={"..."} />
               <PageItem value={maxPage} content={maxPage} />
@@ -116,7 +116,7 @@ const Pagination = () => {
           {pages < 6 && (
             <>
               {[...Array(pages - 1)].map((pageItem, index) => (
-                <PageItem value={index + 1} content={index + 1} />
+                <PageItem key={index} value={index + 1} content={index + 1} />
               ))}
               <PageItem value={maxPage} content={maxPage} />
             </>

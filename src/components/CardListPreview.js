@@ -65,7 +65,7 @@ const CardListPreview = ({ title, elements, categoryId, media_type }) => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 650,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,

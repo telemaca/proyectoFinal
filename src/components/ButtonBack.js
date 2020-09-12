@@ -2,7 +2,7 @@ import React from 'react'
 import { BiArrowBack as ArrowBack } from "react-icons/bi"
 import styled from "styled-components"
 
-const StyledArrowBack = styled(ArrowBack) `
+const StyledArrowBack = styled(ArrowBack)`
     color: #fff;  
     transition: 0.2s;
     font-size: 30px;    
@@ -20,10 +20,10 @@ const StyledArrowBack = styled(ArrowBack) `
         padding: 1vw 0 0 1vw;        
     }
 `
-const Button = styled.button `
+const Button = styled.button`
    position: absolute;
    top: 1vw;
-   left: 6vw;
+   left: 8vw;
    background-color: transparent;
    border: none;
    z-index: 200;  
@@ -38,10 +38,10 @@ const Button = styled.button `
     }
 `
 
-const ButtonBack = ({ handleClick }) => {  
+const ButtonBack = ({ handleClick }) => {
     return (
         <Button >
-            <StyledArrowBack onClick={handleClick}/>
+            <StyledArrowBack onClick={handleClick} />
         </Button>
     )
 }

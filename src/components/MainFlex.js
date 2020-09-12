@@ -5,7 +5,7 @@ const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
   width: 95vw;
-  padding-left: 5vw;
+  padding-left: 75px;
   transform: translateX(-0.7px);
   @media (max-width: 850px) {
     padding-left: 0;

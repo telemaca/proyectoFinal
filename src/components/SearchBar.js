@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { BsSearch as SearchIcon } from "react-icons/bs";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import API_KEY from "../data/apiKey";
@@ -98,7 +98,7 @@ const Form = styled.form`
 
 const StyledSection = styled.section`
   display: flex;
-  margin-left: 5vw;
+  margin-left: 75px;
   padding: 3vw 0 1vw 0;
   width: 95vw;
   background-color: #1d1d1d;
@@ -221,8 +221,7 @@ const SearchBar = () => {
     setIsLoading(true);
     axios
       .get(
-        `${API_URL}search/${media}?api_key=${API_KEY}${
-          query !== "" && `&query=${query}&page=${currentPage}`
+        `${API_URL}search/${media}?api_key=${API_KEY}${query !== "" && `&query=${query}&page=${currentPage}`
         }`
       )
       .then((response) => {

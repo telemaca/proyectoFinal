@@ -7,7 +7,10 @@ import Rating from "./Rating";
 const Card = styled.article`
   margin: 0.2vw;
   @media (max-width: 850px) {
-    width: 40vw;
+    width: ${(props) => (props.component === "search" ? "20vw" : "40vw")};
+  }
+  @media (max-width: 850px) {
+    width: ${(props) => (props.component === "search" && "29vw")};
   }
 `;
 
@@ -23,7 +26,13 @@ const Img = styled.img`
   }
   @media (max-width: 850px) {
     height: ${(props) => (props.component === "list" ? "auto" : "40vw")};
+    height: ${(props) => (props.component === "search" && "34vw")};
     width: ${(props) => (props.component === "list" ? "40vw" : "auto")};
+    width: ${(props) => (props.component === "search" && "23vw")};
+  }
+  @media (max-width: 650px) {
+    height: ${(props) => (props.component === "search" && "36vw")};
+    width: ${(props) => (props.component === "search" && "25vw")};
   }
 `;
 
@@ -38,6 +47,7 @@ const Title = styled.h3`
   max-width: 15vw;
   @media (max-width: 850px) {
     max-width: ${(props) => (props.component === "list" ? "40vw" : "30vw")};
+    max-width: ${(props) => (props.component === "search" && "23vw")};
   }
 `;
 
@@ -73,7 +83,7 @@ const BasicCard = ({
         }
         onClick={() => handleMediaClick(id, media_type)}
       />
-      <Title>{title || name}</Title>
+      <Title component={component}>{title || name}</Title>
       <Rating rating={vote_average} component="card" />
     </Card>
   );

@@ -37,9 +37,13 @@
       opacity: 0.5;
     }
 
+    @media (max-width: 1280px) {
+      top: 36%;
+    }
+
     @media (max-width: 850px) {
-      height: 32vw;
-      top: 37%;
+      height: 42vw;
+      top: 41%;
       width: 8vw;
     }
   }

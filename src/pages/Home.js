@@ -34,26 +34,26 @@ const Home = () => {
   return isMoviesDataLoading && isSeriesDataLoading ? (
     <LoadingPage />
   ) : (
-    <Bodycontainer>
-      <MainFlex>
-        <Hero data={trendingMovie} media_type="movie" page="home" />
+      <Bodycontainer>
+        <MainFlex>
+          <Hero data={trendingMovie} media_type="movie" page="home" />
 
-        <CardListPreview
-          title={TITLES[language][0]}
-          elements={trendingMovies}
-          media_type="movie"
-          categoryId="trending"
-        />
-        <CardListPreview
-          title={TITLES[language][1]}
-          elements={trendingSeries}
-          media_type="tv"
-          categoryId="trending"
-        />
-      </MainFlex>
-      <Footer />
-    </Bodycontainer>
-  );
+          <CardListPreview
+            title={TITLES[language][0]}
+            elements={trendingMovies}
+            media_type="movie"
+            categoryId="trending"
+          />
+          <CardListPreview
+            title={TITLES[language][1]}
+            elements={trendingSeries}
+            media_type="tv"
+            categoryId="trending"
+          />
+        </MainFlex>
+        <Footer />
+      </Bodycontainer>
+    );
 };
 
 export default Home;

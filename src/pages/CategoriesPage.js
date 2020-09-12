@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
@@ -8,11 +7,17 @@ import BasicCard from "../components/CardMovie";
 import Pagination from "../components/Pagination";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
+import Footer from "../components/Footer";
 
 import usePaginationContext from "../contexts/PaginationContext";
 import useLanguageContext from "../contexts/LanguageContext";
 import API_KEY from "../data/apiKey";
 import API_URL from "../utils/API_URL";
+
+const Bodycontainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const StyledSection = styled.section`
   background-color: #1d1d1d;
@@ -108,17 +113,20 @@ const CategoriesPage = () => {
   return isLoading ? (
     <LoadingPage />
   ) : (
-      <MainFlex>
-        <StyledSection>
-          <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
-          <ContainerFlex>
-            {categoriesMovies.map((movie) => (
-              <BasicCard data={movie} media_type={media} />
-            ))}
-          </ContainerFlex>
-          <Pagination />
-        </StyledSection>
-      </MainFlex>
+      <Bodycontainer>
+        <MainFlex>
+          <StyledSection>
+            <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
+            <ContainerFlex>
+              {categoriesMovies.map((movie) => (
+                <BasicCard data={movie} media_type={media} />
+              ))}
+            </ContainerFlex>
+            <Pagination />
+          </StyledSection>
+        </MainFlex>
+        <Footer />
+      </Bodycontainer>
     );
 };
 

@@ -18,8 +18,7 @@ const StyledContainer = styled.div`
   justify-content: space-between;
   padding: 3vw;
   @media (max-width: 650px) {
-    justify-content: initial;
-    margin-left: 3vw;
+    justify-content: space-evenly;
     margin-bottom: 15vw;
   }
 `;

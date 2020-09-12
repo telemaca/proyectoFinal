@@ -13,6 +13,12 @@ import BasicCard from "../components/CardMovie";
 import MainFlex from "../components/MainFlex";
 import LoadingPage from "../pages/LoadingPage";
 import ButtonBack from "../components/ButtonBack";
+import Footer from "../components/Footer";
+
+const Bodycontainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const StyledContainer = styled.div`
   display: flex;
@@ -26,7 +32,7 @@ const SectionTitle = styled.h3`
   font-size: 1.5vw;
   font-weight: 100;
   letter-spacing: 1px;
-  margin-left: 3vw;
+  margin-left: 5vw;
   @media (max-width: 850px) {
     font-size: 3vw;
   }
@@ -80,41 +86,45 @@ const PersonPage = () => {
   return isDataLoading ? (
     <LoadingPage />
   ) : (
-    <MainFlex style={{ backgroundColor: "#191919" }}>
-      <ButtonBack handleClick={handleGoBackClick} />
-      <PersonInfo data={personData} />
-      <SectionTitle>
-        {language === "eng"
-          ? `You may know ${gender} for...`
-          : `Quizá ${genero} conozcas por...`}
-      </SectionTitle>
-      <StyledContainer style={{ borderBottom: "1px dashed #fafafa" }}>
-        {personMovies
-          .sort((a, b) => b.popularity - a.popularity)
-          .slice(0, 15)
-          .map((movie) => (
-            <BasicCard
-              data={movie}
-              media_type="movie"
-              style={{ marginLeft: "2vw" }}
-            />
-          ))}
-      </StyledContainer>
-      <SectionTitle>TV Appearances</SectionTitle>
-      <StyledContainer>
-        {personSeries
-          .sort((a, b) => b.popularity - a.popularity)
-          .slice(0, 15)
-          .map((serie) => (
-            <BasicCard
-              data={serie}
-              media_type="tv"
-              style={{ marginLeft: "2vw" }}
-            />
-          ))}
-      </StyledContainer>
-    </MainFlex>
-  );
+      <Bodycontainer>
+
+        <MainFlex style={{ backgroundColor: "#191919" }}>
+          <ButtonBack handleClick={handleGoBackClick} />
+          <PersonInfo data={personData} />
+          <SectionTitle>
+            {language === "eng"
+              ? `You may know ${gender} for...`
+              : `Quizá ${genero} conozcas por...`}
+          </SectionTitle>
+          <StyledContainer style={{ borderBottom: "1px dashed #fafafa" }}>
+            {personMovies
+              .sort((a, b) => b.popularity - a.popularity)
+              .slice(0, 15)
+              .map((movie) => (
+                <BasicCard
+                  data={movie}
+                  media_type="movie"
+                  style={{ marginLeft: "2vw" }}
+                />
+              ))}
+          </StyledContainer>
+          <SectionTitle>{language === "eng" ? "TV Appearances" : "Apariciones en TV"}</SectionTitle>
+          <StyledContainer>
+            {personSeries
+              .sort((a, b) => b.popularity - a.popularity)
+              .slice(0, 15)
+              .map((serie) => (
+                <BasicCard
+                  data={serie}
+                  media_type="tv"
+                  style={{ marginLeft: "2vw" }}
+                />
+              ))}
+          </StyledContainer>
+        </MainFlex>
+        <Footer />
+      </Bodycontainer>
+    );
 };
 
 export default PersonPage;

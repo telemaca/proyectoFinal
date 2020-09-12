@@ -63,13 +63,13 @@ const Rating = ({ rating, page, component = "hero" }) => {
     const halfStars = rating / 2 - fullStars;
     const starArray = [];
     for (let i = 0; i < fullStars; i++) {
-      starArray.push(<StarFull />);
+      starArray.push(<StarFull key={starArray.length} />);
     }
     if (halfStars >= 0.5) {
-      starArray.push(<StarHalf />);
+      starArray.push(<StarHalf key={starArray.length} />);
     }
     for (let i = starArray.length; i < 5; i++) {
-      starArray.push(<StarEmpty />);
+      starArray.push(<StarEmpty key={starArray.length} />);
     }
     return starArray;
   };
@@ -80,8 +80,8 @@ const Rating = ({ rating, page, component = "hero" }) => {
     <StyledContainer page={page}>
       {component === "hero"
         ? finalRating.map((star, i) => (
-            <StyledSpan delay={`${i / 3}s`}>{star}</StyledSpan>
-          ))
+          <StyledSpan key={i} delay={`${i / 3}s`}>{star}</StyledSpan>
+        ))
         : finalRating}
       <StyledDescription>{rating}</StyledDescription>
     </StyledContainer>

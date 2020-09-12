@@ -129,7 +129,7 @@ const StyledTitle = styled.h1`
   }
 
   @media (max-width: 750px) {
-    font-size: 6vw;
+    font-size: 5vw;
     margin-bottom: 2vw;
     line-height: 5vw;
   }
@@ -148,13 +148,13 @@ const StyledDescription = styled.p`
   margin: ${(props) => props.page === "secondary" && "0"};
   animation: ${animatedFadeRight} 2s;
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1150px) {
     font-size: 1.3vw;
   }
 
   @media (max-width: 850px) {
     width: 75%;
-    font-size: 1.4vw;
+    font-size: 1.6vw;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
