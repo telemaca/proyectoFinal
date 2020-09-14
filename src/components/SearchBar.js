@@ -98,7 +98,7 @@ const Form = styled.form`
 
 const StyledSection = styled.section`
   display: flex;
-  margin-left: 75px;
+  margin-left: 5vw;
   padding: 3vw 0 1vw 0;
   width: 95vw;
   background-color: #1d1d1d;
@@ -185,6 +185,7 @@ const SearchBar = () => {
     setIsSent,
     query,
     setQuery,
+    setNotFound
   } = useSearchContext();
   const { currentPage, setCurrentPage, setMaxPage } = usePaginationContext();
   const { language } = useLanguageContext();
@@ -219,6 +220,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    setNotFound(false)
     axios
       .get(
         `${API_URL}search/${media}?api_key=${API_KEY}${query !== "" && `&query=${query}&page=${currentPage}`
@@ -230,6 +232,9 @@ const SearchBar = () => {
         setInputValue("");
         setIsLoading(false);
         setIsSent(false);
+        if (response.data.results.length === 0) {
+          setNotFound(true)
+        }
       });
   }, [isSent, currentPage]);
 

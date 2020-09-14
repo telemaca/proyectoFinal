@@ -24,6 +24,10 @@ const Button = styled.button`
   &.selected {
     color: #2296f3;
   }
+  @media (max-width: 850px) {
+    font-size: 3vw;
+    width: 6vw;
+  }
 `;
 
 const PageItem = ({ value, content }) => {

@@ -15,20 +15,29 @@ const StyledSection = styled.section`
     padding-left: 5vw;
   }
 `;
+
+const StyledText = styled.p`
+color: #fafafa;
+font-family: "Roboto";
+font-size: 2vw;
+`
+
 const SearchResults = () => {
-  const { media, searchResults } = useSearchContext();
+  const { media, searchResults, notFound } = useSearchContext();
 
   return (
     <StyledSection>
-      {searchResults.map((result) => (
-        <BasicCard
-          key={result.id}
-          id={result.id}
-          data={result}
-          media_type={media}
-          component="search"
-        />
-      ))}
+      {notFound ? <StyledText>Sorry, no matching results.</StyledText> :
+        searchResults.map((result) => (
+          <BasicCard
+            key={result.id}
+            id={result.id}
+            data={result}
+            media_type={media}
+            component="search"
+          />
+        ))
+      }
     </StyledSection>
   );
 };

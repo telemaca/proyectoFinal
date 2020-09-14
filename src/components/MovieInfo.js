@@ -162,8 +162,8 @@ const MovieInfo = ({ data }) => {
     ];
     const movieDate = new Date(release_date);
     return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${language === "eng"
-        ? months[movieDate.getMonth()]
-        : meses[movieDate.getMonth()]
+      ? months[movieDate.getMonth()]
+      : meses[movieDate.getMonth()]
       }, ${movieDate.getFullYear()}`;
   };
 
@@ -214,7 +214,7 @@ const MovieInfo = ({ data }) => {
               <StyledCategory>{TITLES[language][3]}</StyledCategory>
               <StyledText>
                 {genres.map((genre, i) => (
-                  <span>
+                  <span key={i}>
                     {/* si el género es el último, no lleva coma; si no, sí */}
                     {i === genres.length - 1 ? genre.name : genre.name + ", "}
                   </span>

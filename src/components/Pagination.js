@@ -14,11 +14,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 765px) {
-    margin-bottom: 5vh;
-  }
-  @media (max-width: 560px) {
-    padding-bottom: 5vh;
+  @media (max-width: 850px) {
+   padding-top: 5vw;
   }
 `;
 const PaginationButton = styled.button`
@@ -102,7 +99,7 @@ const Pagination = () => {
               <PageItem value={maxPage} content={maxPage} />
             </>
           )}
-          {pages >= 6 && currentPage >= maxPage - 4 && maxPage > 9 && (
+          {pages >= 6 && currentPage >= maxPage - 4 && (
             <>
               <PageItem value={1} content={1} />
               <PageItem value={4} content={"..."} />

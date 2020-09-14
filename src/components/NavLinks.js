@@ -39,7 +39,7 @@ const StyledNavLink = styled(NavLink)`
   /* cursor: pointer; */
   svg {
     color: #fafafa;
-    font-size: 2vw;
+    font-size: 1.7vw;
     margin-bottom: 3vw;
     @media (max-width: 850px) {
       font-size: 2rem;

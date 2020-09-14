@@ -8,6 +8,7 @@ const SearchProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   return (
     <SearchContext.Provider
@@ -22,6 +23,8 @@ const SearchProvider = ({ children }) => {
         setIsSent,
         query,
         setQuery,
+        notFound,
+        setNotFound
       }}
     >
       {children}
