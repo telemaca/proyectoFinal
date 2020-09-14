@@ -11,6 +11,8 @@ See it at work here: https://movieandtvwiki.netlify.app/
 4. View details about Tv Shows including trailer, seasons & episodes, and similar TV shows.
 5. View details about your favorite actor! You can see their biography and movies and TV shows where they appeared. 
 
+
+##
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
