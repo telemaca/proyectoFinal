@@ -33,7 +33,7 @@
   left: 30%;
   z-index: 2000;
   position: absolute;
-
+  
   .code404 {
     font-family: "Roboto";
     font-size: 1.5vw;
@@ -45,7 +45,7 @@
   }
 
   @media (max-width: 850px) {
-    bottom: 10%;
+    bottom: 1%;
     left: 19%;
     font-size: 3.5vw;
   }
@@ -58,6 +58,10 @@
   @include size(100vw, 100vh);
   min-height: 500px;
   overflow: hidden;
+
+  @media (max-width: 850px) {
+    height: 92vh;
+  }
 }
 
 .bg {
