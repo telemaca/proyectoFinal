@@ -63,7 +63,7 @@ const StyledContainerInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: ${(props) => (props.page === "home" ? "30%" : "74.2%")};
+  width: ${(props) => (props.page === "home" ? "30%" : "75vw")};
   background-color: rgba(0, 0, 0, 0.3);
   padding-left: ${(props) => (props.page === "home" ? "3vw" : "20vw")};
   position: ${(props) => props.page === "secondary" && "absolute"};

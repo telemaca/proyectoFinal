@@ -44,16 +44,14 @@ const StyledCloseIcon = styled(CloseIcon)`
     right: 7vw;    
   }
   @media (max-width: 850px) {
-    top: 2vw;    
+    font-size: 6vw;
+    top: 8vw;    
     right: 3vw;
   }
-  @media(max-width: 768px) {   
-    right: 2vw;
+  @media(max-width: 650px) {   
+    right: 4vw;
+    top: 20vw;    
   }  
-  @media (max-width: 414px) {
-    right: 3vw;
-    font-size: 4vw;
-  }
 `;
 
 const StyledText = styled.p`
@@ -67,14 +65,14 @@ const StyledPlayer = styled(ReactPlayer)`
   animation: ${move} 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 `;
 
-const MainPlayerContainer = styled.div `
+const MainPlayerContainer = styled.div`
   width: 100%;
   height: 100%;  
   display: flex;
   justify-content: center;
   align-items: center;  
 `
-const PlayerContainer = styled.div `
+const PlayerContainer = styled.div`
   width: 70%;
   height: 85%;  
   z-index: 400;
@@ -124,28 +122,28 @@ const TrailerPage = ({ media, id, onHandleClick }) => {
   return isTrailerDataLoading ? (
     <SmallLoader />
   ) : (
-    <Container>
-      <StyledCloseIcon onClick={onHandleClick} />
-      {trailerData.length === 0 ? (
-        <StyledText>Sorry, no video found</StyledText>
-      ) : (
-        <MainPlayerContainer>
-        <PlayerContainer>
-          <StyledPlayer
-            className= "react-player"
-            url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
-            width="100%"
-            height="100%"
-            volume="0.5"
-            controls
-            onReady
-            light
-          />
-        </PlayerContainer>
-        </MainPlayerContainer>
-      )}
-    </Container>
-  );
+      <Container>
+        <StyledCloseIcon onClick={onHandleClick} />
+        {trailerData.length === 0 ? (
+          <StyledText>Sorry, no video found</StyledText>
+        ) : (
+            <MainPlayerContainer>
+              <PlayerContainer>
+                <StyledPlayer
+                  className="react-player"
+                  url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
+                  width="100%"
+                  height="100%"
+                  volume="0.5"
+                  controls
+                  onReady
+                  light
+                />
+              </PlayerContainer>
+            </MainPlayerContainer>
+          )}
+      </Container>
+    );
 };
 
 export default TrailerPage;

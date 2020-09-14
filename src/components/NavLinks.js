@@ -13,7 +13,7 @@ import usePaginationContext from "../contexts/PaginationContext";
 import useLanguageContext from "../contexts/LanguageContext";
 
 const StyledNav = styled.nav`
-  width: 75px;
+  width: 5vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@ const StyledNav = styled.nav`
   @media (max-width: 850px) {
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100%;
+    width: 98vw;
     height: 3rem;
     position: fixed;
     border: none;
@@ -39,7 +39,7 @@ const StyledNavLink = styled(NavLink)`
   /* cursor: pointer; */
   svg {
     color: #fafafa;
-    font-size: 24px;
+    font-size: 2vw;
     margin-bottom: 3vw;
     @media (max-width: 850px) {
       font-size: 2rem;

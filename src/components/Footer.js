@@ -3,12 +3,21 @@ import styled from "styled-components";
 import { FaGithubSquare } from "react-icons/fa";
 
 const StyledFooter = styled.footer`
-  height: 150px;
+  height: 20vh;
   background-color: #1d1d1d;
   padding-left: 10vw;
+  font-size: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   @media (max-width: 850px) {
-    font-size: 1.5vw;
-    height: 200px;
+    padding-bottom: 4rem;
+    font-size: 1.7vw;
+    height: 18vh;
+  }
+  @media (max-width: 650px) {
+    font-size: 12px;
+    height: 18vh;
   }
 `;
 
@@ -49,7 +58,7 @@ const StyledIcon = styled(FaGithubSquare)`
 const Footer = () => {
   return (
     <StyledFooter>
-      <StyledText>
+      <StyledText style={{ margin: 0 }}>
         @2020 Sol Zapata, Julia Sartirana, Florencia Holzmann. All rights
         reserved.
       </StyledText>
@@ -65,15 +74,15 @@ const Footer = () => {
         .
       </StyledText>
       <StyledContainer>
-        <StyledLink color="grey" target="_blank" href="https://www.github.com">
+        <StyledLink color="grey" target="_blank" href="https://www.github.com/solzapata">
           <StyledIcon />
           Sol
         </StyledLink>
-        <StyledLink color="grey" target="_blank" href="https://www.github.com">
+        <StyledLink color="grey" target="_blank" href="https://www.github.com/julia-sartirana">
           <StyledIcon />
           Julia
         </StyledLink>
-        <StyledLink color="grey" target="_blank" href="https://www.github.com">
+        <StyledLink color="grey" target="_blank" href="https://www.github.com/telemaca">
           <StyledIcon />
           Florencia
         </StyledLink>
