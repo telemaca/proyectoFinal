@@ -161,10 +161,11 @@ const MovieInfo = ({ data }) => {
       "diciembre",
     ];
     const movieDate = new Date(release_date);
-    return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${language === "eng"
-      ? months[movieDate.getMonth()]
-      : meses[movieDate.getMonth()]
-      }, ${movieDate.getFullYear()}`;
+    return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
+      language === "eng"
+        ? months[movieDate.getMonth()]
+        : meses[movieDate.getMonth()]
+    }, ${movieDate.getFullYear()}`;
   };
 
   useEffect(() => {
@@ -207,7 +208,7 @@ const MovieInfo = ({ data }) => {
             <StyledListItem>
               <StyledCategory>{TITLES[language][2]}</StyledCategory>
               <StyledText>
-                {movieHours}h {movieMinutes}min
+                {movieHours}h {movieMinutes > 0 && `${movieMinutes}min`}
               </StyledText>
             </StyledListItem>
             <StyledListItem>
