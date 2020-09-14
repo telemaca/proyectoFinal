@@ -25,7 +25,7 @@ const SeriesProvider = ({ children }) => {
       });
 
     axios.get(`${API_URL}tv/popular?api_key=${API_KEY}`).then((response) => {
-      setPopularSerie(response.data.results[0]);
+      setPopularSerie(response.data.results[Math.floor(Math.random() * response.data.results.length)]);
       setPopularSeries(response.data.results);
     });
 

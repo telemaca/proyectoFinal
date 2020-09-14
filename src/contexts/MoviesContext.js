@@ -20,7 +20,7 @@ const MoviesProvider = ({ children }) => {
     axios
       .get(`${API_URL}trending/movie/day?api_key=${API_KEY}`)
       .then((response) => {
-        setTrendingMovie(response.data.results[0]);
+        setTrendingMovie(response.data.results[Math.floor(Math.random() * response.data.results.length)]);
         setTrendingMovies(response.data.results);
         setIsMoviesDataLoading(false);
       });
