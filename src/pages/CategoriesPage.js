@@ -90,10 +90,6 @@ const CategoriesPage = () => {
   const { currentPage, setMaxPage } = usePaginationContext();
   const { language } = useLanguageContext();
 
-  // const categoryTitle = categoryId.split("_").join(" ");
-  // const upperCaseTitle =
-  //   categoryTitle[0].toUpperCase() + categoryTitle.slice(1);
-
   useEffect(() => {
     setIsLoading(true);
 

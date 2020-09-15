@@ -233,12 +233,7 @@ const DiscoverPage = () => {
   const [parameterQuery, setParameterQuery] = useState("");
   const [sortByQuery, setSortByQuery] = useState("");
 
-  const {
-    currentPage,
-    setCurrentPage,
-    maxPage,
-    setMaxPage,
-  } = usePaginationContext();
+  const { currentPage, setMaxPage } = usePaginationContext();
 
   const { language } = useLanguageContext();
 
@@ -253,7 +248,6 @@ const DiscoverPage = () => {
     setIsSent(!isSent);
     setHandleToggle(false);
     setSelectedSort("popularity.desc");
-    // setCurrentPage(1);
   };
 
   const handleMedia = (e) => {
@@ -313,13 +307,11 @@ const DiscoverPage = () => {
 
   useEffect(() => {
     setIsDataLoading(true);
-    // setCurrentPage(1);
     axios
       .get(
         `${API_URL}discover/${selectedMedia}?api_key=${API_KEY}${genreQuery}${parameterQuery}${sortByQuery}&page=${currentPage}`
       )
       .then((response) => {
-        // setCurrentPage(1);
         setResults(response.data.results);
         setMaxPage(response.data.total_pages);
         setIsDataLoading(false);
@@ -382,11 +374,7 @@ const DiscoverPage = () => {
                     />
                   ))}
               </ContainerFlex>
-              <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                maxPage={maxPage}
-              />
+              <Pagination />
             </StyledSection>
           )}
         </MainFlex>
