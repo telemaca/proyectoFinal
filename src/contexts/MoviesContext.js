@@ -20,27 +20,37 @@ const MoviesProvider = ({ children }) => {
     axios
       .get(`${API_URL}trending/movie/day?api_key=${API_KEY}`)
       .then((response) => {
-        setTrendingMovie(response.data.results[Math.floor(Math.random() * response.data.results.length)]);
+        setTrendingMovie(
+          response.data.results[
+            Math.floor(Math.random() * response.data.results.length)
+          ]
+        );
         setTrendingMovies(response.data.results);
         setIsMoviesDataLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
 
-    axios.get(`${API_URL}movie/popular?api_key=${API_KEY}`).then((response) => {
-      setPopularMovie(response.data.results[0]);
-      setPopularMovies(response.data.results);
-    });
+    axios
+      .get(`${API_URL}movie/popular?api_key=${API_KEY}`)
+      .then((response) => {
+        setPopularMovie(response.data.results[0]);
+        setPopularMovies(response.data.results);
+      })
+      .catch((err) => console.log(err));
 
     axios
       .get(`${API_URL}movie/top_rated?api_key=${API_KEY}`)
       .then((response) => {
         setTopRatedMovies(response.data.results);
-      });
+      })
+      .catch((err) => console.log(err));
 
     axios
       .get(`${API_URL}movie/now_playing?api_key=${API_KEY}`)
       .then((response) => {
         setNowPlayingMovies(response.data.results);
-      });
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (

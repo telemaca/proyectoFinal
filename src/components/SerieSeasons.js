@@ -130,7 +130,8 @@ const SerieSeasons = ({ data }) => {
       .then((response) => {
         setEpisodes(response.data);
         setIsSerieDataLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [seasonNumber]);
 
   return isSerieDataLoading ? (

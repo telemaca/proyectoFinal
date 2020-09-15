@@ -173,13 +173,53 @@ const Text = styled.p`
 `;
 
 const FILTER_TEXTS = {
-  eng: ["Choose by media:", "Movie", "TV Show", "By genre:", "All", "Release filter:", "Before than", "Exact year", "After than", "Year of filter:", "Order by:", "Most popular", "Less popular", "Newest", "Oldest", "Higher incomes", "Lower incomes", "Show Results", "Filter by:"],
-  spa: ["Elegí el medio:", "Película", "Serie", "Por género", "Todos", "Por año de estreno", "Antes de", "Año exacto", "Después de", "Año", "Ordenar por:", "Más popular", "Menos popular", "Más nuevo", "Más viejo", "Mayores ingresos", "Menores ingresos", "Mostrar", "Filtrar por"]
-}
+  eng: [
+    "Choose by media:",
+    "Movie",
+    "TV Show",
+    "By genre:",
+    "All",
+    "Release filter:",
+    "Before than",
+    "Exact year",
+    "After than",
+    "Year of filter:",
+    "Order by:",
+    "Most popular",
+    "Less popular",
+    "Newest",
+    "Oldest",
+    "Higher incomes",
+    "Lower incomes",
+    "Show Results",
+    "Filter by:",
+  ],
+  spa: [
+    "Elegí el medio:",
+    "Película",
+    "Serie",
+    "Por género",
+    "Todos",
+    "Por año de estreno",
+    "Antes de",
+    "Año exacto",
+    "Después de",
+    "Año",
+    "Ordenar por:",
+    "Más popular",
+    "Menos popular",
+    "Más nuevo",
+    "Más viejo",
+    "Mayores ingresos",
+    "Menores ingresos",
+    "Mostrar",
+    "Filtrar por",
+  ],
+};
 
 const DiscoverPage = () => {
   const [isDataLoading, setIsDataLoading] = useState();
-  const [isSent, setIsSent] = useState(true);
+  const [isSent, setIsSent] = useState(false);
   const [handleToggle, setHandleToggle] = useState(false);
   const [genres, setGenres] = useState([{}]);
   const [oldestYear, setOldestYear] = useState();
@@ -210,9 +250,10 @@ const DiscoverPage = () => {
     selectedYear === "all" ? setParameterQuery("") : getYearsByParameter();
     selectedSort &&
       setSortByQuery(selectedSort ? `&sort_by=${selectedSort}` : "");
-    setIsSent(true);
+    setIsSent(!isSent);
     setHandleToggle(false);
     setSelectedSort("popularity.desc");
+    // setCurrentPage(1);
   };
 
   const handleMedia = (e) => {
@@ -272,11 +313,13 @@ const DiscoverPage = () => {
 
   useEffect(() => {
     setIsDataLoading(true);
+    // setCurrentPage(1);
     axios
       .get(
         `${API_URL}discover/${selectedMedia}?api_key=${API_KEY}${genreQuery}${parameterQuery}${sortByQuery}&page=${currentPage}`
       )
       .then((response) => {
+        // setCurrentPage(1);
         setResults(response.data.results);
         setMaxPage(response.data.total_pages);
         setIsDataLoading(false);
@@ -298,17 +341,17 @@ const DiscoverPage = () => {
       .then((response) => {
         selectedMedia === "tv"
           ? setOldestYear(
-            new Date(
-              response.data.results.find(
-                (result) =>
-                  new Date(result.first_air_date).getFullYear() > 1800 &&
-                  new Date(result.first_air_date).getFullYear() < 2000
-              ).first_air_date
-            ).getFullYear()
-          )
+              new Date(
+                response.data.results.find(
+                  (result) =>
+                    new Date(result.first_air_date).getFullYear() > 1800 &&
+                    new Date(result.first_air_date).getFullYear() < 2000
+                ).first_air_date
+              ).getFullYear()
+            )
           : setOldestYear(
-            new Date(response.data.results[0].release_date).getFullYear()
-          );
+              new Date(response.data.results[0].release_date).getFullYear()
+            );
       })
       .catch((err) => console.log(err));
   }, [selectedMedia]);
@@ -316,105 +359,112 @@ const DiscoverPage = () => {
   return isDataLoading ? (
     <LoadingPage />
   ) : (
-      <>
-        <Input />
-        <ContainerToggle
-          onClick={() => {
-            setHandleToggle(!handleToggle);
-            setIsSent(false);
-          }}
-        >
-          <ToggleStarWars />
-        </ContainerToggle>
-        <Bodycontainer>
-          <MainFlex>
-            {results && (
-              <StyledSection>
-                <ContainerFlex>
-                  {results &&
-                    results.map((result, i) => (
-                      <BasicCard key={i} data={result} media_type={selectedMedia} />
-                    ))}
-                </ContainerFlex>
-                <Pagination
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  maxPage={maxPage}
-                />
-              </StyledSection>
-            )}
-          </MainFlex>
-          <Footer />
-        </Bodycontainer>
-        {handleToggle && (
-          <FilterContainer>
-            <StyledTitle>{FILTER_TEXTS[language][18]}</StyledTitle>
-            <Select onChange={handleMedia}>
-              <Option disabled>{FILTER_TEXTS[language][0]}</Option>
-              <Option defaultValue value={"movie"}>
-                {FILTER_TEXTS[language][1]}
-              </Option>
-              <Option value={"tv"}>{FILTER_TEXTS[language][2]}</Option>
-            </Select>
-            <Select onChange={handleGenre}>
-              <Option disabled selected>
-                {FILTER_TEXTS[language][3]}
-              </Option>
-              <Option value={"all"}>{FILTER_TEXTS[language][4]}</Option>
-              {genres &&
-                genres.map((genre) => (
-                  <Option value={genre.id}>{genre.name}</Option>
-                ))}
-            </Select>
-            <Select onChange={handleParameter}>
-              <Option disabled selected>
-                {FILTER_TEXTS[language][5]}
-              </Option>
-              <Option value={"before"}>{FILTER_TEXTS[language][6]}</Option>
-              <Option value={"exact"}>{FILTER_TEXTS[language][7]}</Option>
-              <Option value={"after"}>{FILTER_TEXTS[language][8]}</Option>
-            </Select>
-            <Select onChange={handleYear}>
-              <Option disabled selected>
-                {FILTER_TEXTS[language][9]}
-              </Option>
-              <Option value={"all"}>{FILTER_TEXTS[language][4]}</Option>
-              {oldestYear && getYears().map((year) => <Option>{year}</Option>)}
-            </Select>
-            <Select onChange={handleSort}>
-              <Option disabled selected>
-                {FILTER_TEXTS[language][10]}
-              </Option>
-              <Option value={"popularity.desc"}>{FILTER_TEXTS[language][11]}</Option>
-              <Option value={"popularity.asc"}>{FILTER_TEXTS[language][12]}</Option>
-              <Option
-                value={
-                  selectedMedia === "movie"
-                    ? "primary_release_date.desc"
-                    : "first_air_date.desc"
-                }
-              >
-                {FILTER_TEXTS[language][13]}
-              </Option>
-              <Option
-                value={
-                  selectedMedia === "movie"
-                    ? "primary_release_date.asc"
-                    : "first_air_date.asc"
-                }
-              >
-                {FILTER_TEXTS[language][14]}
-              </Option>
-              <Option value={"revenue.desc"}>{FILTER_TEXTS[language][15]}</Option>
-              <Option value={"revenue.asc"}>{FILTER_TEXTS[language][16]}</Option>
-            </Select>
-            <Button onClick={handleClick}>
-              <Text>{FILTER_TEXTS[language][17]}</Text>
-            </Button>
-          </FilterContainer>
-        )}
-      </>
-    );
+    <>
+      <Input />
+      <ContainerToggle
+        onClick={() => {
+          setHandleToggle(!handleToggle);
+        }}
+      >
+        <ToggleStarWars />
+      </ContainerToggle>
+      <Bodycontainer>
+        <MainFlex>
+          {results && (
+            <StyledSection>
+              <ContainerFlex>
+                {results &&
+                  results.map((result, i) => (
+                    <BasicCard
+                      key={i}
+                      data={result}
+                      media_type={selectedMedia}
+                    />
+                  ))}
+              </ContainerFlex>
+              <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                maxPage={maxPage}
+              />
+            </StyledSection>
+          )}
+        </MainFlex>
+        <Footer />
+      </Bodycontainer>
+      {handleToggle && (
+        <FilterContainer>
+          <StyledTitle>{FILTER_TEXTS[language][18]}</StyledTitle>
+          <Select onChange={handleMedia}>
+            <Option disabled>{FILTER_TEXTS[language][0]}</Option>
+            <Option defaultValue value={"movie"}>
+              {FILTER_TEXTS[language][1]}
+            </Option>
+            <Option value={"tv"}>{FILTER_TEXTS[language][2]}</Option>
+          </Select>
+          <Select onChange={handleGenre}>
+            <Option disabled selected>
+              {FILTER_TEXTS[language][3]}
+            </Option>
+            <Option value={"all"}>{FILTER_TEXTS[language][4]}</Option>
+            {genres &&
+              genres.map((genre) => (
+                <Option value={genre.id}>{genre.name}</Option>
+              ))}
+          </Select>
+          <Select onChange={handleParameter}>
+            <Option disabled selected>
+              {FILTER_TEXTS[language][5]}
+            </Option>
+            <Option value={"before"}>{FILTER_TEXTS[language][6]}</Option>
+            <Option value={"exact"}>{FILTER_TEXTS[language][7]}</Option>
+            <Option value={"after"}>{FILTER_TEXTS[language][8]}</Option>
+          </Select>
+          <Select onChange={handleYear}>
+            <Option disabled selected>
+              {FILTER_TEXTS[language][9]}
+            </Option>
+            <Option value={"all"}>{FILTER_TEXTS[language][4]}</Option>
+            {oldestYear && getYears().map((year) => <Option>{year}</Option>)}
+          </Select>
+          <Select onChange={handleSort}>
+            <Option disabled selected>
+              {FILTER_TEXTS[language][10]}
+            </Option>
+            <Option value={"popularity.desc"}>
+              {FILTER_TEXTS[language][11]}
+            </Option>
+            <Option value={"popularity.asc"}>
+              {FILTER_TEXTS[language][12]}
+            </Option>
+            <Option
+              value={
+                selectedMedia === "movie"
+                  ? "primary_release_date.desc"
+                  : "first_air_date.desc"
+              }
+            >
+              {FILTER_TEXTS[language][13]}
+            </Option>
+            <Option
+              value={
+                selectedMedia === "movie"
+                  ? "primary_release_date.asc"
+                  : "first_air_date.asc"
+              }
+            >
+              {FILTER_TEXTS[language][14]}
+            </Option>
+            <Option value={"revenue.desc"}>{FILTER_TEXTS[language][15]}</Option>
+            <Option value={"revenue.asc"}>{FILTER_TEXTS[language][16]}</Option>
+          </Select>
+          <Button onClick={handleClick}>
+            <Text>{FILTER_TEXTS[language][17]}</Text>
+          </Button>
+        </FilterContainer>
+      )}
+    </>
+  );
 };
 
 export default DiscoverPage;

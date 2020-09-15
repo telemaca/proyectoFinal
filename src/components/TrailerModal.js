@@ -27,7 +27,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 300;  
+  z-index: 300;
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
@@ -41,17 +41,17 @@ const StyledCloseIcon = styled(CloseIcon)`
     cursor: pointer;
   }
   @media (max-width: 1024px) {
-    right: 7vw;    
+    right: 7vw;
   }
   @media (max-width: 850px) {
     font-size: 6vw;
-    top: 8vw;    
+    top: 8vw;
     right: 3vw;
   }
-  @media(max-width: 650px) {   
+  @media (max-width: 650px) {
     right: 4vw;
-    top: 20vw;    
-  }  
+    top: 20vw;
+  }
 `;
 
 const StyledText = styled.p`
@@ -67,42 +67,41 @@ const StyledPlayer = styled(ReactPlayer)`
 
 const MainPlayerContainer = styled.div`
   width: 100%;
-  height: 100%;  
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;  
-`
+  align-items: center;
+`;
 const PlayerContainer = styled.div`
   width: 70%;
-  height: 85%;  
+  height: 85%;
   z-index: 400;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media(max-width: 1260px) {
+  @media (max-width: 1260px) {
     width: 80%;
-    height: 70%; 
+    height: 70%;
   }
- @media (max-width: 1060px) {
+  @media (max-width: 1060px) {
     width: 95%;
     height: 70%;
-  } 
+  }
   @media (max-width: 920px) {
     width: 95%;
     height: 60%;
-  } 
-   @media(max-width: 700px) {
-    
-    height: 50%; 
-  }  
-  @media(max-width: 620px) {
+  }
+  @media (max-width: 700px) {
+    height: 50%;
+  }
+  @media (max-width: 620px) {
     width: 95%;
-    height: 40%; 
-  }    
+    height: 40%;
+  }
   @media (max-width: 420px) {
     height: 27%;
-  }   
-`
+  }
+`;
 const TrailerPage = ({ media, id, onHandleClick }) => {
   const [trailerData, setTrailerData] = useState([]);
   const [isTrailerDataLoading, setIsTrailerDataLoading] = useState(true);
@@ -116,34 +115,35 @@ const TrailerPage = ({ media, id, onHandleClick }) => {
           response.data.results.filter((index) => index.type === "Trailer")
         );
         setIsTrailerDataLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [media, id]);
 
   return isTrailerDataLoading ? (
     <SmallLoader />
   ) : (
-      <Container>
-        <StyledCloseIcon onClick={onHandleClick} />
-        {trailerData.length === 0 ? (
-          <StyledText>Sorry, no video found</StyledText>
-        ) : (
-            <MainPlayerContainer>
-              <PlayerContainer>
-                <StyledPlayer
-                  className="react-player"
-                  url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
-                  width="100%"
-                  height="100%"
-                  volume="0.5"
-                  controls
-                  onReady
-                  light
-                />
-              </PlayerContainer>
-            </MainPlayerContainer>
-          )}
-      </Container>
-    );
+    <Container>
+      <StyledCloseIcon onClick={onHandleClick} />
+      {trailerData.length === 0 ? (
+        <StyledText>Sorry, no video found</StyledText>
+      ) : (
+        <MainPlayerContainer>
+          <PlayerContainer>
+            <StyledPlayer
+              className="react-player"
+              url={`https://www.youtube.com/watch?v=${trailerData[0]?.key}`}
+              width="100%"
+              height="100%"
+              volume="0.5"
+              controls
+              onReady
+              light
+            />
+          </PlayerContainer>
+        </MainPlayerContainer>
+      )}
+    </Container>
+  );
 };
 
 export default TrailerPage;

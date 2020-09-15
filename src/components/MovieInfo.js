@@ -171,7 +171,8 @@ const MovieInfo = ({ data }) => {
       .get(`${API_URL}movie/${id}/translations?api_key=${API_KEY}`)
       .then((response) => {
         setTranslations(response.data.translations);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [language]);
 
   const spanishText = translations.find(

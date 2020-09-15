@@ -185,7 +185,7 @@ const SearchBar = () => {
     setIsSent,
     query,
     setQuery,
-    setNotFound
+    setNotFound,
   } = useSearchContext();
   const { currentPage, setCurrentPage, setMaxPage } = usePaginationContext();
   const { language } = useLanguageContext();
@@ -218,12 +218,17 @@ const SearchBar = () => {
     setMedia(event.target.value);
   };
 
+  const handlePageDiscover = () => {
+    setCurrentPage(1);
+  };
+
   useEffect(() => {
     setIsLoading(true);
-    setNotFound(false)
+    setNotFound(false);
     axios
       .get(
-        `${API_URL}search/${media}?api_key=${API_KEY}${query !== "" && `&query=${query}&page=${currentPage}`
+        `${API_URL}search/${media}?api_key=${API_KEY}${
+          query !== "" && `&query=${query}&page=${currentPage}`
         }`
       )
       .then((response) => {
@@ -233,9 +238,10 @@ const SearchBar = () => {
         setIsLoading(false);
         setIsSent(false);
         if (response.data.results.length === 0) {
-          setNotFound(true)
+          setNotFound(true);
         }
-      });
+      })
+      .catch((err) => console.log(err));
   }, [isSent, currentPage]);
 
   return (
@@ -275,7 +281,9 @@ const SearchBar = () => {
         <FlexContainerRight>
           <StyledText>{TEXTS[language][3]}-</StyledText>
           <Link to="/discover">
-            <CategoryButton>{TEXTS[language][4]}</CategoryButton>
+            <CategoryButton onClick={handlePageDiscover}>
+              {TEXTS[language][4]}
+            </CategoryButton>
           </Link>
         </FlexContainerRight>
       </StyledSection>
