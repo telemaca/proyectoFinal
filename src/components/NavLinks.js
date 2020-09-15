@@ -27,13 +27,14 @@ const StyledNav = styled.nav`
   @media (max-width: 850px) {
     flex-direction: row;
     justify-content: space-evenly;
-    width: 98vw;
+    width: 100vw;
     height: 3rem;
     position: fixed;
     border: none;
     bottom: 0;
   }
 `;
+//pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 const StyledNavLink = styled(NavLink)`
   /* cursor: pointer; */

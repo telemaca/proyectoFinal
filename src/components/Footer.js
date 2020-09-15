@@ -5,7 +5,7 @@ import { FaGithubSquare } from "react-icons/fa";
 const StyledFooter = styled.footer`
   height: 20vh;
   background-color: #1d1d1d;
-  padding-left: 10vw;
+  padding-left: 7vw;
   font-size: 1vw;
   display: flex;
   flex-direction: column;
@@ -53,6 +53,10 @@ const StyledIcon = styled(FaGithubSquare)`
   color: grey;
   font-size: 1.5vw;
   padding-right: 5px;
+
+  @media (max-width: 260x) {
+    font-size: 6.5vw;
+  }
 `;
 
 const Footer = () => {
@@ -74,15 +78,27 @@ const Footer = () => {
         .
       </StyledText>
       <StyledContainer>
-        <StyledLink color="grey" target="_blank" href="https://www.github.com/solzapata">
+        <StyledLink
+          color="grey"
+          target="_blank"
+          href="https://www.github.com/solzapata"
+        >
           <StyledIcon />
           Sol
         </StyledLink>
-        <StyledLink color="grey" target="_blank" href="https://www.github.com/julia-sartirana">
+        <StyledLink
+          color="grey"
+          target="_blank"
+          href="https://www.github.com/julia-sartirana"
+        >
           <StyledIcon />
           Julia
         </StyledLink>
-        <StyledLink color="grey" target="_blank" href="https://www.github.com/telemaca">
+        <StyledLink
+          color="grey"
+          target="_blank"
+          href="https://www.github.com/telemaca"
+        >
           <StyledIcon />
           Florencia
         </StyledLink>

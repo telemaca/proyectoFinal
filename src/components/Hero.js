@@ -57,11 +57,12 @@ const StyledSection = styled.section`
     props.page === "home" ? "initial" : "flex-end"};
 `;
 
+//ESTE WITDHHHHHHHHHHHHHHHHHH
 const StyledContainerInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: ${(props) => (props.page === "home" ? "30%" : "75vw")};
+  width: ${(props) => (props.page === "home" ? "30%" : "73.6vw")};
   background-color: rgba(0, 0, 0, 0.3);
   padding-left: ${(props) => (props.page === "home" ? "3vw" : "20vw")};
   position: ${(props) => props.page === "secondary" && "absolute"};
@@ -72,7 +73,7 @@ const StyledContainerInfo = styled.div`
   }
 
   @media (max-width: 850px) {
-    width: 80vw;
+    width: 78vw;
     position: absolute;
     height: 53vw;
     padding-left: 20vw;
@@ -90,8 +91,9 @@ const Container = styled.div`
   }
 `;
 
+//ESTEEEEEEEEEEEEEEE
 const BackgrdImgContainer = styled.div`
-  width: ${(props) => (props.page === "home" ? "100%" : "95vw")};
+  width: ${(props) => (props.page === "home" ? "100%" : "93.6vw")};
   height: ${(props) => (props.page === "home" ? "auto" : "53vw")};
   background-image: url(${(props) => props.img});
   background-size: cover;
@@ -102,7 +104,7 @@ const BackgrdImgContainer = styled.div`
   }
 
   @media (max-width: 850px) {
-    width: 100vw;
+    width: 98vw;
     height: 53vw;
   }
 `;

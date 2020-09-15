@@ -1,7 +1,12 @@
 import React from "react";
+import styled from "styled-components";
 
-const Section = ({ children, backgroundColor = "black" }) => {
-    return <section style={{ backgroundColor: `${backgroundColor}` }}>{children}</section>;
+const StyledSection = styled.section`
+  backgroundcolor: black;
+`;
+
+const Section = ({ children }) => {
+  return <StyledSection>{children}</StyledSection>;
 };
 
 export default Section;
