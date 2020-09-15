@@ -15,12 +15,17 @@ See it at work here: https://movieandtvwiki.netlify.app/
 
 ## Screenshots
 
-1. Home
-   ![Home screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/home.JPG)
-2. Selected Movie
-   ![Movie screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/movie.JPG)
-3. Mobile version
-   ![Mobile screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/mobile.JPG)
+## Home
+
+![Home screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/home.JPG)
+
+## Selected Movie
+   
+![Movie screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/movie.JPG)
+
+## Mobile version
+  
+![Mobile screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/mobile.JPG)
    
 ##
 
