@@ -16,7 +16,7 @@ See it at work here: https://movieandtvwiki.netlify.app/
 ## Screenshots
 
 1. Home
-   ![Home screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/home.jpg)
+   ![Home screenshot](https://github.com/telemaca/proyectoFinal/tree/master/src/assets/screenshots/home.jpg)
 2. Selected Movie
 
 3. Mobile version
