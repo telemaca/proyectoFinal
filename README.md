@@ -1,18 +1,28 @@
 ## Movies and TV Shows Wiki
+
 ReactJs App to browse movies, TV shows, and people from the entertainment industry. You can even watch trailers!
 All the data is provided by the awesome folks from The Movie Database (TMDB) API.
 
 See it at work here: https://movieandtvwiki.netlify.app/
 
 ## Features
+
 1. List popular Movies and Tv Shows. You can also see Top-Rated, Now Airing, and Trending items in each media.
 2. Search Movies and Tv Shows by title.
 3. View details about Movies, including trailer, cast, and similar movies.
 4. View details about Tv Shows including trailer, seasons & episodes, and similar TV shows.
-5. View details about your favorite actor! You can see their biography and movies and TV shows where they appeared. 
+5. View details about your favorite actor! You can see their biography and movies and TV shows where they appeared.
 
+## Screenshots
+
+1. Home
+   ![Home screenshot](https://github.com/telemaca/proyectoFinal/blob/master/src/assets/screenshots/home.jpg)
+2. Selected Movie
+
+3. Mobile version
 
 ##
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
