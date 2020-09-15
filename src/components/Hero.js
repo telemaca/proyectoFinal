@@ -6,8 +6,6 @@ import axios from "axios";
 
 import useLanguageContext from "../contexts/LanguageContext";
 
-
-
 import Rating from "./Rating";
 import TrailerModal from "./TrailerModal";
 
@@ -100,7 +98,7 @@ const BackgrdImgContainer = styled.div`
 
   @media (min-width: 850px) {
     box-shadow: ${(props) =>
-    props.page === "home" && "inset 50px -20px 60px 60px #000"};
+      props.page === "home" && "inset 50px -20px 60px 60px #000"};
   }
 
   @media (max-width: 850px) {
@@ -262,7 +260,8 @@ const Hero = ({ data, media_type, page = "home" }) => {
       .get(`${API_URL}${media_type}/${id}/translations?api_key=${API_KEY}`)
       .then((response) => {
         setTranslations(response.data.translations);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [language]);
 
   const spanishText = translations.find(
@@ -279,9 +278,9 @@ const Hero = ({ data, media_type, page = "home" }) => {
           <StyledTitleLink page={page} to={`/${media_type}/${id}/info`}>
             <StyledTitle page={page}>
               {language === "spa" &&
-                hasSpanishTranslation &&
-                ((media_type === "tv" && spanishText.data.name !== "") ||
-                  (media_type === "movie" && spanishText.data.title !== ""))
+              hasSpanishTranslation &&
+              ((media_type === "tv" && spanishText.data.name !== "") ||
+                (media_type === "movie" && spanishText.data.title !== ""))
                 ? spanishText.data.title || spanishText.data.name
                 : title || name}
             </StyledTitle>
@@ -290,8 +289,8 @@ const Hero = ({ data, media_type, page = "home" }) => {
         </Container>
         <StyledDescription page={page}>
           {language === "spa" &&
-            hasSpanishTranslation &&
-            spanishText.data.overview !== ""
+          hasSpanishTranslation &&
+          spanishText.data.overview !== ""
             ? spanishText.data.overview
             : overview}
         </StyledDescription>

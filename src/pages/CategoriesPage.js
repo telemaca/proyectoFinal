@@ -107,27 +107,28 @@ const CategoriesPage = () => {
         setCategoriesMovies(response.data.results);
         setMaxPage(response.data.total_pages);
         setIsLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [categoryId, media, currentPage]);
 
   return isLoading ? (
     <LoadingPage />
   ) : (
-      <Bodycontainer>
-        <MainFlex>
-          <StyledSection>
-            <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
-            <ContainerFlex>
-              {categoriesMovies.map((movie, i) => (
-                <BasicCard key={i} data={movie} media_type={media} />
-              ))}
-            </ContainerFlex>
-            <Pagination />
-          </StyledSection>
-        </MainFlex>
-        <Footer />
-      </Bodycontainer>
-    );
+    <Bodycontainer>
+      <MainFlex>
+        <StyledSection>
+          <Title>{CATEGORIES_NAMES[language][media][categoryId]}</Title>
+          <ContainerFlex>
+            {categoriesMovies.map((movie, i) => (
+              <BasicCard key={i} data={movie} media_type={media} />
+            ))}
+          </ContainerFlex>
+          <Pagination />
+        </StyledSection>
+      </MainFlex>
+      <Footer />
+    </Bodycontainer>
+  );
 };
 
 export default CategoriesPage;

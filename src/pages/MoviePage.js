@@ -50,49 +50,52 @@ const MoviePage = () => {
       .then((response) => {
         setSelectedMovie(response.data);
         setIsMovieDataLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
 
     axios
       .get(`${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`)
       .then((response) => {
         setSelectedMovieCast(response.data.cast);
-      });
+      })
+      .catch((err) => console.log(err));
 
     axios
       .get(`${API_URL}movie/${movieId}/similar?api_key=${API_KEY}`)
       .then((response) => {
         setSimilarMovies(response.data.results);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [movieId]);
 
   return isMovieDataLoading ? (
     <LoadingPage />
   ) : (
-      <Bodycontainer>
-        <MainFlex>
-          <ButtonBack handleClick={handleGoBackClick} />
-          <Hero data={selectedMovie} media_type="movie" page="secondary" />
-          <MovieNavLinks />
-          <Switch>
-            <Route exact path={`${path}/info`}>
-              <MovieInfo data={selectedMovie} />
-            </Route>
-            <Route exact path={`${path}/cast`}>
-              <MovieCast actors={selectedMovieCast} />
-            </Route>
-            <Route exact path={`${path}/similar`}>
-              <SimilarMovies
-                movies={
-                  similarMovies.length !== 0 ? similarMovies : popularMovies
-                }
-                notFound={similarMovies.length === 0}
-              />
-            </Route>
-          </Switch>
-        </MainFlex>
-        <Footer />
-      </Bodycontainer>
-    );
+    <Bodycontainer>
+      <MainFlex>
+        <ButtonBack handleClick={handleGoBackClick} />
+        <Hero data={selectedMovie} media_type="movie" page="secondary" />
+        <MovieNavLinks />
+        <Switch>
+          <Route exact path={`${path}/info`}>
+            <MovieInfo data={selectedMovie} />
+          </Route>
+          <Route exact path={`${path}/cast`}>
+            <MovieCast actors={selectedMovieCast} />
+          </Route>
+          <Route exact path={`${path}/similar`}>
+            <SimilarMovies
+              movies={
+                similarMovies.length !== 0 ? similarMovies : popularMovies
+              }
+              notFound={similarMovies.length === 0}
+            />
+          </Route>
+        </Switch>
+      </MainFlex>
+      <Footer />
+    </Bodycontainer>
+  );
 };
 
 export default MoviePage;

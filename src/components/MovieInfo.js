@@ -161,10 +161,11 @@ const MovieInfo = ({ data }) => {
       "diciembre",
     ];
     const movieDate = new Date(release_date);
-    return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${language === "eng"
-      ? months[movieDate.getMonth()]
-      : meses[movieDate.getMonth()]
-      }, ${movieDate.getFullYear()}`;
+    return `${movieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
+      language === "eng"
+        ? months[movieDate.getMonth()]
+        : meses[movieDate.getMonth()]
+    }, ${movieDate.getFullYear()}`;
   };
 
   useEffect(() => {
@@ -172,7 +173,8 @@ const MovieInfo = ({ data }) => {
       .get(`${API_URL}movie/${id}/translations?api_key=${API_KEY}`)
       .then((response) => {
         setTranslations(response.data.translations);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [language]);
 
   const spanishText = translations.find(

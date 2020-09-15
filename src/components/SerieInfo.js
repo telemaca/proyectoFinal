@@ -156,10 +156,11 @@ const SerieInfo = ({ data }) => {
       "diciembre",
     ];
     const serieDate = new Date(first_air_date);
-    return `${serieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${language === "eng"
-      ? months[serieDate.getMonth()]
-      : meses[serieDate.getMonth()]
-      }, ${serieDate.getFullYear()}`;
+    return `${serieDate.getDate() + 1} ${language === "spa" ? "de" : ""} ${
+      language === "eng"
+        ? months[serieDate.getMonth()]
+        : meses[serieDate.getMonth()]
+    }, ${serieDate.getFullYear()}`;
   };
 
   useEffect(() => {
@@ -167,7 +168,8 @@ const SerieInfo = ({ data }) => {
       .get(`${API_URL}tv/${id}/translations?api_key=${API_KEY}`)
       .then((response) => {
         setTranslations(response.data.translations);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [language]);
 
   const spanishText = translations.find(

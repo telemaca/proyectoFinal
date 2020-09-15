@@ -186,7 +186,8 @@ const PersonInfo = ({ data }) => {
       .get(`${API_URL}person/${id}/translations?api_key=${API_KEY}`)
       .then((response) => {
         setTranslations(response.data.translations);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [language, data]);
 
   const spanishText = translations.find(
