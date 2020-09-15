@@ -16,7 +16,6 @@ const StyledSection = styled.section`
   background-color: #1d1d1d;
   box-shadow: inset 0px 30px 100px -30px #000;
   @media (max-width: 850px) {
-    /* margin-bottom: 15vw; */
     padding: 3vw 3vw 15vw 3vw;
   }
 `;
@@ -75,7 +74,6 @@ const StyledTitle = styled.h2`
   }
   @media (max-width: 650px) {
     font-size: 4vw;
-    /* margin-top: 0; */
   }
 `;
 
@@ -209,7 +207,7 @@ const MovieInfo = ({ data }) => {
             <StyledListItem>
               <StyledCategory>{TITLES[language][2]}</StyledCategory>
               <StyledText>
-                {movieHours}h {movieMinutes}min
+                {movieHours}h {movieMinutes > 0 && `${movieMinutes}min`}
               </StyledText>
             </StyledListItem>
             <StyledListItem>
